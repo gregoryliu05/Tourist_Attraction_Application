@@ -1,27 +1,27 @@
 drop table users;
+drop table category;
+drop table city_details;
+drop table city_time_zone;
+drop table locations;
 drop table rating;
 drop table user_comments;
 drop table picture;
 drop table time_of_booking;
+drop table bookable;
 drop table booking_details;
 drop table categorizes;
-drop table category;
-drop table locations;
 drop table parks;
 drop table museums;
-drop table bookable;
 drop table restaurant;
 drop table hotel;
 drop table event_time;
 drop table event_details;
-drop table city_details;
-drop table city_time_zone;
 
 
 
 CREATE TABLE users (
     userID CHAR(10) NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    fullName VARCHAR(50) NOT NULL,
     username VARCHAR(25) NOT NULL,
     password VARCHAR(25) NOT NULL,
     numReviews INT,
@@ -31,15 +31,15 @@ CREATE TABLE users (
 GRANT SELECT ON users TO PUBLIC;
 
 CREATE TABLE category (
-    name VARCHAR(50) PRIMARY KEY,
+    catName VARCHAR(50) PRIMARY KEY,
     description VARCHAR(255)
 );
 GRANT SELECT ON category TO PUBLIC;
 
 CREATE TABLE city_details (
     provinceState VARCHAR(2) NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    PRIMARY KEY (provinceState, name)
+    cityName VARCHAR(50) NOT NULL,
+    PRIMARY KEY (provinceState, cityName)
 );
 GRANT SELECT ON city_details TO PUBLIC;
 
@@ -57,9 +57,9 @@ CREATE TABLE locations (
     address VARCHAR(50),
     operationHours VARCHAR(50),
     provinceState VARCHAR(2) NOT NULL,
-    city_name VARCHAR(50) NOT NULL,
+    cityName VARCHAR(50) NOT NULL,
     PRIMARY KEY (postalCode, address),
-    FOREIGN KEY (provinceState, city_name) REFERENCES city_details(provinceState, name)
+    FOREIGN KEY (provinceState, cityName) REFERENCES city_details(provinceState, cityName) ON DELETE CASCADE
 );
 GRANT SELECT ON locations TO PUBLIC;
 
@@ -69,22 +69,22 @@ CREATE TABLE rating (
     userID CHAR(10),
     postalCode VARCHAR(10) NOT NULL,
     address VARCHAR(50) NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(userID),
-    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address)
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON rating TO PUBLIC;
 
 CREATE TABLE user_comments (
     ratingID CHAR(10),
     text VARCHAR(255),
-    FOREIGN KEY (ratingID) REFERENCES rating(ratingID)
+    FOREIGN KEY (ratingID) REFERENCES rating(ratingID) ON DELETE CASCADE
 );
 GRANT SELECT ON user_comments TO PUBLIC;
 
 CREATE TABLE picture (
     ratingID CHAR(10),
     image BLOB, 
-    FOREIGN KEY (ratingID) REFERENCES rating(ratingID)
+    FOREIGN KEY (ratingID) REFERENCES rating(ratingID) ON DELETE CASCADE
 );
 GRANT SELECT ON picture TO PUBLIC;
 
@@ -101,7 +101,8 @@ CREATE TABLE bookable (
     postalCode VARCHAR(10),
     address VARCHAR(50),
     price FLOAT,
-    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address)
+    PRIMARY KEY (postalCode, address),
+    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON bookable TO PUBLIC;
 
@@ -113,18 +114,18 @@ CREATE TABLE booking_details (
     userID CHAR(10),
     postalCode VARCHAR(10) NOT NULL,
     address VARCHAR(50) NOT NULL,
-    FOREIGN KEY (userID) REFERENCES users(userID),
-    FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address)
+    FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
+    FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON booking_details TO PUBLIC;
 
 CREATE TABLE categorizes (
-    name VARCHAR(50),
+    catName VARCHAR(50),
     postalCode VARCHAR(10),
     address VARCHAR(50),
-    PRIMARY KEY (name, postalCode, address),
-    FOREIGN KEY (name) REFERENCES category(name),
-    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address)
+    PRIMARY KEY (catName, postalCode, address),
+    FOREIGN KEY (catName) REFERENCES category(catName) ON DELETE CASCADE,
+    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON categorizes TO PUBLIC;
 
@@ -132,7 +133,7 @@ CREATE TABLE parks (
     postalCode VARCHAR(10),
     address VARCHAR(50),
     area INT,
-    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address)
+    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON parks TO PUBLIC;
 
@@ -141,7 +142,7 @@ CREATE TABLE museums (
     address VARCHAR(50),
     cost FLOAT,
     type VARCHAR(50),
-    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address)
+    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON museums TO PUBLIC;
 
@@ -149,7 +150,7 @@ CREATE TABLE restaurant (
     postalCode VARCHAR(10),
     address VARCHAR(50),
     cuisineType VARCHAR(50),
-    FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address)
+    FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON restaurant TO PUBLIC;
 
@@ -158,7 +159,7 @@ CREATE TABLE hotel (
     address VARCHAR(50),
     price FLOAT,
     stars INT,
-    FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address)
+    FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON hotel TO PUBLIC;
 
@@ -171,21 +172,21 @@ CREATE TABLE event_time (
 GRANT SELECT ON event_time TO PUBLIC;
 
 CREATE TABLE event_details (
-    name VARCHAR(50),
+    eventName VARCHAR(50),
     startTime VARCHAR(50),
     duration VARCHAR(50),
     host VARCHAR(50),
     postalCode VARCHAR(10),
     address VARCHAR(50),
-    PRIMARY KEY (name, startTime, duration),
-    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address)
+    PRIMARY KEY (eventName, startTime, duration),
+    FOREIGN KEY (postalCode, address) REFERENCES locations(postalCode, address) ON DELETE CASCADE
 );
 GRANT SELECT ON event_details TO PUBLIC;
 
 
 
 -- users table
-INSERT INTO users VALUES (1248484739, 'Greg', 'JumpingMan', 'aKask3*k', 4, 'GregDuck@gmail.com');
+INSERT INTO users VALUES ('1248484739', 'Greg', 'JumpingMan', 'aKask3*k', 4, 'GregDuck@gmail.com');
 INSERT INTO users VALUES ('1000000001', 'Alice Johnson', 'alicej', 'password123', 5, 'alice@example.com');
 INSERT INTO users VALUES ('1000000002', 'Bob Smith', 'bobs', 'password456', 3, 'bob@example.com');
 INSERT INTO users VALUES ('1000000003', 'Charlie Brown', 'charlieb', 'securepass', 2, 'charlie@example.com');
@@ -211,6 +212,10 @@ INSERT INTO category VALUES ('Beach', 'Outdoor area by the sea or lake.');
 
 -- city_details table
 INSERT INTO city_details VALUES ('BC', 'Vancouver');
+INSERT INTO city_details VALUES ('BC', 'Richmond');
+INSERT INTO city_details VALUES ('BC', 'Coquitlam');
+INSERT INTO city_details VALUES ('BC', 'Surrey');
+INSERT INTO city_details VALUES ('BC', 'Burnaby');
 INSERT INTO city_details VALUES ('BC', 'Victoria');
 INSERT INTO city_details VALUES ('ON', 'Toronto');
 INSERT INTO city_details VALUES ('ON', 'Ottawa');
@@ -234,16 +239,16 @@ INSERT INTO city_time_zone VALUES ('YT', 'Canada', 'PST');
 INSERT INTO city_time_zone VALUES ('NT', 'Canada', 'MST');
 
 -- locations table
-INSERT INTO locations VALUES ('V5K1Z1', '123 Elm Street', '9AM-5PM', 'BC');
-INSERT INTO locations VALUES ('V5K2Z2', '456 Oak Avenue', '10AM-6PM', 'BC');
-INSERT INTO locations VALUES ('V5K3Z3', '789 Maple Lane', '8AM-8PM', 'BC');
-INSERT INTO locations VALUES ('V5K4Z4', '135 Pine Street', '7AM-9PM', 'BC');
-INSERT INTO locations VALUES ('V5K5Z5', '246 Cedar Road', '24 hours', 'BC');
-INSERT INTO locations VALUES ('V5K6Z6', '357 Birch Way', '6AM-10PM', 'BC');
-INSERT INTO locations VALUES ('V5K7Z7', '468 Willow Drive', '8AM-6PM', 'BC');
-INSERT INTO locations VALUES ('V5K8Z8', '579 Fir Trail', '10AM-5PM', 'BC');
-INSERT INTO locations VALUES ('V5K9Z9', '680 Redwood Road', '9AM-6PM', 'BC');
-INSERT INTO locations VALUES ('V5K0Z0', '791 Ash Boulevard', '24 hours', 'BC');
+INSERT INTO locations VALUES ('V5K1Z1', '123 Elm Street', '9AM-5PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('V5K2Z2', '456 Oak Avenue', '10AM-6PM', 'BC', 'Richmond');
+INSERT INTO locations VALUES ('V5K3Z3', '789 Maple Lane', '8AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('V5K4Z4', '135 Pine Street', '7AM-9PM', 'BC', 'Burnaby');
+INSERT INTO locations VALUES ('V5K5Z5', '246 Cedar Road', '24 hours', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('V5K6Z6', '357 Birch Way', '6AM-10PM', 'BC', 'Surrey');
+INSERT INTO locations VALUES ('V5K7Z7', '468 Willow Drive', '8AM-6PM', 'BC', 'Coquitlam');
+INSERT INTO locations VALUES ('V5K8Z8', '579 Fir Trail', '10AM-5PM', 'BC', 'Richmond');
+INSERT INTO locations VALUES ('V5K9Z9', '680 Redwood Road', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('V5K0Z0', '791 Ash Boulevard', '24 hours', 'BC', 'Vancouver');
 
 -- rating table
 INSERT INTO rating VALUES ('R000000001', 4.5, '1000000001', 'V5K1Z1', '123 Elm Street');
@@ -270,16 +275,16 @@ INSERT INTO user_comments VALUES ('R000000009', 'Best experience ever!');
 INSERT INTO user_comments VALUES ('R000000010', 'Friendly staff and great atmosphere.');
 
 -- picture table
-INSERT INTO picture VALUES ('R000000001', '0x89504E47');
-INSERT INTO picture VALUES ('R000000002', '0xFFD8FFE0');
-INSERT INTO picture VALUES ('R000000003', '0x89504E47');
-INSERT INTO picture VALUES ('R000000004', '0xFFD8FFE0');
-INSERT INTO picture VALUES ('R000000005', '0x89504E47');
-INSERT INTO picture VALUES ('R000000006', '0xFFD8FFE0');
-INSERT INTO picture VALUES ('R000000007', '0x89504E47');
-INSERT INTO picture VALUES ('R000000008', '0xFFD8FFE0');
-INSERT INTO picture VALUES ('R000000009', '0x89504E47');
-INSERT INTO picture VALUES ('R000000010', '0xFFD8FFE0');
+INSERT INTO picture VALUES ('R000000001', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000000002', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000000003', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000000004', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000000005', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000000006', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000000007', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000000008', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000000009', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000000010', HEXTORAW('FFD8FFE0'));
 
 -- time_of_booking table
 INSERT INTO time_of_booking VALUES ('08:00 AM', '10:00 AM', '2 hours');
