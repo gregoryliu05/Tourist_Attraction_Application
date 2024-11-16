@@ -76,27 +76,32 @@ async function testOracleConnection() {
     });
 }
 
-async function fetchDemotableFromDb() {
+async function fetchUsersFromDb() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM DEMOTABLE');
+        const result = await connection.execute('SELECT * FROM users');
         return result.rows;
     }).catch(() => {
         return [];
     });
 }
 
-async function initiateDemotable() {
+async function initiateUsers() {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE DEMOTABLE`);
+            await connection.execute(`DROP TABLE users`);
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
 
         const result = await connection.execute(`
-            CREATE TABLE DEMOTABLE (
-                id NUMBER PRIMARY KEY,
-                name VARCHAR2(20)
+            CREATE TABLE users (
+            userID CHAR(10) NOT NULL,
+            fullName VARCHAR(50) NOT NULL,
+            username VARCHAR(25) NOT NULL,
+            password VARCHAR(25) NOT NULL,
+            numReviews INT,
+            email VARCHAR(50) UNIQUE,
+            PRIMARY KEY(userID)
             )
         `);
         return true;
@@ -105,11 +110,12 @@ async function initiateDemotable() {
     });
 }
 
-async function insertDemotable(id, name) {
+async function insertUsers(userID, fullName, username, password, email) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO DEMOTABLE (id, name) VALUES (:id, :name)`,
-            [id, name],
+            `INSERT INTO users (userID, fullName, username, password, email) 
+            VALUES (:userID, :fullName, :username, :password, 0, :email)`,
+            [userID, fullName, username, password, email],
             { autoCommit: true }
         );
 
@@ -119,10 +125,10 @@ async function insertDemotable(id, name) {
     });
 }
 
-async function updateNameDemotable(oldName, newName) {
+async function updateNameUsers(oldName, newName) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `UPDATE DEMOTABLE SET name=:newName where name=:oldName`,
+            `UPDATE users SET fullName=:newName where fullName=:oldName`,
             [newName, oldName],
             { autoCommit: true }
         );
@@ -133,9 +139,9 @@ async function updateNameDemotable(oldName, newName) {
     });
 }
 
-async function countDemotable() {
+async function countUsers() {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM DEMOTABLE');
+        const result = await connection.execute('SELECT Count(*) FROM users');
         return result.rows[0][0];
     }).catch(() => {
         return -1;
@@ -144,9 +150,9 @@ async function countDemotable() {
 
 module.exports = {
     testOracleConnection,
-    fetchDemotableFromDb,
-    initiateDemotable, 
-    insertDemotable, 
-    updateNameDemotable, 
-    countDemotable
+    fetchUsersFromDb,
+    initiateUsers, 
+    insertUsers, 
+    updateNameUsers, 
+    countUsers
 };

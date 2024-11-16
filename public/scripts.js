@@ -38,10 +38,10 @@ async function checkDbConnection() {
 
 // Fetches data from the demotable and displays it.
 async function fetchAndDisplayUsers() {
-    const tableElement = document.getElementById('demotable');
+    const tableElement = document.getElementById('users');
     const tableBody = tableElement.querySelector('tbody');
 
-    const response = await fetch('/demotable', {
+    const response = await fetch('/users', {
         method: 'GET'
     });
 
@@ -63,8 +63,8 @@ async function fetchAndDisplayUsers() {
 }
 
 // This function resets or initializes the demotable.
-async function resetDemotable() {
-    const response = await fetch("/initiate-demotable", {
+async function resetUsers() {
+    const response = await fetch("/initiate-users", {
         method: 'POST'
     });
     const responseData = await response.json();
@@ -79,20 +79,27 @@ async function resetDemotable() {
 }
 
 // Inserts new records into the demotable.
-async function insertDemotable(event) {
+async function insertUsers(event) {
     event.preventDefault();
 
     const idValue = document.getElementById('insertId').value;
     const nameValue = document.getElementById('insertName').value;
+    const usernameValue = document.getElementById('insertUsername').value;
+    const passwordValue = document.getElementById('insertPassword').value;
+    //const numReviewsValue = 0;
+    const emailValue = document.getElementById('insertEmail').value;
 
-    const response = await fetch('/insert-demotable', {
+    const response = await fetch('/insert-users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: idValue,
-            name: nameValue
+            userID: idValue,
+            fullName: nameValue,
+            username: usernameValue,
+            password: passwordValue, 
+            email: emailValue
         })
     });
 
@@ -108,13 +115,13 @@ async function insertDemotable(event) {
 }
 
 // Updates names in the demotable.
-async function updateNameDemotable(event) {
+async function updataNameUsers(event) {
     event.preventDefault();
 
     const oldNameValue = document.getElementById('updateOldName').value;
     const newNameValue = document.getElementById('updateNewName').value;
 
-    const response = await fetch('/update-name-demotable', {
+    const response = await fetch('/update-name-users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -138,8 +145,8 @@ async function updateNameDemotable(event) {
 
 // Counts rows in the demotable.
 // Modify the function accordingly if using different aggregate functions or procedures.
-async function countDemotable() {
-    const response = await fetch("/count-demotable", {
+async function countUsers() {
+    const response = await fetch("/count-users", {
         method: 'GET'
     });
 
@@ -161,10 +168,10 @@ async function countDemotable() {
 window.onload = function() {
     checkDbConnection();
     fetchTableData();
-    document.getElementById("resetDemotable").addEventListener("click", resetDemotable);
-    document.getElementById("insertDemotable").addEventListener("submit", insertDemotable);
-    document.getElementById("updataNameDemotable").addEventListener("submit", updateNameDemotable);
-    document.getElementById("countDemotable").addEventListener("click", countDemotable);
+    document.getElementById("resetUsers").addEventListener("click", resetUsers);
+    document.getElementById("insertUsers").addEventListener("submit", insertUsers);
+    document.getElementById("updataNameUsers").addEventListener("submit", updataNameUsers);
+    document.getElementById("countUsers").addEventListener("click", countUsers);
 };
 
 // General function to refresh the displayed table data. 

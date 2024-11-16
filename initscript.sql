@@ -1,21 +1,21 @@
-drop table users;
-drop table category;
-drop table city_details;
-drop table city_time_zone;
-drop table locations;
-drop table rating;
-drop table user_comments;
-drop table picture;
-drop table time_of_booking;
-drop table bookable;
-drop table booking_details;
-drop table categorizes;
-drop table parks;
-drop table museums;
-drop table restaurant;
-drop table hotel;
-drop table event_time;
-drop table event_details;
+drop table users CASCADE CONSTRAINTS; 
+drop table category CASCADE CONSTRAINTS;
+drop table city_details CASCADE CONSTRAINTS;
+drop table city_time_zone CASCADE CONSTRAINTS;
+drop table locations CASCADE CONSTRAINTS;
+drop table rating CASCADE CONSTRAINTS;
+drop table user_comments CASCADE CONSTRAINTS;
+drop table picture CASCADE CONSTRAINTS;
+drop table time_of_booking CASCADE CONSTRAINTS;
+drop table bookable CASCADE CONSTRAINTS;
+drop table booking_details CASCADE CONSTRAINTS;
+drop table categorizes CASCADE CONSTRAINTS;
+drop table parks CASCADE CONSTRAINTS;
+drop table museums CASCADE CONSTRAINTS;
+drop table restaurant CASCADE CONSTRAINTS;
+drop table hotel CASCADE CONSTRAINTS;
+drop table event_time CASCADE CONSTRAINTS;
+drop table event_details CASCADE CONSTRAINTS;
 
 
 

@@ -15,13 +15,13 @@ router.get('/check-db-connection', async (req, res) => {
     }
 });
 
-router.get('/demotable', async (req, res) => {
-    const tableContent = await appService.fetchDemotableFromDb();
+router.get('/users', async (req, res) => {
+    const tableContent = await appService.fetchUsersFromDb();
     res.json({data: tableContent});
 });
 
-router.post("/initiate-demotable", async (req, res) => {
-    const initiateResult = await appService.initiateDemotable();
+router.post("/initiate-users", async (req, res) => {
+    const initiateResult = await appService.initiateUsers();
     if (initiateResult) {
         res.json({ success: true });
     } else {
@@ -29,9 +29,9 @@ router.post("/initiate-demotable", async (req, res) => {
     }
 });
 
-router.post("/insert-demotable", async (req, res) => {
-    const { id, name } = req.body;
-    const insertResult = await appService.insertDemotable(id, name);
+router.post("/insert-users", async (req, res) => {
+    const { id, fullName, username, password, email } = req.body;
+    const insertResult = await appService.insertUsers(id, fullName, username, password, email);
     if (insertResult) {
         res.json({ success: true });
     } else {
@@ -39,9 +39,9 @@ router.post("/insert-demotable", async (req, res) => {
     }
 });
 
-router.post("/update-name-demotable", async (req, res) => {
+router.post("/update-name-users", async (req, res) => {
     const { oldName, newName } = req.body;
-    const updateResult = await appService.updateNameDemotable(oldName, newName);
+    const updateResult = await appService.updateNameUsers(oldName, newName);
     if (updateResult) {
         res.json({ success: true });
     } else {
@@ -49,8 +49,8 @@ router.post("/update-name-demotable", async (req, res) => {
     }
 });
 
-router.get('/count-demotable', async (req, res) => {
-    const tableCount = await appService.countDemotable();
+router.get('/count-users', async (req, res) => {
+    const tableCount = await appService.countUsers();
     if (tableCount >= 0) {
         res.json({ 
             success: true,  
