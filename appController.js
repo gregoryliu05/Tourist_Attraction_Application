@@ -67,4 +67,61 @@ router.get('/count-users', async (req, res) => {
 });
 
 
+// get a users info based on userID
+router.get('/users/:userID', async (req, res) => {
+    const { userID } = req.params;
+    const viewResult = await appService.getUserByID(userID);
+    res.json({data: viewResult});
+})
+
+// posts a rating to a location 
+router.post('/insert-rating', async (req, res) => {
+    const {ratingID, score, userID, postalCode, address} = req.body;
+    const updateResult = await appService.addRating(ratingID, score, userID, postalCode, address);
+    if (updateResult) {
+        res.json({ success: true });
+    } else {
+        res.status(500).json({ success: false });
+    }
+})
+
+// gets all ratings
+router.get('/ratings', async (req,res) => {
+    const tableContent = await appService.fetchRatingsFromDb();
+    res.json({data: tableContent});
+})
+
+// gets a rating by ID
+router.get('/ratings/:ratingID', async (req,res) =>  {
+    const {ratingID} = req.params;
+    const viewResult = await appService.getRating(ratingID);
+    res.json({data:viewResult});
+})
+
+// deletes a rating by ratingID 
+router.delete('/ratings/:ratingID', async (req,res) => {
+    const {ratingID} = req.params;
+    const updateResult = await appService.deleteRating(ratingID);
+    if (updateResult) {
+        res.json({ success: true });
+    } else {
+        res.status(500).json({ success: false });
+    }
+})
+
+// gets ratings based on userID
+router.get('/users/:userID/ratings', async (req,res) => {
+    const {userID} = req.params;
+    const viewResult = await appService.getUsersRating(userID);
+    res.json({data: viewResult});
+})
+
+// gets ratings based on location
+//** CHANGE THIS ONE ITS WRONG RIGHT NOW */
+router.get('/locations/:locationID/ratings', async (req, res) => {
+    const {locationID} = req.params;
+    const viewResult = await appService.getLocationsRating(locationID);
+    res.json({data :viewResult});
+})
+
 module.exports = router;
