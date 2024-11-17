@@ -88,7 +88,7 @@ async function fetchUsersFromDb() {
 async function initiateUsers() {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE users`);
+            await connection.execute(`DROP TABLE users CASCADE CONSTRAINTS`);
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
@@ -111,11 +111,18 @@ async function initiateUsers() {
 }
 
 async function insertUsers(userID, fullName, username, password, email) {
+    console.log("Insert Parameters:", { userID, fullName, username, password, email }); // Debug log
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO users (userID, fullName, username, password, email) 
+            `INSERT INTO users (userID, fullName, username, password, numReviews, email) 
             VALUES (:userID, :fullName, :username, :password, 0, :email)`,
-            [userID, fullName, username, password, email],
+            {
+                userID: userID,
+                fullName: fullName,
+                username: username,
+                password: password,
+                email: email
+            },
             { autoCommit: true }
         );
 
@@ -124,6 +131,7 @@ async function insertUsers(userID, fullName, username, password, email) {
         return false;
     });
 }
+
 
 async function updateNameUsers(oldName, newName) {
     return await withOracleDB(async (connection) => {
@@ -139,6 +147,7 @@ async function updateNameUsers(oldName, newName) {
     });
 }
 
+// probably not nteeded 
 async function countUsers() {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute('SELECT Count(*) FROM users');
@@ -148,11 +157,29 @@ async function countUsers() {
     });
 }
 
+// add a rating by user for a location
+async function addRating() {
+
+}
+
+
+// delete a rating by user for a location
+async function deleteRating() {
+
+}
+
+// get all ratings done by a user
+async function getUsersRating() {
+
+}
+
+
+// get all ratings for a location 
+async function getLocationsRating() {
+
+
+}
+
 module.exports = {
-    testOracleConnection,
-    fetchUsersFromDb,
-    initiateUsers, 
-    insertUsers, 
-    updateNameUsers, 
-    countUsers
+    ...exports
 };

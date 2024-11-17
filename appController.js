@@ -6,6 +6,7 @@ const router = express.Router();
 // ----------------------------------------------------------
 // API endpoints
 // Modify or extend these routes based on your project's needs.
+// ADD VALIDATION IN THESE ENDPOINTS 
 router.get('/check-db-connection', async (req, res) => {
     const isConnect = await appService.testOracleConnection();
     if (isConnect) {
@@ -30,8 +31,9 @@ router.post("/initiate-users", async (req, res) => {
 });
 
 router.post("/insert-users", async (req, res) => {
-    const { id, fullName, username, password, email } = req.body;
-    const insertResult = await appService.insertUsers(id, fullName, username, password, email);
+    const { userID, fullName, username, password, email } = req.body;
+    console.log("Inserting User with:", { userID, fullName, username, password, email });
+    const insertResult = await appService.insertUsers(userID, fullName, username, password, email);
     if (insertResult) {
         res.json({ success: true });
     } else {
