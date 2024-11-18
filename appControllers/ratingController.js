@@ -15,13 +15,13 @@ router.post('/insert-rating', async (req, res) => {
 })
 
 // gets all ratings
-router.get('/ratings', async (req,res) => {
-    const tableContent = await ratingService.fetchRatingsFromDb();
+router.get('/', async (req,res) => {
+    const tableContent = await ratingService.getRatingsFromDb();
     res.json({data: tableContent});
 })
 
 // gets a rating by ID
-router.get('/ratings/:ratingID', async (req,res) =>  {
+router.get('/:ratingID', async (req,res) =>  {
     const {ratingID} = req.params;
     const viewResult = await ratingService.getRating(ratingID);
     res.json({data:viewResult});
@@ -38,13 +38,5 @@ router.delete('/:ratingID', async (req,res) => {
     }
 })
 
-
-// gets ratings based on location
-//** CHANGE THIS ONE ITS WRONG RIGHT NOW */
-router.get('/locations/:locationID/ratings', async (req, res) => {
-    const {locationID} = req.params;
-    const viewResult = await ratingService.getLocationsRating(locationID);
-    res.json({data :viewResult});
-})
 
 module.exports = router;

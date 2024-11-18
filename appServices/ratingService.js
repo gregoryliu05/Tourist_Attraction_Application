@@ -26,7 +26,7 @@ async function addRating(ratingID, score, userID, postalCode, address) {
 async function getRatingsFromDb() {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            'SELECT * from rating',
+            'SELECT * from rating'
         );
         return result.rows;
     }).catch(() => {
@@ -73,20 +73,6 @@ async function getUsersRating(userID) {
     });
 }
 
-// get all ratings for a location 
-// TODO CHANGE THIS ONE ITS INCORRECT
-async function getLocationsRating(locationID) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `SELECT * from rating where locationID = :locationID`,
-            [locationID]
-        );
-        return result.rows
-    }).catch(()=> {
-        return [];
-    });
-}
-
 
 module.exports = {
     addRating, 
@@ -94,5 +80,4 @@ module.exports = {
     getRating,
     deleteRating,
     getUsersRating,
-    getLocationsRating
 };
