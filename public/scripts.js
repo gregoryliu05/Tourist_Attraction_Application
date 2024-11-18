@@ -18,7 +18,7 @@ async function checkDbConnection() {
     const statusElem = document.getElementById('dbStatus');
     const loadingGifElem = document.getElementById('loadingGif');
 
-    const response = await fetch('/check-db-connection', {
+    const response = await fetch('users/check-db-connection', {
         method: "GET"
     });
 
@@ -41,7 +41,7 @@ async function fetchAndDisplayUsers() {
     const tableElement = document.getElementById('users');
     const tableBody = tableElement.querySelector('tbody');
 
-    const response = await fetch('/users', {
+    const response = await fetch('/users/', {
         method: 'GET'
     });
 
@@ -64,7 +64,7 @@ async function fetchAndDisplayUsers() {
 
 // This function resets or initializes the demotable.
 async function resetUsers() {
-    const response = await fetch("/initiate-users", {
+    const response = await fetch("users/initiate-users", {
         method: 'POST'
     });
     const responseData = await response.json();
@@ -89,7 +89,7 @@ async function insertUsers(event) {
     //const numReviewsValue = 0;
     const emailValue = document.getElementById('insertEmail').value;
 
-    const response = await fetch('/insert-users', {
+    const response = await fetch('users/insert-users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -121,7 +121,7 @@ async function updataNameUsers(event) {
     const oldNameValue = document.getElementById('updateOldName').value;
     const newNameValue = document.getElementById('updateNewName').value;
 
-    const response = await fetch('/update-name-users', {
+    const response = await fetch('users/update-name-users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -146,7 +146,7 @@ async function updataNameUsers(event) {
 // Counts rows in the demotable.
 // Modify the function accordingly if using different aggregate functions or procedures.
 async function countUsers() {
-    const response = await fetch("/count-users", {
+    const response = await fetch("users/count-users", {
         method: 'GET'
     });
 

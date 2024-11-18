@@ -1,5 +1,6 @@
 const express = require('express');
-const appController = require('./appController');
+const userController = require('./appControllers/userController');
+const ratingController = require('./appControllers/ratingController');
 
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
@@ -22,7 +23,9 @@ app.use(express.json());             // Parse incoming JSON payloads
 
 
 // mount the router
-app.use('/', appController);
+app.use('/users', userController);
+app.use('/ratings', ratingController);
+
 
 
 // ----------------------------------------------------------
