@@ -115,6 +115,7 @@ CREATE TABLE booking_details (
     userID CHAR(10),
     postalCode VARCHAR(10) NOT NULL,
     address VARCHAR(50) NOT NULL,
+    FOREIGN KEY (startTime, duration) REFERENCES time_of_booking(startTime, duration) ON DELETE CASCADE,
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
     FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address) ON DELETE CASCADE
 );
