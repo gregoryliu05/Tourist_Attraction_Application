@@ -27,6 +27,7 @@ app.use(express.json());             // Parse incoming JSON payloads
 app.use('/users', userController);
 app.use('/ratings', ratingController);
 app.use('/locations', locationController);
+app.use('/bookables', bookableController);
 
 
 
