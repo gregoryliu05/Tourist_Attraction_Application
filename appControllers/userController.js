@@ -79,8 +79,45 @@ router.get('/:userID', async (req, res) => {
 // gets ratings based on userID
 router.get('/:userID/ratings', async (req,res) => {
     const {userID} = req.params;
-    const viewResult = await userService.getUsersRating(userID);
-    res.json({data: viewResult});
+    
+    const tableContent = await userService.getUsersRating(userID);
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get ratings based on userID'});
+    }
+})
+
+// getting bookings based on userID
+router.get('/:userID/bookings', async (req,res ) => {
+    const {userID} = req.params;
+    const tableContent = await userService.getUsersBookings(userID);
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get bookings based on userID'});
+    }
+})
+
+
+// update users Password
+router.post('/:userID/update-password', async (req, res) => {
+    const {userID} = req.params;
+    const {newPassword} = req.body;
+
+    if (!newPassword || newPassword.length < 8 || newPassword.length > 25) { 
+        return res.status(400).json({
+            success: false,
+            message: "Password must be at least 8 characters long with a max of 25 chars"
+        });
+    }
+
+    const updateResult = await userService.updateUserPassword(userID, newPassword);
+    if (updateResult) {
+        res.json({success: true, message: "password updated"});
+    } else {
+        res.status(500).json({success: false, message: "failed to update password"});
+    }
 })
 
 

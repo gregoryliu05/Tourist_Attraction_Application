@@ -52,7 +52,7 @@ async function getBookableFromKey(postalCode, address) {
             [postalCode, address]
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getBookableFromKey:', err);
         return [];
     });
@@ -92,7 +92,7 @@ async function getAllRestaurants() {
             `SELECT * FROM restaurant`
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getAllRestaurants:', err);
         return [];
     });
@@ -106,7 +106,7 @@ async function getRestaurantFromKey(postalCode, address) {
             [postalCode, address]
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getRestaurantFromKey:', err);
         return [];
     });
@@ -148,7 +148,7 @@ async function getAllHotels() {
             `SELECT * FROM hotel`
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getAllHotels:', err);
         return [];
     });
@@ -162,7 +162,7 @@ async function getHotelFromKey(postalCode, address) {
             [postalCode, address]
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getHotelFromKey:', err);
         return [];
     });

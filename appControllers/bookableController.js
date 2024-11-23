@@ -5,12 +5,22 @@ const router = express.Router();
 // get all bookables
 router.get('/', async (req, res) => {
     const tableContent = await bookableService.getBookables();
-    res.json({data: tableContent});
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get all bookables'});
+    }
 });
 
 // add a bookable item
 router.post('/add-bookable', async (req, res) => {
     const {postalCode, address, price} = req.body;
+
+
+    if (!postalCode || !address || !price) {
+        return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
     const insertResult = bookableService.addBookable(postalCode, address, price);
     if (insertResult) {
         res.json({ success: true});
@@ -23,8 +33,12 @@ router.post('/add-bookable', async (req, res) => {
 // get a bookable item
 router.get('/:postalCode/:address', async (req, res) => {
     const {postalCode, address} = req.params;
-    const updateResult = bookableService.getBookableFromKey(postalCode, address);
-    res.json({data: updateResult});
+    const tableContent = bookableService.getBookableFromKey(postalCode, address);
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get bookable'});
+    }
 });
 
 
@@ -43,12 +57,21 @@ router.delete('/:postalCode/:address', async (req, res) => {
 // get all restaurants
 router.get('/restaurants', async (req, res) => {
     const tableContent = await bookableService.getAllRestaurants();
-    res.json({data: tableContent});
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get all restaurants'});
+    }
 });
 
 // add a restaurant 
 router.post('/restaurants/add-restaurant', async (req, res) => {
     const {postalCode, address, cuisineType} = req.body;
+
+    if (!postalCode || !address || !cuisineType) {
+        return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
     const insertResult = bookableService.addRestaurant(postalCode, address, cuisineType);
     if (insertResult) {
         res.json({ success: true});
@@ -61,8 +84,12 @@ router.post('/restaurants/add-restaurant', async (req, res) => {
 // get a restaurant
 router.get('/restaurants/:postalCode/:address', async (req, res) => {
     const {postalCode, address} = req.params;
-    const updateResult = bookableService.getRestaurantFromKey(postalCode, address);
-    res.json({data: updateResult});
+    const tableContent = bookableService.getRestaurantFromKey(postalCode, address);
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get restaurant'});
+    }
 });
 
 
@@ -82,12 +109,21 @@ router.delete('/restaurants/:postalCode/:address', async (req, res) => {
 //get all hotels
 router.get('/hotels', async (req, res) => {
     const tableContent = await bookableService.getAllHotels();
-    res.json({data: tableContent});
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get all hotels'});
+    }
 });
 
 // add a hotel 
 router.post('/hotels/add-hotel', async (req, res) => {
     const {postalCode, address, stars} = req.body;
+
+    if (!postalCode || !address || !stars) {
+        return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+
     const insertResult = bookableService.addHotel(postalCode, address, stars);
     if (insertResult) {
         res.json({ success: true});
@@ -101,8 +137,12 @@ router.post('/hotels/add-hotel', async (req, res) => {
 // get a hotel
 router.get('/hotels/:postalCode/:address', async (req, res) => {
     const {postalCode, address} = req.params;
-    const updateResult = bookableService.getHotelFromKey(postalCode, address);
-    res.json({data: updateResult});
+    const tableContent = bookableService.getHotelFromKey(postalCode, address);
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get hotel'});
+    }
 });
 
 

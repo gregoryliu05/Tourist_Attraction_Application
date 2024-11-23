@@ -95,7 +95,7 @@ async function countUsers() {
     });
 }
 
-// get user by location 
+// get user by ID
 async function getUserByID(userID) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
@@ -103,8 +103,38 @@ async function getUserByID(userID) {
             [userID]
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
+        console.err("could not get user", err);
         return [];
+    });
+}
+
+
+// getting bookings based on userID
+async function getUsersBookings(userID) {
+    return await withOracleDB(async (connection)=> {
+        const result = await connection.execute(
+            `SELECT * from booking_details where userID = :userID`,
+            [userID]
+        )
+        return result.rows;
+    }).catch((err)=> {
+        console.err("could not get bookings", err);
+    })
+} 
+
+// update users Password
+async function updateUserPassword(userID, newPassword) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `UPDATE users set password = :newPassword WHERE userID = :userID`,
+            [newPassword, userID],
+            {autoCommit: true}
+        );
+        return result.rowsAffected && result.rowsAffected > 0;
+    }).catch(() => {
+        console.error('Error in updateUserPassword:', err);
+        return false;
     });
 }
 
@@ -115,5 +145,7 @@ module.exports = {
     insertUsers,
     updateNameUsers,
     countUsers,
-    getUserByID
+    getUserByID,
+    getUsersBookings, 
+    updateUserPassword
 };

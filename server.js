@@ -3,6 +3,7 @@ const userController = require('./appControllers/userController');
 const ratingController = require('./appControllers/ratingController');
 const locationController = require('./appControllers/locationController');
 const bookableController = require('./appControllers/bookableController');
+const bookingController = require('./appControllers/bookingController');
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
 const loadEnvFile = require('./utils/envUtil');
@@ -28,6 +29,7 @@ app.use('/users', userController);
 app.use('/ratings', ratingController);
 app.use('/locations', locationController);
 app.use('/bookables', bookableController);
+app.use('/bookings', bookingController);
 
 
 
