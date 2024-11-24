@@ -132,10 +132,26 @@ async function updateUserPassword(userID, newPassword) {
             {autoCommit: true}
         );
         return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in updateUserPassword:', err);
         return false;
     });
+}
+
+
+async function getUserFromUsernameAndPassword(username, password) {
+    try {
+        return await withOracleDB(async (connection) => {
+            const result = await connection.execute(
+                `SELECT * from users WHERE username = :username AND password = :password`,
+                [username, password]
+            );
+            return result.rows && result.rows.length > 0;
+        });
+    } catch (err) {
+        console.error('Error during database query:', err);
+        return false;
+    }
 }
 
 module.exports = {
@@ -147,5 +163,6 @@ module.exports = {
     countUsers,
     getUserByID,
     getUsersBookings, 
-    updateUserPassword
+    updateUserPassword,
+    getUserFromUsernameAndPassword
 };

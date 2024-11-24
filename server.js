@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const userController = require('./appControllers/userController');
 const ratingController = require('./appControllers/ratingController');
 const locationController = require('./appControllers/locationController');
@@ -15,6 +16,13 @@ const PORT = envVariables.PORT || 65534;  // Adjust the PORT if needed (e.g., if
 // Middleware setup
 app.use(express.static('public'));  // Serve static files from the 'public' directory
 app.use(express.json());             // Parse incoming JSON payloads
+
+const corsOptions = {
+    origin: 'http://localhost:5173', 
+    credentials: true, 
+};
+app.use(cors(corsOptions));
+
 
 // If you prefer some other file as default page other than 'index.html',
 //      you can adjust and use the bellow line of code to

@@ -120,5 +120,22 @@ router.post('/:userID/update-password', async (req, res) => {
     }
 })
 
+// get a user from username and password
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ message: 'Missing username or password' });
+    }
+
+    const update = await userService.getUserFromUsernameAndPassword(username, password);
+    if (update) {
+        res.json({ success: true, message: "Login success!" });
+    } else {
+        res.status(500).json({ message: 'Invalid username or password' });
+    }
+});
+
+
 
 module.exports = router;

@@ -4,15 +4,19 @@ import { Link, Outlet, NavLink} from "react-router-dom";
 
 
 const TopNavBar = () => {
+
+  const [searchVal, setSearchVal] = useState('')
   const buttonHandler = (event) => {
     event.preventDefault()
     console.log("lolo;")
+    setSearchVal('')
   }
   return (
     <div className='p-2.0 flex justify-between px-4 py-2'> 
       <form onSubmit = {buttonHandler} className= 'flex  gap-4'>
         <input className = 'px-4 py-2 border border-gray-300 rounded hover:shadow-lg transition-shadow' 
-        type = 'text' placeholder='search for locations'>
+        type = 'text' placeholder='search for locations' value = {searchVal}
+        onChange ={(e) => setSearchVal(e.target.value)}>
         </input>
       <button className='bg-gray-200 px-4 py-2 border border-black-300 rounded 
       hover:shadow-lg transition-shadow' type = 'submit'>
