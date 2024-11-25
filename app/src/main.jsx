@@ -8,6 +8,7 @@ import NotFoundPage from './pages/NotFoundPage.jsx'
 import ProfileP from './pages/ProfileP.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
+import RequireAuth from './pages/requireAuth.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
 
 
@@ -20,13 +21,12 @@ const router = createBrowserRouter([
    errorElement: <NotFoundPage/>
  },
  {
-  path: '/profile',
-  element:  <ProfilePage/>,
+  element: <RequireAuth/>,
   children: [
     {
-      path: '/profile/:id',
-      element: <ProfileP/>
-     }
+    path: '/profile',
+    element: <ProfilePage/>
+    }
   ]
  },
  {

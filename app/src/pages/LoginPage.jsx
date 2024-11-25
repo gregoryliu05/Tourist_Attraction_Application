@@ -1,19 +1,25 @@
 import {useRef, useState, useEffect, useContext} from 'react';
-import { NavLink } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import AuthContext from '../context/AuthProvider';
 import axios from '../api/axios';
 
 const LOGIN_URL = 'http://localhost:50004/users/login' 
 
 const LoginPage = () => {
-    const {setAuth} = useContext(AuthContext);
+    const {auth, setAuth} = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         userRef.current.focus();
@@ -23,28 +29,30 @@ const LoginPage = () => {
         setErrMsg('');
     }, [user,pwd])
 
+    useEffect(() => {
+        console.log("Auth state updated:", auth);
+    }, [auth]);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            console.log("Payload being sent:", {
-                userID: uuidv4().replace(/-/g, '').slice(0, 10),
-                fullName: name,
-                username: user,
-                password: pwd,
-                email: email,
-            });
+            
             const response = await axios.post(LOGIN_URL, 
-                JSON.stringify({username: user,password: pwd}),
+                {username: user,password: pwd},
                 {headers: {'Content-Type': 'application/json'},
                 withCredentials: true,
             }
             );
-            console.log(JSON.stringify(response?.data));
-            setAuth({user, pwd});
+            console.log(response.data)
+            const { userID, fullName, username, numReviews, email } = response.data.data;
+            console.log(response.data.email);
+            console.log("values that should be in auth", {userID, fullName, username, email});
+            setAuth({ userID, fullName, username, email });
+            console.log("values in auth", auth);
             setUser('')
             setPwd('')
-            setSuccess(true)
+            navigate(from, {replace: true});
 
         } catch (err) {
             if (!err?.response) {
@@ -63,13 +71,7 @@ const LoginPage = () => {
     }
 
     return (
-        <> { success ? (
-            <section className='border border-gray-200 rounded-lg p-4 flex flex-col items-center text-center'>
-                <h1 className='py-4'> You Are logged In!</h1> 
-                <br/>
-                <NavLink className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {'/'}> Click here to return home</NavLink>
-            </section>
-        ): (
+       
        <section className = 'border border-gray-200 rounded-lg p-4 flex flex-col items-center '>
         <p ref = {errRef} className = {errMsg ? "py-4 border border-gray-200 rounded-lg p-4 flex text-red-500" : "hidden"} aria-live = 'assertive'
         >{errMsg}</p>
@@ -107,9 +109,6 @@ const LoginPage = () => {
 
        </section>
         )
-        }
-       </>
-    )
 }
 
 export default LoginPage

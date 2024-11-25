@@ -1,15 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import { Link, Outlet, NavLink} from "react-router-dom";
-
+import useAuth from './hooks/useAuth';
 
 
 const TopNavBar = () => {
-
+  const {auth, setAuth} = useAuth()
   const [searchVal, setSearchVal] = useState('')
   const buttonHandler = (event) => {
     event.preventDefault()
     console.log("lolo;")
     setSearchVal('')
+  }
+
+  useEffect(() => {
+    console.log("Auth on this page:", auth);
+  }, [auth]);
+
+  const handleLogout = () => {
+    console.log(auth);
+    setAuth(null);
+    localStorage.removeItem('auth');
+    console.log()
+    
   }
   return (
     <div className='p-2.0 flex justify-between px-4 py-2'> 
@@ -24,9 +36,22 @@ const TopNavBar = () => {
         </button>
         </form>
       <div className = 'text-lg font-bold text-center flex-grow px-4 py-2'>Tourist Attraction Application</div>
-      <NavLink className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {`/login`}
-      >Login/Sign Up</NavLink>
-      <div className= 'w-[150px] px-4 py-2'></div>
+      <>
+      { !auth?
+      (<>
+        <NavLink className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {`/login`}
+          >Login/Sign Up</NavLink>
+           <div className= 'w-[150px] px-4 py-2'></div>
+          </>): 
+      (<>
+      <p className=' px-4 py-2'>Hello, {auth.username} </p>
+      <NavLink className = ' text-center bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {`/profile`}
+        >View Profile</NavLink>
+        <button className= 'text-center bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' onClick = {handleLogout}>Logout</button>
+        </>)
+      }
+      </>
+
     </div>
   )
 }

@@ -139,19 +139,30 @@ async function updateUserPassword(userID, newPassword) {
     });
 }
 
-
+// get user login details 
 async function getUserFromUsernameAndPassword(username, password) {
     try {
         return await withOracleDB(async (connection) => {
             const result = await connection.execute(
-                `SELECT * from users WHERE username = :username AND password = :password`,
+                `SELECT * FROM users WHERE username = :username AND password = :password`,
                 [username, password]
             );
-            return result.rows && result.rows.length > 0;
+
+            if (result.rows.length > 0) {
+                const user = result.rows[0]; 
+                return {
+                    userID: user[0], // Assuming userID is the first column
+                    fullName: user[1], // Assuming fullName is the second column
+                    username: user[2], // Assuming username is the third column
+                    numReviews: user[4], // Assuming numReviews is the fifth column
+                    email: user[5] // Assuming email is the sixth column
+                };
+            }
+            return null; 
         });
     } catch (err) {
         console.error('Error during database query:', err);
-        return false;
+        throw new Error('Database error'); 
     }
 }
 

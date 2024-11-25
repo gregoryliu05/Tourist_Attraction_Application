@@ -137,11 +137,16 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'Missing username or password' });
     }
 
-    const update = await userService.getUserFromUsernameAndPassword(username, password);
-    if (update) {
-        res.json({ success: true, message: "Login success!" });
-    } else {
-        res.status(500).json({ message: 'Invalid username or password' });
+    try {
+        const user = await userService.getUserFromUsernameAndPassword(username, password);
+        if (user) {
+            return res.json({ data: user });
+        } else {
+            return res.status(401).json({ message: 'Invalid username or password' }); // Use 401 for unauthorized
+        }
+    } catch (err) {
+        console.error('Error during login:', err.message);
+        return res.status(500).json({ message: 'An internal server error occurred' });
     }
 });
 
