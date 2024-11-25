@@ -27,6 +27,13 @@ const LoginPage = () => {
         e.preventDefault()
 
         try {
+            console.log("Payload being sent:", {
+                userID: uuidv4().replace(/-/g, '').slice(0, 10),
+                fullName: name,
+                username: user,
+                password: pwd,
+                email: email,
+            });
             const response = await axios.post(LOGIN_URL, 
                 JSON.stringify({username: user,password: pwd}),
                 {headers: {'Content-Type': 'application/json'},
@@ -57,19 +64,19 @@ const LoginPage = () => {
 
     return (
         <> { success ? (
-            <section>
-                <h1> You Are logged In!</h1> 
+            <section className='border border-gray-200 rounded-lg p-4 flex flex-col items-center text-center'>
+                <h1 className='py-4'> You Are logged In!</h1> 
                 <br/>
                 <NavLink className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {'/'}> Click here to return home</NavLink>
             </section>
         ): (
-       <section className = 'border border-gray-200 rounded-lg p-4 flex flex-col items-center text-center'>
+       <section className = 'border border-gray-200 rounded-lg p-4 flex flex-col items-center '>
         <p ref = {errRef} className = {errMsg ? "py-4 border border-gray-200 rounded-lg p-4 flex text-red-500" : "hidden"} aria-live = 'assertive'
         >{errMsg}</p>
         <h1  className='text-lg font-bold py-4'> Sign In</h1>
         <form onSubmit = {handleSubmit} className='flex px-4 py-2 grid grid-cols-1 '>
-            <label className = 'py-4  'htmlFor = "username"> Username:</label>
-            <input className = 'py-4 border border-gray-200 rounded-lg p-4 flex' type = "text" placeholder='enter username here'
+            <label className = ' 'htmlFor = "username"> Username:</label>
+            <input className = 'py-2 border border-gray-200 rounded-lg p-4 flex' type = "text" placeholder='enter username here'
             id = "username" 
             ref = {userRef}
             autoComplete='off'
@@ -77,15 +84,18 @@ const LoginPage = () => {
             value = {user}
             required
             />
+            <br/>
             <label htmlFor = "password" > Password:</label>
-            <input className = 'py-4 border border-gray-200 rounded-lg p-4 flex' type = "password"  placeholder = 'enter password here'
+            <input className = 'py-2 border border-gray-200 rounded-lg p-4 flex' type = "password"  placeholder = 'enter password here'
             id = "password" 
             autoComplete='off'
             onChange = {(e) => setPwd(e.target.value)}
             value = {pwd}
             required
             />
-            <button className = 'py-2'type = 'submit'> Sign In</button>
+            <br/>
+            <button className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' type = 'submit'
+            > Sign In</button>
         </form>
         <p className='py-2'>
             Need an Account? <br/>

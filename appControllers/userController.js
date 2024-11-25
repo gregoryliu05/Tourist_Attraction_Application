@@ -31,13 +31,22 @@ router.post('/initiate-users', async (req, res) => {
 
 // Insert a user
 router.post('/insert-users', async (req, res) => {
+    console.log("Received data:", req.body);
     const { userID, fullName, username, password, email } = req.body;
-    console.log("Inserting User with:", { userID, fullName, username, password, email });
-    const insertResult = await userService.insertUsers(userID, fullName, username, password, email);
+
+    if (!userID|| !fullName || !username || !password || !email) {
+        return res.status(400).json({success: false, message: "missing fields"})
+    }
+
+    if (userService.getUserByID(userID) == []) {
+        return res.status(500).json({message: 'internal error'})
+    } 
+
+    const insertResult = await userService.insertUsers(userID, fullName, username, password, 0, email);
     if (insertResult) {
-        res.json({ success: true });
+        return res.json({ success: true });
     } else {
-        res.status(500).json({ success: false });
+        return res.status(500).json({ success: false });
     }
 });
 

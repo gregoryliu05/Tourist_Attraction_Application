@@ -49,16 +49,17 @@ async function initiateUsers() {
 
 
 // add user 
-async function insertUsers(userID, fullName, username, password, email) {
+async function insertUsers(userID, fullName, username, password, numReviews, email) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO users (userID, fullName, username, password, numReviews, email) 
-            VALUES (:userID, :fullName, :username, :password, 0, :email)`,
+            VALUES (:userID, :fullName, :username, :password, :numReviews , :email)`,
             {
                 userID: userID,
                 fullName: fullName,
                 username: username,
                 password: password,
+                numReviews: numReviews,
                 email: email
             },
             { autoCommit: true }
