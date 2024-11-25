@@ -81,7 +81,16 @@ router.get('/count-users', async (req, res) => {
 router.get('/:userID', async (req, res) => {
     const { userID } = req.params;
     const viewResult = await userService.getUserByID(userID);
-    res.json({ data: viewResult });
+    
+    if (!userID) {
+        res.status(400).json({success: false, message: "no user id"})
+    }
+
+    if (viewResult) {
+        res.json({ data: viewResult });
+    } else {
+        res.status(500).json({success: false, message: "could not get user"})
+    }
 });
 
 
@@ -142,7 +151,7 @@ router.post('/login', async (req, res) => {
         if (user) {
             return res.json({ data: user });
         } else {
-            return res.status(401).json({ message: 'Invalid username or password' }); // Use 401 for unauthorized
+            return res.status(401).json({ message: 'Invalid username or password' }); 
         }
     } catch (err) {
         console.error('Error during login:', err.message);

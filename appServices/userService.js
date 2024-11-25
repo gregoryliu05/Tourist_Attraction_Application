@@ -103,10 +103,21 @@ async function getUserByID(userID) {
             'SELECT * from users where userID = :userID',
             [userID]
         );
-        return result.rows;
+        const data = result.rows[0];
+        if (result.rows.length > 0 ) {
+            return {
+                userID: data[0],
+                fullName: data[1],
+                username: data[2],
+                password: data[3],
+                numReviews: data[4],
+                email: data[5]
+            }
+        }
+        return null;
     }).catch((err) => {
         console.err("could not get user", err);
-        return [];
+        return null;
     });
 }
 
@@ -151,11 +162,12 @@ async function getUserFromUsernameAndPassword(username, password) {
             if (result.rows.length > 0) {
                 const user = result.rows[0]; 
                 return {
-                    userID: user[0], // Assuming userID is the first column
-                    fullName: user[1], // Assuming fullName is the second column
-                    username: user[2], // Assuming username is the third column
-                    numReviews: user[4], // Assuming numReviews is the fifth column
-                    email: user[5] // Assuming email is the sixth column
+                    userID: user[0], 
+                    fullName: user[1], 
+                    username: user[2], 
+                    password: user[3], 
+                    numReviews: user[4], 
+                    email: user[5] 
                 };
             }
             return null; 
