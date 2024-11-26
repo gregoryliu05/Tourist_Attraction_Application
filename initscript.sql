@@ -345,28 +345,28 @@ INSERT INTO rating VALUES ('R000039', 4.8, '100039', 'PARK009', '309 Green Ave')
 INSERT INTO rating VALUES ('R000040', 4.6, '100040', 'PARK010', '310 Green Ave'); 
 
 -- user_comments table
-INSERT INTO user_comments VALUES ('R000000001', 'Great place, highly recommend!');
-INSERT INTO user_comments VALUES ('R000000002', 'Decent, but could be better.');
-INSERT INTO user_comments VALUES ('R000000003', 'Absolutely fantastic!');
-INSERT INTO user_comments VALUES ('R000000004', 'Not very satisfied with the experience.');
-INSERT INTO user_comments VALUES ('R000000005', 'Would visit again.');
-INSERT INTO user_comments VALUES ('R000000006', 'Very clean and well-maintained.');
-INSERT INTO user_comments VALUES ('R000000007', 'Average place, nothing special.');
-INSERT INTO user_comments VALUES ('R000000008', 'Enjoyed my visit thoroughly.');
-INSERT INTO user_comments VALUES ('R000000009', 'Best experience ever!');
-INSERT INTO user_comments VALUES ('R000000010', 'Friendly staff and great atmosphere.');
+INSERT INTO user_comments VALUES ('R000001', 'Great place, highly recommend!');
+INSERT INTO user_comments VALUES ('R000002', 'Decent, but could be better.');
+INSERT INTO user_comments VALUES ('R000003', 'Absolutely fantastic!');
+INSERT INTO user_comments VALUES ('R000004', 'Not very satisfied with the experience.');
+INSERT INTO user_comments VALUES ('R000005', 'Would visit again.');
+INSERT INTO user_comments VALUES ('R000006', 'Very clean and well-maintained.');
+INSERT INTO user_comments VALUES ('R000007', 'Average place, nothing special.');
+INSERT INTO user_comments VALUES ('R000008', 'Enjoyed my visit thoroughly.');
+INSERT INTO user_comments VALUES ('R000009', 'Best experience ever!');
+INSERT INTO user_comments VALUES ('R000010', 'Friendly staff and great atmosphere.');
 
 -- picture table
-INSERT INTO picture VALUES ('R000000001', HEXTORAW('89504E47'));
-INSERT INTO picture VALUES ('R000000002', HEXTORAW('FFD8FFE0'));
-INSERT INTO picture VALUES ('R000000003', HEXTORAW('89504E47'));
-INSERT INTO picture VALUES ('R000000004', HEXTORAW('FFD8FFE0'));
-INSERT INTO picture VALUES ('R000000005', HEXTORAW('89504E47'));
-INSERT INTO picture VALUES ('R000000006', HEXTORAW('FFD8FFE0'));
-INSERT INTO picture VALUES ('R000000007', HEXTORAW('89504E47'));
-INSERT INTO picture VALUES ('R000000008', HEXTORAW('FFD8FFE0'));
-INSERT INTO picture VALUES ('R000000009', HEXTORAW('89504E47'));
-INSERT INTO picture VALUES ('R000000010', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000001', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000002', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000003', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000004', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000005', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000006', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000007', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000008', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000009', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000010', HEXTORAW('FFD8FFE0'));
 
 -- time_of_booking table
 INSERT INTO time_of_booking VALUES ('08:00 AM', '10:00 AM', '2 hours');
