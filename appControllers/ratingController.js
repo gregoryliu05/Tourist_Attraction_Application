@@ -14,6 +14,18 @@ router.post('/insert-rating', async (req, res) => {
     }
 })
 
+router.get('/locations-ratings', async (req,res) => {
+    try {
+        const tableContent = await ratingService.getLocationsRatings();
+        res.json({data: tableContent})
+    } catch (err) {
+        res.status(500).json({error: 'An error occured while fetching ratings'})
+
+    }
+
+})
+
+
 // gets all ratings
 router.get('/', async (req,res) => {
     const tableContent = await ratingService.getRatingsFromDb();

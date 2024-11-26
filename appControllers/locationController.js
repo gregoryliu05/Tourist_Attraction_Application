@@ -13,6 +13,15 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/details', async (req,res) => {
+    try {
+        const tableContent = await locationService.getLocationsDetails();
+        res.json({data: tableContent});
+    } catch (err) {
+        res.status(500).json({error: 'An error occured while fetching location'});
+    }
+})
+
 
 router.post('/add-location', async (req, res) => {
     const {locationName, postalCode, address, operationHours, provinceState, cityName} = req.body;

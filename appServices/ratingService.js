@@ -74,10 +74,31 @@ async function getUsersRating(userID) {
 }
 
 
+// get average rating and number of ratings for all locations 
+async function getLocationsRatings() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            'SELECT * from rating'
+        );
+        const ratings = result.rows.map((row)=> ({
+            postalCode: row[0],
+            address: row[1],
+            avg_rating: row[2],
+            num_ratings: row[3]
+        }))
+        return ratings;
+    }).catch((err) => {
+        console.log("error in getLocationsRatings", err)
+        return null;
+    })
+
+}
+
 module.exports = {
     addRating, 
     getRatingsFromDb,
     getRating,
     deleteRating,
     getUsersRating,
+    getLocationsRatings
 };

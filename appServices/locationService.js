@@ -1,4 +1,5 @@
 // queries for locations, parks and museums
+const { connect } = require('../appControllers/userController');
 const {withOracleDB } = require('../db');
 
 
@@ -9,12 +10,31 @@ async function getLocations() {
             'SELECT * from locations'
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getLocations:', err);
         return [];
     })
 }
 
+
+// get all locations name, address and postal code
+async function getLocationsDetails() {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            'SELECT locationName, address, postalCode from locations'
+        );
+        const locations = result.rows.map((row) => ({
+            locationName: row[0],
+            address: row[1],
+            postalCode: row[2]    
+        })
+    )
+        return locations;
+    }).catch((err) => {
+        console.error("Error in getLocationsDetails:", err);
+        return null;
+    })
+}
 
 
 //add a location with its subtype??
@@ -70,7 +90,7 @@ async function getLocationsWithName(locationName) {
         [locationName]
     );
     return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getLocationsWithName:', err);
         return [];
     })
@@ -226,6 +246,7 @@ module.exports = {
     getLocations,
     addLocation,
     getLocationFromKey,
+    getLocationsDetails,
     deleteLocationFromKey,
     getLocationsWithName,
     getLocationsInCity,

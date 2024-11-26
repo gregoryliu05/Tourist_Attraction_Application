@@ -251,13 +251,13 @@ INSERT INTO city_time_zone VALUES ('YT', 'Canada', 'PST');
 INSERT INTO city_time_zone VALUES ('NT', 'Canada', 'MST');
 
 -- locations table
-INSERT INTO locations VALUES ('mcdonalds', 'V5K1Z1', '123 Elm Street', '9AM-5PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K2Z2', '456 Oak Avenue', '10AM-6PM', 'BC', 'Richmond');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K3Z3', '789 Maple Lane', '8AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K4Z4', '135 Pine Street', '7AM-9PM', 'BC', 'Burnaby');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K5Z5', '246 Cedar Road', '24 hours', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K6Z6', '357 Birch Way', '6AM-10PM', 'BC', 'Surrey');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K7Z7', '468 Willow Drive', '8AM-6PM', 'BC', 'Coquitlam');
+INSERT INTO locations VALUES ('Mcdonalds', 'V5K1Z1', '123 Elm Street', '9AM-5PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('Haidilao', 'V5K2Z2', '456 Oak Avenue', '10AM-6PM', 'BC', 'Richmond');
+INSERT INTO locations VALUES ('Burger King', 'V5K3Z3', '789 Maple Lane', '8AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('Tim Hortons', 'V5K4Z4', '135 Pine Street', '7AM-9PM', 'BC', 'Burnaby');
+INSERT INTO locations VALUES ('Kfc', 'V5K5Z5', '246 Cedar Road', '24 hours', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ("Church's Chicken", 'V5K6Z6', '357 Birch Way', '6AM-10PM', 'BC', 'Surrey');
+INSERT INTO locations VALUES ('', 'V5K7Z7', '468 Willow Drive', '8AM-6PM', 'BC', 'Coquitlam');
 INSERT INTO locations VALUES ('mcdonalds', 'V5K8Z8', '579 Fir Trail', '10AM-5PM', 'BC', 'Richmond');
 INSERT INTO locations VALUES ('mcdonalds', 'V5K9Z9', '680 Redwood Road', '9AM-6PM', 'BC', 'Vancouver');
 INSERT INTO locations VALUES ('mcdonalds', 'V5K0Z0', '791 Ash Boulevard', '24 hours', 'BC', 'Vancouver');
