@@ -407,7 +407,7 @@ INSERT INTO bookable VALUES ('P103457', '142 Main St', 20.00);
 
 -- booking_details table
 INSERT INTO booking_details VALUES ('B000000001', '08:00 AM', '2 hours', 4, '1000000001', 'P123456', '123 Main St');
-INSERT INTO booking_details VALUES ('B000000002', '10:00 AM', '1.5 hours', 2, '1000000002',  'P123457', '124 Main St');
+INSERT INTO booking_details VALUES ('B000000002', '10:00 AM', '1.5 hours', 2, '1000230002',  'P123457', '124 Main St');
 INSERT INTO booking_details VALUES ('B000000003', '12:00 PM', '1.5 hours', 5, '1000000003',  'P223456', '125 Main St');
 INSERT INTO booking_details VALUES ('B000000004', '02:00 PM', '1.5 hours', 3, '1000000004','P223457', '126 Main St');
 INSERT INTO booking_details VALUES ('B000000005', '03:30 PM', '1 hour', 6, '1000000005','P323456', '127 Main St');
