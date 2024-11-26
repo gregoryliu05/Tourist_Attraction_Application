@@ -38,12 +38,12 @@ async function getLocationsDetails() {
 
 
 //add a location with its subtype??
-async function addLocation(locationName, postalCode, address, operationHours, provinceState, cityName) {
+async function addLocation(locationID, locationName, postalCode, address, operationHours, provinceState, cityName) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO locations (locationName, postalCode, address, operationHours, provinceState, cityName)
-             VALUES(:locationName, :postalCode, :address, :operationHours, :provinceState, :cityName)`,
-             [locationName, postalCode, address, operationHours, provinceState, cityName],
+            `INSERT INTO locations (locationID, locationName, postalCode, address, operationHours, provinceState, cityName)
+             VALUES(:locationID, :locationName, :postalCode, :address, :operationHours, :provinceState, :cityName)`,
+             [locationID, locationName, postalCode, address, operationHours, provinceState, cityName],
              {autoCommit: true}
         );
         return result.rowsAffected && result.rowsAffected > 0;

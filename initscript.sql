@@ -56,6 +56,7 @@ GRANT SELECT ON city_time_zone TO PUBLIC;
 
 
 CREATE TABLE locations (
+    locationID VARCHAR(10) UNIQUE,
     locationName VARCHAR(50),
     postalCode VARCHAR(10),
     address VARCHAR(50),
@@ -250,17 +251,51 @@ INSERT INTO city_time_zone VALUES ('NL', 'Canada', 'NST');
 INSERT INTO city_time_zone VALUES ('YT', 'Canada', 'PST');
 INSERT INTO city_time_zone VALUES ('NT', 'Canada', 'MST');
 
--- locations table
-INSERT INTO locations VALUES ('Mcdonalds', 'V5K1Z1', '123 Elm Street', '9AM-5PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('Haidilao', 'V5K2Z2', '456 Oak Avenue', '10AM-6PM', 'BC', 'Richmond');
-INSERT INTO locations VALUES ('Burger King', 'V5K3Z3', '789 Maple Lane', '8AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('Tim Hortons', 'V5K4Z4', '135 Pine Street', '7AM-9PM', 'BC', 'Burnaby');
-INSERT INTO locations VALUES ('Kfc', 'V5K5Z5', '246 Cedar Road', '24 hours', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ("Church's Chicken", 'V5K6Z6', '357 Birch Way', '6AM-10PM', 'BC', 'Surrey');
-INSERT INTO locations VALUES ('', 'V5K7Z7', '468 Willow Drive', '8AM-6PM', 'BC', 'Coquitlam');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K8Z8', '579 Fir Trail', '10AM-5PM', 'BC', 'Richmond');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K9Z9', '680 Redwood Road', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('mcdonalds', 'V5K0Z0', '791 Ash Boulevard', '24 hours', 'BC', 'Vancouver');
+-- Locations for Bookables (10 Hotels and 10 Restaurants)
+INSERT INTO locations VALUES ('LOC001', 'Hotel 1', 'P123456', '123 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC002', 'Restaurant 1', 'P123457', '124 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC003', 'Hotel 2', 'P223456', '125 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC004', 'Restaurant 2', 'P223457', '126 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC005', 'Hotel 3', 'P323456', '127 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC006', 'Restaurant 3', 'P323457', '128 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC007', 'Hotel 4', 'P423456', '129 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC008', 'Restaurant 4', 'P423457', '130 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC009', 'Hotel 5', 'P523456', '131 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC010', 'Restaurant 5', 'P523457', '132 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC011', 'Hotel 6', 'P623456', '133 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC012', 'Restaurant 6', 'P623457', '134 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC013', 'Hotel 7', 'P723456', '135 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC014', 'Restaurant 7', 'P723457', '136 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC015', 'Hotel 8', 'P823456', '137 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC016', 'Restaurant 8', 'P823457', '138 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC017', 'Hotel 9', 'P923456', '139 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC018', 'Restaurant 9', 'P923457', '140 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC019', 'Hotel 10', 'P103456', '141 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC020', 'Restaurant 10', 'P103457', '142 Main St', '8AM-10PM', 'BC', 'Vancouver');
+
+-- Locations for Museums (10)
+INSERT INTO locations VALUES ('LOC021', 'Museum 1', 'M123456', '201 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC022', 'Museum 2', 'M223456', '202 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC023', 'Museum 3', 'M323456', '203 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC024', 'Museum 4', 'M423456', '204 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC025', 'Museum 5', 'M523456', '205 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC026', 'Museum 6', 'M623456', '206 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC027', 'Museum 7', 'M723456', '207 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC028', 'Museum 8', 'M823456', '208 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC029', 'Museum 9', 'M923456', '209 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC030', 'Museum 10', 'M103456', '210 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+
+-- Locations for Parks (10)
+INSERT INTO locations VALUES ('LOC031', 'Park 1', 'PARK001', '301 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC032', 'Park 2', 'PARK002', '302 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC033', 'Park 3', 'PARK003', '303 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC034', 'Park 4', 'PARK004', '304 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC035', 'Park 5', 'PARK005', '305 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC036', 'Park 6', 'PARK006', '306 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC037', 'Park 7', 'PARK007', '307 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC038', 'Park 8', 'PARK008', '308 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC039', 'Park 9', 'PARK009', '309 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
 
 -- rating table
 INSERT INTO rating VALUES ('R000000001', 4.5, '1000000001', 'V5K1Z1', '123 Elm Street');
@@ -311,16 +346,29 @@ INSERT INTO time_of_booking VALUES ('09:30 PM', '11:00 PM', '1.5 hours');
 INSERT INTO time_of_booking VALUES ('11:00 PM', '12:00 AM', '1 hour');
 
 -- bookable table
-INSERT INTO bookable VALUES ('V5K1Z1', '123 Elm Street', 100.00);
-INSERT INTO bookable VALUES ('V5K2Z2', '456 Oak Avenue', 150.00);
-INSERT INTO bookable VALUES ('V5K3Z3', '789 Maple Lane', 75.00);
-INSERT INTO bookable VALUES ('V5K4Z4', '135 Pine Street', 200.00);
-INSERT INTO bookable VALUES ('V5K5Z5', '246 Cedar Road', 125.00);
-INSERT INTO bookable VALUES ('V5K6Z6', '357 Birch Way', 175.00);
-INSERT INTO bookable VALUES ('V5K7Z7', '468 Willow Drive', 80.00);
-INSERT INTO bookable VALUES ('V5K8Z8', '579 Fir Trail', 140.00);
-INSERT INTO bookable VALUES ('V5K9Z9', '680 Redwood Road', 95.00);
-INSERT INTO bookable VALUES ('V5K0Z0', '791 Ash Boulevard', 130.00);
+-- Hotels
+INSERT INTO bookable VALUES ('P123456', '123 Main St', 120.00);
+INSERT INTO bookable VALUES ('P223456', '125 Main St', 150.00);
+INSERT INTO bookable VALUES ('P323456', '127 Main St', 180.00);
+INSERT INTO bookable VALUES ('P423456', '129 Main St', 200.00);
+INSERT INTO bookable VALUES ('P523456', '131 Main St', 170.00);
+INSERT INTO bookable VALUES ('P623456', '133 Main St', 190.00);
+INSERT INTO bookable VALUES ('P723456', '135 Main St', 160.00);
+INSERT INTO bookable VALUES ('P823456', '137 Main St', 220.00);
+INSERT INTO bookable VALUES ('P923456', '139 Main St', 250.00);
+INSERT INTO bookable VALUES ('P103456', '141 Main St', 230.00);
+
+-- Restaurants
+INSERT INTO bookable VALUES ('P123457', '124 Main St', 30.00);
+INSERT INTO bookable VALUES ('P223457', '126 Main St', 25.00);
+INSERT INTO bookable VALUES ('P323457', '128 Main St', 35.00);
+INSERT INTO bookable VALUES ('P423457', '130 Main St', 40.00);
+INSERT INTO bookable VALUES ('P523457', '132 Main St', 45.00);
+INSERT INTO bookable VALUES ('P623457', '134 Main St', 50.00);
+INSERT INTO bookable VALUES ('P723457', '136 Main St', 28.00);
+INSERT INTO bookable VALUES ('P823457', '138 Main St', 55.00);
+INSERT INTO bookable VALUES ('P923457', '140 Main St', 60.00);
+INSERT INTO bookable VALUES ('P103457', '142 Main St', 20.00);
 
 -- booking_details table
 INSERT INTO booking_details VALUES ('B000000001', '08:00 AM', '2 hours', 4, '1000000001', 'V5K1Z1', '123 Elm Street');
@@ -347,52 +395,52 @@ INSERT INTO categorizes VALUES ('Park', 'V5K9Z9', '680 Redwood Road');
 INSERT INTO categorizes VALUES ('Museum', 'V5K0Z0', '791 Ash Boulevard');
 
 -- parks table
-INSERT INTO parks VALUES ('V5K1Z1', '123 Elm Street', 500);
-INSERT INTO parks VALUES ('V5K2Z2', '456 Oak Avenue', 750);
-INSERT INTO parks VALUES ('V5K3Z3', '789 Maple Lane', 300);
-INSERT INTO parks VALUES ('V5K4Z4', '135 Pine Street', 1200);
-INSERT INTO parks VALUES ('V5K5Z5', '246 Cedar Road', 950);
-INSERT INTO parks VALUES ('V5K6Z6', '357 Birch Way', 400);
-INSERT INTO parks VALUES ('V5K7Z7', '468 Willow Drive', 550);
-INSERT INTO parks VALUES ('V5K8Z8', '579 Fir Trail', 700);
-INSERT INTO parks VALUES ('V5K9Z9', '680 Redwood Road', 1100);
-INSERT INTO parks VALUES ('V5K0Z0', '791 Ash Boulevard', 850);
+INSERT INTO parks VALUES ('PARK001', '301 Green Ave', 500);
+INSERT INTO parks VALUES ('PARK002', '302 Green Ave', 600);
+INSERT INTO parks VALUES ('PARK003', '303 Green Ave', 700);
+INSERT INTO parks VALUES ('PARK004', '304 Green Ave', 800);
+INSERT INTO parks VALUES ('PARK005', '305 Green Ave', 900);
+INSERT INTO parks VALUES ('PARK006', '306 Green Ave', 1000);
+INSERT INTO parks VALUES ('PARK007', '307 Green Ave', 1100);
+INSERT INTO parks VALUES ('PARK008', '308 Green Ave', 1200);
+INSERT INTO parks VALUES ('PARK009', '309 Green Ave', 1300);
+INSERT INTO parks VALUES ('PARK010', '310 Green Ave', 1400);
 
 -- museums table
-INSERT INTO museums VALUES ('V5K1Z1', '123 Elm Street', 15.00, 'History');
-INSERT INTO museums VALUES ('V5K2Z2', '456 Oak Avenue', 20.00, 'Science');
-INSERT INTO museums VALUES ('V5K3Z3', '789 Maple Lane', 10.00, 'Art');
-INSERT INTO museums VALUES ('V5K4Z4', '135 Pine Street', 25.00, 'Technology');
-INSERT INTO museums VALUES ('V5K5Z5', '246 Cedar Road', 12.50, 'Natural History');
-INSERT INTO museums VALUES ('V5K6Z6', '357 Birch Way', 18.00, 'Aquatic Life');
-INSERT INTO museums VALUES ('V5K7Z7', '468 Willow Drive', 22.00, 'Cultural Heritage');
-INSERT INTO museums VALUES ('V5K8Z8', '579 Fir Trail', 9.50, 'Space Exploration');
-INSERT INTO museums VALUES ('V5K9Z9', '680 Redwood Road', 16.00, 'Archaeology');
-INSERT INTO museums VALUES ('V5K0Z0', '791 Ash Boulevard', 13.75, 'Modern Art');
+INSERT INTO museums VALUES ('M123456', '201 Culture St', 15.00, 'Art');
+INSERT INTO museums VALUES ('M223456', '202 Culture St', 10.00, 'History');
+INSERT INTO museums VALUES ('M323456', '203 Culture St', 20.00, 'Science');
+INSERT INTO museums VALUES ('M423456', '204 Culture St', 12.00, 'Children');
+INSERT INTO museums VALUES ('M523456', '205 Culture St', 18.00, 'Natural History');
+INSERT INTO museums VALUES ('M623456', '206 Culture St', 25.00, 'Planetarium');
+INSERT INTO museums VALUES ('M723456', '207 Culture St', 15.00, 'Heritage');
+INSERT INTO museums VALUES ('M823456', '208 Culture St', 22.00, 'Photography');
+INSERT INTO museums VALUES ('M923456', '209 Culture St', 19.00, 'Technology');
+INSERT INTO museums VALUES ('M103456', '210 Culture St', 30.00, 'Space');
 
 -- restaurant table
-INSERT INTO restaurant VALUES ('V5K1Z1', '123 Elm Street', 'Italian');
-INSERT INTO restaurant VALUES ('V5K2Z2', '456 Oak Avenue', 'Mexican');
-INSERT INTO restaurant VALUES ('V5K3Z3', '789 Maple Lane', 'Chinese');
-INSERT INTO restaurant VALUES ('V5K4Z4', '135 Pine Street', 'Indian');
-INSERT INTO restaurant VALUES ('V5K5Z5', '246 Cedar Road', 'Japanese');
-INSERT INTO restaurant VALUES ('V5K6Z6', '357 Birch Way', 'French');
-INSERT INTO restaurant VALUES ('V5K7Z7', '468 Willow Drive', 'Thai');
-INSERT INTO restaurant VALUES ('V5K8Z8', '579 Fir Trail', 'Korean');
-INSERT INTO restaurant VALUES ('V5K9Z9', '680 Redwood Road', 'Vietnamese');
-INSERT INTO restaurant VALUES ('V5K0Z0', '791 Ash Boulevard', 'Greek');
+INSERT INTO restaurant VALUES ('P123457', '124 Main St', 'French Cuisine');
+INSERT INTO restaurant VALUES ('P223457', '126 Main St', 'Italian Cuisine');
+INSERT INTO restaurant VALUES ('P323457', '128 Main St', 'Mexican Cuisine');
+INSERT INTO restaurant VALUES ('P423457', '130 Main St', 'American Cuisine');
+INSERT INTO restaurant VALUES ('P523457', '132 Main St', 'Chinese Cuisine');
+INSERT INTO restaurant VALUES ('P623457', '134 Main St', 'Indian Cuisine');
+INSERT INTO restaurant VALUES ('P723457', '136 Main St', 'Japanese Cuisine');
+INSERT INTO restaurant VALUES ('P823457', '138 Main St', 'Thai Cuisine');
+INSERT INTO restaurant VALUES ('P923457', '140 Main St', 'Mediterranean Cuisine');
+INSERT INTO restaurant VALUES ('P103457', '142 Main St', 'Vegan Cuisine');
 
 -- hotel table
-INSERT INTO hotel VALUES ('V5K1Z1', '123 Elm Street', 250.00, 4);
-INSERT INTO hotel VALUES ('V5K2Z2', '456 Oak Avenue', 180.00, 3);
-INSERT INTO hotel VALUES ('V5K3Z3', '789 Maple Lane', 300.00, 5);
-INSERT INTO hotel VALUES ('V5K4Z4', '135 Pine Street', 220.00, 4);
-INSERT INTO hotel VALUES ('V5K5Z5', '246 Cedar Road', 150.00, 3);
-INSERT INTO hotel VALUES ('V5K6Z6', '357 Birch Way', 275.00, 4);
-INSERT INTO hotel VALUES ('V5K7Z7', '468 Willow Drive', 125.00, 2);
-INSERT INTO hotel VALUES ('V5K8Z8', '579 Fir Trail', 350.00, 5);
-INSERT INTO hotel VALUES ('V5K9Z9', '680 Redwood Road', 200.00, 3);
-INSERT INTO hotel VALUES ('V5K0Z0', '791 Ash Boulevard', 175.00, 3);
+INSERT INTO hotel VALUES ('P123456', '123 Main St', 120.00, 5);
+INSERT INTO hotel VALUES ('P223456', '125 Main St', 150.00, 4);
+INSERT INTO hotel VALUES ('P323456', '127 Main St', 180.00, 5);
+INSERT INTO hotel VALUES ('P423456', '129 Main St', 200.00, 4);
+INSERT INTO hotel VALUES ('P523456', '131 Main St', 170.00, 3);
+INSERT INTO hotel VALUES ('P623456', '133 Main St', 190.00, 5);
+INSERT INTO hotel VALUES ('P723456', '135 Main St', 160.00, 4);
+INSERT INTO hotel VALUES ('P823456', '137 Main St', 220.00, 5);
+INSERT INTO hotel VALUES ('P923456', '139 Main St', 250.00, 5);
+INSERT INTO hotel VALUES ('P103456', '141 Main St', 230.00, 5);
 
 -- event_time table
 INSERT INTO event_time VALUES ('09:00 AM', '11:00 AM', '2 hours');
