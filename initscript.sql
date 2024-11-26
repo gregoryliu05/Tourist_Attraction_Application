@@ -298,16 +298,51 @@ INSERT INTO locations VALUES ('LOC039', 'Park 9', 'PARK009', '309 Green Ave', '6
 INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
 
 -- rating table
-INSERT INTO rating VALUES ('R000000001', 4.5, '1000000001', 'V5K1Z1', '123 Elm Street');
-INSERT INTO rating VALUES ('R000000002', 3.7, '1000000002', 'V5K2Z2', '456 Oak Avenue');
-INSERT INTO rating VALUES ('R000000003', 5.0, '1000000003', 'V5K3Z3', '789 Maple Lane');
-INSERT INTO rating VALUES ('R000000004', 2.8, '1000000004', 'V5K4Z4', '135 Pine Street');
-INSERT INTO rating VALUES ('R000000005', 3.3, '1000000005', 'V5K5Z5', '246 Cedar Road');
-INSERT INTO rating VALUES ('R000000006', 4.9, '1000000006', 'V5K6Z6', '357 Birch Way');
-INSERT INTO rating VALUES ('R000000007', 3.1, '1000000007', 'V5K7Z7', '468 Willow Drive');
-INSERT INTO rating VALUES ('R000000008', 4.2, '1000000008', 'V5K8Z8', '579 Fir Trail');
-INSERT INTO rating VALUES ('R000000009', 5.0, '1000000009', 'V5K9Z9', '680 Redwood Road');
-INSERT INTO rating VALUES ('R000000010', 4.0, '1000000010', 'V5K0Z0', '791 Ash Boulevard');
+-- Ratings for Bookables (10 Hotels and 10 Restaurants)
+INSERT INTO rating VALUES ('R000001', 4.5, '100001', 'P123456', '123 Main St');
+INSERT INTO rating VALUES ('R000002', 4.0, '100002', 'P123457', '124 Main St');
+INSERT INTO rating VALUES ('R000003', 4.8, '100003', 'P223456', '125 Main St'); 
+INSERT INTO rating VALUES ('R000004', 3.7, '100004', 'P223457', '126 Main St'); 
+INSERT INTO rating VALUES ('R000005', 4.2, '100005', 'P323456', '127 Main St'); 
+INSERT INTO rating VALUES ('R000006', 3.5, '100006', 'P323457', '128 Main St'); 
+INSERT INTO rating VALUES ('R000007', 4.6, '100007', 'P423456', '129 Main St'); 
+INSERT INTO rating VALUES ('R000008', 2.0, '100008', 'P423457', '130 Main St');
+INSERT INTO rating VALUES ('R000009', 4.9, '100009', 'P523456', '131 Main St'); 
+INSERT INTO rating VALUES ('R000010', 3.9, '100010', 'P523457', '132 Main St'); 
+INSERT INTO rating VALUES ('R000011', 4.7, '100011', 'P623456', '133 Main St'); 
+INSERT INTO rating VALUES ('R000012', 4.1, '100012', 'P623457', '134 Main St'); 
+INSERT INTO rating VALUES ('R000013', 4.8, '100013', 'P723456', '135 Main St'); 
+INSERT INTO rating VALUES ('R000014', 3.6, '100014', 'P723457', '136 Main St'); 
+INSERT INTO rating VALUES ('R000015', 4.3, '100015', 'P823456', '137 Main St'); 
+INSERT INTO rating VALUES ('R000016', 1.0, '100016', 'P823457', '138 Main St'); 
+INSERT INTO rating VALUES ('R000017', 4.9, '100017', 'P923456', '139 Main St'); 
+INSERT INTO rating VALUES ('R000018', 3.8, '100018', 'P923457', '140 Main St'); 
+INSERT INTO rating VALUES ('R000019', 3.6, '100019', 'P103456', '141 Main St'); 
+INSERT INTO rating VALUES ('R000020', 4.3, '100020', 'P103457', '142 Main St'); 
+
+-- Ratings for Museums (10)
+INSERT INTO rating VALUES ('R000021', 1.7, '100021', 'M123456', '201 Culture St'); 
+INSERT INTO rating VALUES ('R000022', 4.5, '100022', 'M223456', '202 Culture St'); 
+INSERT INTO rating VALUES ('R000023', 1.9, '100023', 'M323456', '203 Culture St'); 
+INSERT INTO rating VALUES ('R000024', 1.4, '100024', 'M423456', '204 Culture St'); 
+INSERT INTO rating VALUES ('R000025', 4.3, '100025', 'M523456', '205 Culture St'); 
+INSERT INTO rating VALUES ('R000026', 2.8, '100026', 'M623456', '206 Culture St'); 
+INSERT INTO rating VALUES ('R000027', 4.2, '100027', 'M723456', '207 Culture St'); 
+INSERT INTO rating VALUES ('R000028', 4.5, '100028', 'M823456', '208 Culture St'); 
+INSERT INTO rating VALUES ('R000029', 4.6, '100029', 'M923456', '209 Culture St'); 
+INSERT INTO rating VALUES ('R000030', 4.9, '100030', 'M103456', '210 Culture St'); 
+
+-- Ratings for Parks (10)
+INSERT INTO rating VALUES ('R000031', 4.4, '100031', 'PARK001', '301 Green Ave'); 
+INSERT INTO rating VALUES ('R000032', 2.3, '100032', 'PARK002', '302 Green Ave'); 
+INSERT INTO rating VALUES ('R000033', 4.8, '100033', 'PARK003', '303 Green Ave'); 
+INSERT INTO rating VALUES ('R000034', 4.6, '100034', 'PARK004', '304 Green Ave'); 
+INSERT INTO rating VALUES ('R000035', 4.2, '100035', 'PARK005', '305 Green Ave'); 
+INSERT INTO rating VALUES ('R000036', 4.5, '100036', 'PARK006', '306 Green Ave');
+INSERT INTO rating VALUES ('R000037', 4.7, '100037', 'PARK007', '307 Green Ave'); 
+INSERT INTO rating VALUES ('R000038', 4.9, '100038', 'PARK008', '308 Green Ave'); 
+INSERT INTO rating VALUES ('R000039', 4.8, '100039', 'PARK009', '309 Green Ave'); 
+INSERT INTO rating VALUES ('R000040', 4.6, '100040', 'PARK010', '310 Green Ave'); 
 
 -- user_comments table
 INSERT INTO user_comments VALUES ('R000000001', 'Great place, highly recommend!');
@@ -371,28 +406,28 @@ INSERT INTO bookable VALUES ('P923457', '140 Main St', 60.00);
 INSERT INTO bookable VALUES ('P103457', '142 Main St', 20.00);
 
 -- booking_details table
-INSERT INTO booking_details VALUES ('B000000001', '08:00 AM', '2 hours', 4, '1000000001', 'V5K1Z1', '123 Elm Street');
-INSERT INTO booking_details VALUES ('B000000002', '10:00 AM', '1.5 hours', 2, '1000000002', 'V5K2Z2', '456 Oak Avenue');
-INSERT INTO booking_details VALUES ('B000000003', '12:00 PM', '1.5 hours', 5, '1000000003', 'V5K3Z3', '789 Maple Lane');
-INSERT INTO booking_details VALUES ('B000000004', '02:00 PM', '1.5 hours', 3, '1000000004', 'V5K4Z4', '135 Pine Street');
-INSERT INTO booking_details VALUES ('B000000005', '03:30 PM', '1 hour', 6, '1000000005', 'V5K5Z5', '246 Cedar Road');
-INSERT INTO booking_details VALUES ('B000000006', '05:00 PM', '1.5 hours', 8, '1000000006', 'V5K6Z6', '357 Birch Way');
-INSERT INTO booking_details VALUES ('B000000007', '07:00 PM', '1 hour', 4, '1000000007', 'V5K7Z7', '468 Willow Drive');
-INSERT INTO booking_details VALUES ('B000000008', '08:30 PM', '1 hour', 7, '1000000008', 'V5K8Z8', '579 Fir Trail');
-INSERT INTO booking_details VALUES ('B000000009', '09:30 PM', '1.5 hours', 5, '1000000009', 'V5K9Z9', '680 Redwood Road');
-INSERT INTO booking_details VALUES ('B000000010', '11:00 PM', '1 hour', 9, '1000000010', 'V5K0Z0', '791 Ash Boulevard');
+INSERT INTO booking_details VALUES ('B000000001', '08:00 AM', '2 hours', 4, '1000000001', 'P123456', '123 Main St');
+INSERT INTO booking_details VALUES ('B000000002', '10:00 AM', '1.5 hours', 2, '1000000002',  'P123457', '124 Main St');
+INSERT INTO booking_details VALUES ('B000000003', '12:00 PM', '1.5 hours', 5, '1000000003',  'P223456', '125 Main St');
+INSERT INTO booking_details VALUES ('B000000004', '02:00 PM', '1.5 hours', 3, '1000000004','P223457', '126 Main St');
+INSERT INTO booking_details VALUES ('B000000005', '03:30 PM', '1 hour', 6, '1000000005','P323456', '127 Main St');
+INSERT INTO booking_details VALUES ('B000000006', '05:00 PM', '1.5 hours', 8, '1000000006', 'P323457', '128 Main St');
+INSERT INTO booking_details VALUES ('B000000007', '07:00 PM', '1 hour', 4, '1000000007',  'P423456', '129 Main St');
+INSERT INTO booking_details VALUES ('B000000008', '08:30 PM', '1 hour', 7, '1000000008', 'P423457', '130 Main St');
+INSERT INTO booking_details VALUES ('B000000009', '09:30 PM', '1.5 hours', 5, '1000000009', 'P523456', '131 Main St');
+INSERT INTO booking_details VALUES ('B000000010', '11:00 PM', '1 hour', 9, '1000000010', 'P523457', '132 Main St');
 
 -- categorizes table
-INSERT INTO categorizes VALUES ('Park', 'V5K1Z1', '123 Elm Street');
-INSERT INTO categorizes VALUES ('Museum', 'V5K2Z2', '456 Oak Avenue');
-INSERT INTO categorizes VALUES ('Restaurant', 'V5K3Z3', '789 Maple Lane');
-INSERT INTO categorizes VALUES ('Hotel', 'V5K4Z4', '135 Pine Street');
-INSERT INTO categorizes VALUES ('Park', 'V5K5Z5', '246 Cedar Road');
-INSERT INTO categorizes VALUES ('Museum', 'V5K6Z6', '357 Birch Way');
-INSERT INTO categorizes VALUES ('Restaurant', 'V5K7Z7', '468 Willow Drive');
-INSERT INTO categorizes VALUES ('Hotel', 'V5K8Z8', '579 Fir Trail');
-INSERT INTO categorizes VALUES ('Park', 'V5K9Z9', '680 Redwood Road');
-INSERT INTO categorizes VALUES ('Museum', 'V5K0Z0', '791 Ash Boulevard');
+INSERT INTO categorizes VALUES ('Park', 'PARK001', '301 Green Ave');
+INSERT INTO categorizes VALUES ('Museum', 'M123456', '201 Culture St');
+INSERT INTO categorizes VALUES ('Restaurant', 'P123457', '124 Main St');
+INSERT INTO categorizes VALUES ('Hotel', 'P123456', '123 Main St');
+INSERT INTO categorizes VALUES ('Park', 'PARK002', '302 Green Ave',);
+INSERT INTO categorizes VALUES ('Museum', 'M223456', '202 Culture St');
+INSERT INTO categorizes VALUES ('Restaurant', 'P223457', '126 Main St');
+INSERT INTO categorizes VALUES ('Hotel', 'P223456', '125 Main St');
+INSERT INTO categorizes VALUES ('Park', 'PARK003', '303 Green Ave',);
+INSERT INTO categorizes VALUES ('Museum', 'M323456', '203 Culture St');
 
 -- parks table
 INSERT INTO parks VALUES ('PARK001', '301 Green Ave', 500);
@@ -455,16 +490,16 @@ INSERT INTO event_time VALUES ('02:00 PM', '04:00 PM', '2 hours');
 INSERT INTO event_time VALUES ('06:30 PM', '08:30 PM', '2 hours');
 
 -- event_details table
-INSERT INTO event_details VALUES ('Music Concert', '09:00 AM', '2 hours', 'City Events', 'V5K1Z1', '123 Elm Street');
-INSERT INTO event_details VALUES ('Art Exhibition', '11:00 AM', '1.5 hours', 'Art Center', 'V5K2Z2', '456 Oak Avenue');
-INSERT INTO event_details VALUES ('Food Festival', '01:00 PM', '2 hours', 'Food Lovers', 'V5K3Z3', '789 Maple Lane');
-INSERT INTO event_details VALUES ('Book Reading', '03:00 PM', '1 hour', 'Local Library', 'V5K4Z4', '135 Pine Street');
-INSERT INTO event_details VALUES ('Outdoor Movie', '05:00 PM', '1.5 hours', 'City Council', 'V5K5Z5', '246 Cedar Road');
-INSERT INTO event_details VALUES ('Yoga Class', '07:00 PM', '2 hours', 'Wellness Club', 'V5K6Z6', '357 Birch Way');
-INSERT INTO event_details VALUES ('Cooking Workshop', '10:00 AM', '2 hours', 'Chef School', 'V5K7Z7', '468 Willow Drive');
-INSERT INTO event_details VALUES ('Tech Meetup', '12:30 PM', '1.5 hours', 'Tech Community', 'V5K8Z8', '579 Fir Trail');
-INSERT INTO event_details VALUES ('Charity Run', '02:00 PM', '2 hours', 'Local Sports', 'V5K9Z9', '680 Redwood Road');
-INSERT INTO event_details VALUES ('Dance Class', '06:30 PM', '2 hours', 'Dance Academy', 'V5K0Z0', '791 Ash Boulevard');
+INSERT INTO event_details VALUES ('Music Concert', '09:00 AM', '2 hours', 'City Events', 'P123456', '123 Main St');
+INSERT INTO event_details VALUES ('Art Exhibition', '11:00 AM', '1.5 hours', 'Art Center', 'P123457', '124 Main St');
+INSERT INTO event_details VALUES ('Food Festival', '01:00 PM', '2 hours', 'Food Lovers', 'P223456', '125 Main St');
+INSERT INTO event_details VALUES ('Book Reading', '03:00 PM', '1 hour', 'Local Library', 'P223457', '126 Main St');
+INSERT INTO event_details VALUES ('Outdoor Movie', '05:00 PM', '1.5 hours', 'City Council', 'P323456', '127 Main St');
+INSERT INTO event_details VALUES ('Yoga Class', '07:00 PM', '2 hours', 'Wellness Club', 'P323457', '128 Main St');
+INSERT INTO event_details VALUES ('Cooking Workshop', '10:00 AM', '2 hours', 'Chef School', 'P423456', '129 Main St');
+INSERT INTO event_details VALUES ('Tech Meetup', '12:30 PM', '1.5 hours', 'Tech Community', 'P423457', '130 Main St');
+INSERT INTO event_details VALUES ('Charity Run', '02:00 PM', '2 hours', 'Local Sports', 'P523456', '131 Main St');
+INSERT INTO event_details VALUES ('Dance Class', '06:30 PM', '2 hours', 'Dance Academy', 'P523457', '132 Main St');
 
 
 
