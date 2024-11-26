@@ -109,8 +109,8 @@ const SignupPage = () => {
                 withCredentials: true,
             }
             );
-            console.log("Axios response:", response); // Log the full response
-            //console.log(JSON.stringify(response?.data)); // Log response data
+            console.log("Axios response:", response); 
+            //console.log(JSON.stringify(response?.data)); 
             console.log("worked????"); // Debug log
             setName('')
             setUser('')

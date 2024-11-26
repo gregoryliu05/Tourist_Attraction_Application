@@ -30,12 +30,14 @@ CREATE TABLE users (
 );
 GRANT SELECT ON users TO PUBLIC;
 
+-- TODO-- 
 CREATE TABLE category (
     catName VARCHAR(50) PRIMARY KEY,
     description VARCHAR(255)
 );
 GRANT SELECT ON category TO PUBLIC;
 
+-- TODO-- 
 CREATE TABLE city_details (
     provinceState VARCHAR(2) NOT NULL,
     cityName VARCHAR(50) NOT NULL,
@@ -43,6 +45,7 @@ CREATE TABLE city_details (
 );
 GRANT SELECT ON city_details TO PUBLIC;
 
+-- TODO-- 
 CREATE TABLE city_time_zone (
     provinceState VARCHAR(2) NOT NULL,
     country VARCHAR(50) NOT NULL,
@@ -75,6 +78,7 @@ CREATE TABLE rating (
 );
 GRANT SELECT ON rating TO PUBLIC;
 
+-- TODO-- 
 CREATE TABLE user_comments (
     ratingID CHAR(10),
     text VARCHAR(255),
@@ -82,6 +86,7 @@ CREATE TABLE user_comments (
 );
 GRANT SELECT ON user_comments TO PUBLIC;
 
+-- TODO-- 
 CREATE TABLE picture (
     ratingID CHAR(10),
     image BLOB, 
@@ -89,7 +94,7 @@ CREATE TABLE picture (
 );
 GRANT SELECT ON picture TO PUBLIC;
 
-
+-- TODO-- 
 CREATE TABLE time_of_booking (
     startTime VARCHAR(50),
     endTime VARCHAR(50),
@@ -121,6 +126,7 @@ CREATE TABLE booking_details (
 );
 GRANT SELECT ON booking_details TO PUBLIC;
 
+-- TODO-- 
 CREATE TABLE categorizes (
     catName VARCHAR(50),
     postalCode VARCHAR(10),
@@ -165,6 +171,8 @@ CREATE TABLE hotel (
 );
 GRANT SELECT ON hotel TO PUBLIC;
 
+
+-- TODO-- 
 CREATE TABLE event_time (
     startTime VARCHAR(50),
     end_time VARCHAR(50),
@@ -173,6 +181,8 @@ CREATE TABLE event_time (
 );
 GRANT SELECT ON event_time TO PUBLIC;
 
+
+-- TODO-- 
 CREATE TABLE event_details (
     eventName VARCHAR(50),
     startTime VARCHAR(50),
