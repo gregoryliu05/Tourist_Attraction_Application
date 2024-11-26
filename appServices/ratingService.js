@@ -78,7 +78,9 @@ async function getUsersRating(userID) {
 async function getLocationsRatings() {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            'SELECT * from rating'
+            `SELECT postalCode, address, AVG(score) as avg_rating, COUNT(*) as num_ratings
+            from rating
+            GROUP BY postalCode, address`
         );
         const ratings = result.rows.map((row)=> ({
             postalCode: row[0],

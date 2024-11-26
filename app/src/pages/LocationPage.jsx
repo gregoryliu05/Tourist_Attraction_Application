@@ -44,18 +44,11 @@ const LocationPage = () => {
     }, [])
 
 
-
     return (
         <>
         {locations && locationsRating ? 
         (<div>
-        {locations.map((location, index) => (
-            <div key={index} className="location-item">
-                <h3>{location.locationName}</h3>
-                <p>{location.address}</p>
-                <p>{location.postalCode}</p>
-            </div>
-        ))}
+        lol
     </div>
     ) 
     :
