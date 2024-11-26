@@ -6,3 +6,31 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+10 required queries:
+insert done  done in frontend
+update done done in frontend 
+delete done need to implement in frontend 
+select done done in frontend 
+projection 
+join 
+aggregation withgroup_by 
+aggregation with having 
+nested aggregation with group by
+division 
+
+
+
+frontend
+-create basic pages gor everything 
+- Advanced search page with selectable categories 
+displaying info about locations
+displaying user info
+users make bookings
+users make ratings
+
+
+
+
+
