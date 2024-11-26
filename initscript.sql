@@ -199,9 +199,9 @@ GRANT SELECT ON event_details TO PUBLIC;
 
 
 -- users table
-INSERT INTO users VALUES ('1248484739', 'Greg', 'JumpingMan', 'aKask3*k', 4, 'GregDuck@gmail.com');
-INSERT INTO users VALUES ('1000000001', 'Alice Johnson', 'alicej', 'password123', 5, 'alice@example.com');
-INSERT INTO users VALUES ('1000000002', 'Bob Smith', 'bobs', 'password456', 3, 'bob@example.com');
+INSERT INTO users VALUES ('1248484739', 'Greg', 'JumpingMan', 'aKask3*k', 12, 'GregDuck@gmail.com');
+INSERT INTO users VALUES ('1000000001', 'Alice Johnson', 'alicej', 'password123', 20, 'alice@example.com');
+INSERT INTO users VALUES ('1000230002', 'Bob Smith', 'bobs', 'password456', 8, 'bob@example.com');
 INSERT INTO users VALUES ('1000000003', 'Charlie Brown', 'charlieb', 'securepass', 2, 'charlie@example.com');
 INSERT INTO users VALUES ('1000000004', 'Diana Prince', 'dianap', 'wonderpass', 7, 'diana@example.com');
 INSERT INTO users VALUES ('1000000005', 'Edward Kim', 'edwardk', 'edpass123', 6, 'edward@example.com');
@@ -299,50 +299,50 @@ INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '
 
 -- rating table
 -- Ratings for Bookables (10 Hotels and 10 Restaurants)
-INSERT INTO rating VALUES ('R000001', 4.5, '100001', 'P123456', '123 Main St');
-INSERT INTO rating VALUES ('R000002', 4.0, '100002', 'P123457', '124 Main St');
-INSERT INTO rating VALUES ('R000003', 4.8, '100003', 'P223456', '125 Main St'); 
-INSERT INTO rating VALUES ('R000004', 3.7, '100004', 'P223457', '126 Main St'); 
-INSERT INTO rating VALUES ('R000005', 4.2, '100005', 'P323456', '127 Main St'); 
-INSERT INTO rating VALUES ('R000006', 3.5, '100006', 'P323457', '128 Main St'); 
-INSERT INTO rating VALUES ('R000007', 4.6, '100007', 'P423456', '129 Main St'); 
-INSERT INTO rating VALUES ('R000008', 2.0, '100008', 'P423457', '130 Main St');
-INSERT INTO rating VALUES ('R000009', 4.9, '100009', 'P523456', '131 Main St'); 
-INSERT INTO rating VALUES ('R000010', 3.9, '100010', 'P523457', '132 Main St'); 
-INSERT INTO rating VALUES ('R000011', 4.7, '100011', 'P623456', '133 Main St'); 
-INSERT INTO rating VALUES ('R000012', 4.1, '100012', 'P623457', '134 Main St'); 
-INSERT INTO rating VALUES ('R000013', 4.8, '100013', 'P723456', '135 Main St'); 
-INSERT INTO rating VALUES ('R000014', 3.6, '100014', 'P723457', '136 Main St'); 
-INSERT INTO rating VALUES ('R000015', 4.3, '100015', 'P823456', '137 Main St'); 
-INSERT INTO rating VALUES ('R000016', 1.0, '100016', 'P823457', '138 Main St'); 
-INSERT INTO rating VALUES ('R000017', 4.9, '100017', 'P923456', '139 Main St'); 
-INSERT INTO rating VALUES ('R000018', 3.8, '100018', 'P923457', '140 Main St'); 
-INSERT INTO rating VALUES ('R000019', 3.6, '100019', 'P103456', '141 Main St'); 
-INSERT INTO rating VALUES ('R000020', 4.3, '100020', 'P103457', '142 Main St'); 
+INSERT INTO rating VALUES ('R000001', 4.5, '1000000001', 'P123456', '123 Main St');
+INSERT INTO rating VALUES ('R000002', 4.0, '1000000001', 'P123457', '124 Main St');
+INSERT INTO rating VALUES ('R000003', 4.8, '1000000001', 'P223456', '125 Main St'); 
+INSERT INTO rating VALUES ('R000004', 3.7, '1000000001', 'P223457', '126 Main St'); 
+INSERT INTO rating VALUES ('R000005', 4.2, '1000000001', 'P323456', '127 Main St'); 
+INSERT INTO rating VALUES ('R000006', 3.5, '1000000001', 'P323457', '128 Main St'); 
+INSERT INTO rating VALUES ('R000007', 4.6, '1000000001', 'P423456', '129 Main St'); 
+INSERT INTO rating VALUES ('R000008', 2.0, '1000000001', 'P423457', '130 Main St');
+INSERT INTO rating VALUES ('R000009', 4.9, '1000000001', 'P523456', '131 Main St'); 
+INSERT INTO rating VALUES ('R000010', 3.9, '1000000001', 'P523457', '132 Main St'); 
+INSERT INTO rating VALUES ('R000011', 4.7, '1000000001', 'P623456', '133 Main St'); 
+INSERT INTO rating VALUES ('R000012', 4.1, '1000000001', 'P623457', '134 Main St'); 
+INSERT INTO rating VALUES ('R000013', 4.8, '1000000001', 'P723456', '135 Main St'); 
+INSERT INTO rating VALUES ('R000014', 3.6, '1000000001', 'P723457', '136 Main St'); 
+INSERT INTO rating VALUES ('R000015', 4.3, '1000000001', 'P823456', '137 Main St'); 
+INSERT INTO rating VALUES ('R000016', 1.0, '1000000001', 'P823457', '138 Main St'); 
+INSERT INTO rating VALUES ('R000017', 4.9, '1000000001', 'P923456', '139 Main St'); 
+INSERT INTO rating VALUES ('R000018', 3.8, '1000000001', 'P923457', '140 Main St'); 
+INSERT INTO rating VALUES ('R000019', 3.6, '1000000001', 'P103456', '141 Main St'); 
+INSERT INTO rating VALUES ('R000020', 4.3, '1000000001', 'P103457', '142 Main St'); 
 
 -- Ratings for Museums (10)
-INSERT INTO rating VALUES ('R000021', 1.7, '100021', 'M123456', '201 Culture St'); 
-INSERT INTO rating VALUES ('R000022', 4.5, '100022', 'M223456', '202 Culture St'); 
-INSERT INTO rating VALUES ('R000023', 1.9, '100023', 'M323456', '203 Culture St'); 
-INSERT INTO rating VALUES ('R000024', 1.4, '100024', 'M423456', '204 Culture St'); 
-INSERT INTO rating VALUES ('R000025', 4.3, '100025', 'M523456', '205 Culture St'); 
-INSERT INTO rating VALUES ('R000026', 2.8, '100026', 'M623456', '206 Culture St'); 
-INSERT INTO rating VALUES ('R000027', 4.2, '100027', 'M723456', '207 Culture St'); 
-INSERT INTO rating VALUES ('R000028', 4.5, '100028', 'M823456', '208 Culture St'); 
-INSERT INTO rating VALUES ('R000029', 4.6, '100029', 'M923456', '209 Culture St'); 
-INSERT INTO rating VALUES ('R000030', 4.9, '100030', 'M103456', '210 Culture St'); 
+INSERT INTO rating VALUES ('R000021', 1.7, '1248484739', 'M123456', '201 Culture St'); 
+INSERT INTO rating VALUES ('R000022', 4.5, '1248484739', 'M223456', '202 Culture St'); 
+INSERT INTO rating VALUES ('R000023', 1.9, '1248484739', 'M323456', '203 Culture St'); 
+INSERT INTO rating VALUES ('R000024', 1.4, '1248484739', 'M423456', '204 Culture St'); 
+INSERT INTO rating VALUES ('R000025', 4.3, '1248484739', 'M523456', '205 Culture St'); 
+INSERT INTO rating VALUES ('R000026', 2.8, '1248484739', 'M623456', '206 Culture St'); 
+INSERT INTO rating VALUES ('R000027', 4.2, '1248484739', 'M723456', '207 Culture St'); 
+INSERT INTO rating VALUES ('R000028', 4.5, '1248484739', 'M823456', '208 Culture St'); 
+INSERT INTO rating VALUES ('R000029', 4.6, '1248484739', 'M923456', '209 Culture St'); 
+INSERT INTO rating VALUES ('R000030', 4.9, '1248484739', 'M103456', '210 Culture St'); 
 
 -- Ratings for Parks (10)
-INSERT INTO rating VALUES ('R000031', 4.4, '100031', 'PARK001', '301 Green Ave'); 
-INSERT INTO rating VALUES ('R000032', 2.3, '100032', 'PARK002', '302 Green Ave'); 
-INSERT INTO rating VALUES ('R000033', 4.8, '100033', 'PARK003', '303 Green Ave'); 
-INSERT INTO rating VALUES ('R000034', 4.6, '100034', 'PARK004', '304 Green Ave'); 
-INSERT INTO rating VALUES ('R000035', 4.2, '100035', 'PARK005', '305 Green Ave'); 
-INSERT INTO rating VALUES ('R000036', 4.5, '100036', 'PARK006', '306 Green Ave');
-INSERT INTO rating VALUES ('R000037', 4.7, '100037', 'PARK007', '307 Green Ave'); 
-INSERT INTO rating VALUES ('R000038', 4.9, '100038', 'PARK008', '308 Green Ave'); 
-INSERT INTO rating VALUES ('R000039', 4.8, '100039', 'PARK009', '309 Green Ave'); 
-INSERT INTO rating VALUES ('R000040', 4.6, '100040', 'PARK010', '310 Green Ave'); 
+INSERT INTO rating VALUES ('R000031', 4.4, '1248484739', 'PARK001', '301 Green Ave'); 
+INSERT INTO rating VALUES ('R000032', 2.3, '1248484739', 'PARK002', '302 Green Ave'); 
+INSERT INTO rating VALUES ('R000033', 4.8, '1000230002', 'PARK003', '303 Green Ave'); 
+INSERT INTO rating VALUES ('R000034', 4.6, '1000230002', 'PARK004', '304 Green Ave'); 
+INSERT INTO rating VALUES ('R000035', 4.2, '1000230002', 'PARK005', '305 Green Ave'); 
+INSERT INTO rating VALUES ('R000036', 4.5, '1000230002', 'PARK006', '306 Green Ave');
+INSERT INTO rating VALUES ('R000037', 4.7, '1000230002', 'PARK007', '307 Green Ave'); 
+INSERT INTO rating VALUES ('R000038', 4.9, '1000230002', 'PARK008', '308 Green Ave'); 
+INSERT INTO rating VALUES ('R000039', 4.8, '1000230002', 'PARK009', '309 Green Ave'); 
+INSERT INTO rating VALUES ('R000040', 4.6, '1000230002', 'PARK010', '310 Green Ave'); 
 
 -- user_comments table
 INSERT INTO user_comments VALUES ('R000001', 'Great place, highly recommend!');
@@ -422,11 +422,11 @@ INSERT INTO categorizes VALUES ('Park', 'PARK001', '301 Green Ave');
 INSERT INTO categorizes VALUES ('Museum', 'M123456', '201 Culture St');
 INSERT INTO categorizes VALUES ('Restaurant', 'P123457', '124 Main St');
 INSERT INTO categorizes VALUES ('Hotel', 'P123456', '123 Main St');
-INSERT INTO categorizes VALUES ('Park', 'PARK002', '302 Green Ave',);
+INSERT INTO categorizes VALUES ('Park', 'PARK002', '302 Green Ave');
 INSERT INTO categorizes VALUES ('Museum', 'M223456', '202 Culture St');
 INSERT INTO categorizes VALUES ('Restaurant', 'P223457', '126 Main St');
 INSERT INTO categorizes VALUES ('Hotel', 'P223456', '125 Main St');
-INSERT INTO categorizes VALUES ('Park', 'PARK003', '303 Green Ave',);
+INSERT INTO categorizes VALUES ('Park', 'PARK003', '303 Green Ave');
 INSERT INTO categorizes VALUES ('Museum', 'M323456', '203 Culture St');
 
 -- parks table
