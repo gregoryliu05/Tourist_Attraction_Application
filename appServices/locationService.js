@@ -21,12 +21,13 @@ async function getLocations() {
 async function getLocationsDetails() {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            'SELECT locationName, address, postalCode from locations'
+            'SELECT locationID, locationName, address, postalCode from locations'
         );
         const locations = result.rows.map((row) => ({
-            locationName: row[0],
-            address: row[1],
-            postalCode: row[2]    
+            locationID: row[0],
+            locationName: row[1],
+            postalCode: row[2],
+            address: row[3]    
         })
     )
         return locations;
@@ -63,12 +64,38 @@ async function getLocationFromKey(postalCode, address) {
             [postalCode, address]
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getLocationFromKey:', err);
         return [];
     })
 }
 
+
+//get a location from locationID
+async function getLocationFromID(locationID) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(`
+            SELECT * from locations WHERE locationID = :locationID`,
+            [locationID]
+        );
+        if (result.rows.length === 0) {
+            return null; 
+        }
+    
+        return {
+            locationID: result.rows[0][0],
+            locationName: result.rows[0][1],
+            postalCode: result.rows[0][2],
+            address: result.rows[0][3],
+            operationHours: result.rows[0][4],
+            provinceState: result.rows[0][5],
+            cityName: result.rows[0][6],
+        };
+    }).catch((err) => {
+        console.error('Error in getLocationFromKey:', err);
+        return null;
+    })
+}
 
 async function deleteLocationFromKey(postalCode, address) {
     return await withOracleDB(async (connection) => {
@@ -104,7 +131,7 @@ async function getLocationsInCity(cityName) {
         [cityName]
     );
     return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getLocationsInCity:', err);
         return [];
     })
@@ -120,7 +147,7 @@ async function getLocationsRating(postalCode, address) {
             [postalCode, address],
         );
         return result.rows
-    }).catch(()=> {
+    }).catch((err)=> {
         console.error('Error in getLocationsRating:', err);
         return [];
     });
@@ -162,7 +189,7 @@ async function getAllParks() {
             `SELECT * from parks`
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getAllParks:', err);
         return [];
     })
@@ -176,7 +203,7 @@ async function getParkFromKey(postalCode, address) {
             [postalCode, address]
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getParkFromKey:', err);
         return [];
     })
@@ -219,7 +246,7 @@ async function getAllMuseums() {
             `SELECT * from museums`
         );
         return result.rows;
-    }).catch(() => {
+    }).catch((err) => {
         console.error('Error in getAllMuseums:', err);
         return [];
     })
@@ -245,6 +272,7 @@ async function getMuseumFromKey(postalCode, address) {
 module.exports = {
     getLocations,
     addLocation,
+    getLocationFromID,
     getLocationFromKey,
     getLocationsDetails,
     deleteLocationFromKey,

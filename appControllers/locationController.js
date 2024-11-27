@@ -39,6 +39,19 @@ router.post('/add-location', async (req, res) => {
 })
 
 
+// gets ratings based on location
+router.get('/:postalCode/:address/ratings', async (req, res) => {
+    const {postalCode, address} = req.params;
+    try {
+        const viewResult = await locationService.getLocationsRating(postalCode, address);
+        res.json({data :viewResult});
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching location' });
+    }
+})
+
+
+
 router.get('/:postalCode/:address', async (req, res) => {
     const {postalCode, address} = req.params;
     try {
@@ -60,11 +73,22 @@ router.delete('/:postalCode/:address', async (req,res) => {
     }
 })
 
+router.get('/:locationID', async (req,res) => {
+    const {locationID} = req.params;
+    try {
+        const tableContent = await locationService.getLocationFromID(locationID)
+        res.json({data:tableContent})
+    } catch (err) {
+        res.status(500).json({error: 'An error occured while fetching location'});
+    }
+
+})
+
 
 router.get('/:locationName', async (req,res) => {
     const {locationName} = req.params;
     try {
-        const viewResult = locationService.getLocationsWithName(locationName);
+        const viewResult = await locationService.getLocationsWithName(locationName);
         res.json({data: viewResult});
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching location' });
@@ -80,16 +104,7 @@ router.get('/:cityName', async (req,res) => {
 })
 
 
-// gets ratings based on location
-router.get('/:postalCode/:address/ratings', async (req, res) => {
-    const {postalCode, address} = req.params;
-    try {
-        const viewResult = await locationService.getLocationsRating(postalCode, address);
-        res.json({data :viewResult});
-    } catch (error) {
-        res.status(500).json({ error: 'An error occurred while fetching location' });
-    }
-})
+
 
 router.post('/parks/add-park', async (req, res) => {
     const { postalCode, address, area} = req.body;

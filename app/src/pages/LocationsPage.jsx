@@ -1,7 +1,7 @@
 import {useRef, useState, useEffect, useContext} from 'react';
 import useAuth from '../hooks/useAuth';
 
-import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation , Outlet} from 'react-router-dom';
 import AuthContext from '../context/AuthProvider';
 import axios from '../api/axios';
 
@@ -60,6 +60,21 @@ const LocationPage = () => {
 
     const [locationsRating, setLocationsRating] = useState(null)
 
+    const [filterRatings, setFilterRatings] = useState(false)
+
+    const [goodLocationsRating, setGoodLocationsRating] = useState(null)
+
+
+
+    const filterLocations = (locations) => {
+      return locations.filter((location) => goodLocationsRating.find((rating => {
+        return (
+          rating.address === location.postalCode &&
+          rating.postalCode === location.address
+        )
+      })))
+
+    }
     useEffect(() => {
         axios.get('http://localhost:50004/locations/details' // gets all relevant locations details 
         ).then(response => {
@@ -81,24 +96,68 @@ const LocationPage = () => {
     }, [])
 
 
+    useEffect(() => {
+      axios.get('http://localhost:50004/ratings/locations-ratings-good'
+
+      ).then(response => {
+          console.log("good ratings data", response.data.data)
+          setGoodLocationsRating(response.data.data)
+      }).catch(error => {
+          console.error("Error fetching ratings data:", error);
+      });
+
+  }, [])
+
+
+    const ogLocations = locations
+    const filteredLocations = (filterRatings) ? (filterLocations(locations)) : (ogLocations)
+
+
     return (
         <>
-        <h1 className='font-bold text-center text-xl py-4'> All Locations</h1>
+        <div className="relative w-full px-4 py-4">
+        <div className="flex items-center space-x-4">
+        <h1 className="font-bold text-xl">All Locations</h1>
+        {filterRatings ? (
+          <button
+          onClick={() => setFilterRatings(!filterRatings)}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        >
+          Show All Locations
+        </button>
+
+        ) : (
+          <button
+          onClick={() => setFilterRatings(!filterRatings)}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        >
+          Filter for Good Locations
+        </button>
+        )}
         
+        </div>
+      <NavLink
+        className="bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow absolute top-4 right-4"
+        to="/"
+      >
+        Return to Home
+      </NavLink>
+  </div>      
         {locations && locationsRating ? 
         (
+            <div className='flex gap-2'>
             <div className="flex-col flex justify-center items-center space-y-2 ">
-            {locations.map((location) => {
+            {filteredLocations.map((location) => {
               return (
-                <div >
-                  <NavLink to =  {`/locations/${location.address}`} >
+                <div 
+                key={location.locationID}>
+                  <NavLink to =  {`/locations/${location.locationID}`} >
                 <LocationElement
-                  key={`${location.address}-${location.postalCode}`}
                   location={location}
                   rating={locationsRating.find((rating) => {
                     return (
-                      rating.address === location.address &&
-                      rating.postalCode === location.postalCode
+                      rating.address === location.postalCode &&
+                      rating.postalCode === location.address
                     );
                   })}
                 />
@@ -107,14 +166,10 @@ const LocationPage = () => {
               );
             })}
           
-            <NavLink
-              className="bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow"
-              to="/"
-            >
-              Return to Home
-            </NavLink>
             </div>
-
+            <Outlet/>
+            </div>
+          
 
     ) 
     :
