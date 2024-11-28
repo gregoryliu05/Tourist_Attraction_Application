@@ -144,11 +144,24 @@ router.get('/parks/:postalCode/:address', async (req,res) => {
     const {postalCode, address} = req.params;
     try {
         const viewResult = await locationService.getParkFromKey(postalCode, address);
+
         res.json({data :viewResult});
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching location' });
     }
 })
+
+router.get('/museums/:postalCode/:address', async (req,res) => {
+    const {postalCode, address} = req.params;
+    try {
+        const viewResult = await locationService.getMuseumFromKey(postalCode, address);
+        res.json({data :viewResult});
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching location' });
+    }
+})
+
+
 
 router.post('/museums/add-museum', async (req, res) => {
     const { postalCode, address, cost} = req.body;
@@ -179,16 +192,6 @@ router.get('/museums', async (req,res) => {
     try {
         const tableContent = await locationService.getAllMuseums();
         res.json({ data: tableContent });
-    } catch (error) {
-        res.status(500).json({ error: 'An error occurred while fetching location' });
-    }
-})
-
-router.get('/museums/:postalCode/:address', async (req,res) => {
-    const {postalCode, address} = req.params;
-    try {
-        const viewResult = await locationService.getMuseumFromKey(postalCode, address);
-        res.json({data :viewResult});
     } catch (error) {
         res.status(500).json({ error: 'An error occurred while fetching location' });
     }
