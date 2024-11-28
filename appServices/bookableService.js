@@ -105,7 +105,11 @@ async function getRestaurantFromKey(postalCode, address) {
             `SELECT * FROM restaurant WHERE postalCode = :postalCode AND address = :address`,
             [postalCode, address]
         );
-        return result.rows;
+        const restaurantInfo = {
+            kind: "restaurant", 
+            cuisineType: result.rows[0][2]
+        }
+        return result.rows[0];
     }).catch((err) => {
         console.error('Error in getRestaurantFromKey:', err);
         return [];
@@ -161,7 +165,13 @@ async function getHotelFromKey(postalCode, address) {
             `SELECT * FROM hotel WHERE postalCode = :postalCode AND address = :address`,
             [postalCode, address]
         );
-        return result.rows;
+        const row = result.rows[0];
+        const hotelInfo = {
+            kind: "hotel",
+            price: row?.[2],
+            stars: row?.[3] 
+        }
+        return row;
     }).catch((err) => {
         console.error('Error in getHotelFromKey:', err);
         return [];

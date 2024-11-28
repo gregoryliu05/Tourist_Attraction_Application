@@ -144,7 +144,11 @@ async function getLocationsInCity(cityName) {
 async function getLocationsRating(postalCode, address) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `SELECT * from rating where postalCode = :postalCode AND address = :address`,
+            `SELECT * 
+            FROM rating R
+            JOIN picture P ON R.ratingID = P.ratingID
+            JOIN user_comments U ON R.ratingID = U.ratingID
+            WHERE R.postalCode = :postalCode AND R.address = :address`,
             [postalCode, address],
         );
         const ratings = result.rows.map((row) => ({
@@ -152,7 +156,9 @@ async function getLocationsRating(postalCode, address) {
             score: row[1],
             userID: row[2],
             postalCode: row[3],
-            address: row[4]
+            address: row[4], 
+            image: row[6],
+            text: row[8]
         }))
         return ratings;
     }).catch((err)=> {
@@ -210,7 +216,11 @@ async function getParkFromKey(postalCode, address) {
             `SELECT * from parks WHERE postalCode = :postalCode and address = :address`,
             [postalCode, address]
         );
-        return result.rows;
+        const parkInfo = {
+            kind: "park",
+            area: result.rows[0][2]
+        }
+        return parkInfo;
     }).catch((err) => {
         console.error('Error in getParkFromKey:', err);
         return [];
@@ -267,7 +277,12 @@ async function getMuseumFromKey(postalCode, address) {
             `SELECT * from museums WHERE postalCode = :postalCode and address = :address`,
             [postalCode, address]
         );
-        return result.rows;
+        const museumInfo = {
+            kind: "museum",
+            cost: result.rows[0][2],
+            type: result.rows[0][3]
+        }
+        return museumInfo;
     }).catch(() => {
         console.error('Error in getMuseum:', err);
         return [];

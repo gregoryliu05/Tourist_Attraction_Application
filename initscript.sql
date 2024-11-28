@@ -286,16 +286,16 @@ INSERT INTO locations VALUES ('LOC029', 'Museum 9', 'M923456', '209 Culture St',
 INSERT INTO locations VALUES ('LOC030', 'Museum 10', 'M103456', '210 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
 
 -- Locations for Parks (10)
-INSERT INTO locations VALUES ('LOC031', 'Park 1', 'PARK001', '301 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC032', 'Park 2', 'PARK002', '302 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC033', 'Park 3', 'PARK003', '303 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC034', 'Park 4', 'PARK004', '304 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC035', 'Park 5', 'PARK005', '305 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC036', 'Park 6', 'PARK006', '306 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC037', 'Park 7', 'PARK007', '307 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC038', 'Park 8', 'PARK008', '308 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC039', 'Park 9', 'PARK009', '309 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
-INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC031', 'Park 1', 'PARK001', '301 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC032', 'Park 2', 'PARK002', '302 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC033', 'Park 3', 'PARK003', '303 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC034', 'Park 4', 'PARK004', '304 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC035', 'Park 5', 'PARK005', '305 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC036', 'Park 6', 'PARK006', '306 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC037', 'Park 7', 'PARK007', '307 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC038', 'Park 8', 'PARK008', '308 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC039', 'Park 9', 'PARK009', '309 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
+INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '6AM-8PM', 'BC', 'Vancouver', 'Park');
 
 -- rating table
 -- Ratings for Bookables (10 Hotels and 10 Restaurants)
@@ -319,6 +319,10 @@ INSERT INTO rating VALUES ('R000017', 4.9, '1000000001', 'P923456', '139 Main St
 INSERT INTO rating VALUES ('R000018', 3.8, '1000000001', 'P923457', '140 Main St'); 
 INSERT INTO rating VALUES ('R000019', 3.6, '1000000001', 'P103456', '141 Main St'); 
 INSERT INTO rating VALUES ('R000020', 4.3, '1000000001', 'P103457', '142 Main St'); 
+INSERT INTO rating VALUES ('R000020', 4.3, '1000000001', 'P103457', '142 Main St'); 
+INSERT INTO rating VALUES ('R000041', 1.5, '1000000001', 'P103457', '142 Main St'); 
+INSERT INTO rating VALUES ('R000042', 2.6, '1000000001', 'P103457', '142 Main St'); 
+INSERT INTO rating VALUES ('R000043', 5.0, '1000000001', 'P103457', '142 Main St'); 
 
 -- Ratings for Museums (10)
 INSERT INTO rating VALUES ('R000021', 1.7, '1248484739', 'M123456', '201 Culture St'); 
@@ -352,9 +356,43 @@ INSERT INTO user_comments VALUES ('R000004', 'Not very satisfied with the experi
 INSERT INTO user_comments VALUES ('R000005', 'Would visit again.');
 INSERT INTO user_comments VALUES ('R000006', 'Very clean and well-maintained.');
 INSERT INTO user_comments VALUES ('R000007', 'Average place, nothing special.');
-INSERT INTO user_comments VALUES ('R000008', 'Enjoyed my visit thoroughly.');
+INSERT INTO user_comments VALUES ('R000008', 'Horrible Service, Bad Food.');
 INSERT INTO user_comments VALUES ('R000009', 'Best experience ever!');
 INSERT INTO user_comments VALUES ('R000010', 'Friendly staff and great atmosphere.');
+INSERT INTO user_comments VALUES ('R000011', 'Luxurious hotel with exceptional service.');
+INSERT INTO user_comments VALUES ('R000012', 'Cozy restaurant, loved the food.');
+INSERT INTO user_comments VALUES ('R000013', 'Top-notch hotel, very comfortable.');
+INSERT INTO user_comments VALUES ('R000014', 'Mediocre service, average food.');
+INSERT INTO user_comments VALUES ('R000015', 'Good location and excellent service.');
+INSERT INTO user_comments VALUES ('R000016', 'Terrible experience, will not return.');
+INSERT INTO user_comments VALUES ('R000017', 'Amazing stay, highly recommend.');
+INSERT INTO user_comments VALUES ('R000018', 'Great ambiance but pricey.');
+INSERT INTO user_comments VALUES ('R000019', 'Nice place to stay for a quick trip.');
+INSERT INTO user_comments VALUES ('R000020', 'Good value for the price.');
+INSERT INTO user_comments VALUES ('R000021', 'Informative museum, loved the exhibits.');
+INSERT INTO user_comments VALUES ('R000022', 'Very well-maintained museum.');
+INSERT INTO user_comments VALUES ('R000023', 'Small museum but interesting displays.');
+INSERT INTO user_comments VALUES ('R000024', 'Not worth the price of admission.');
+INSERT INTO user_comments VALUES ('R000025', 'Great place to spend the afternoon.');
+INSERT INTO user_comments VALUES ('R000026', 'Educational experience, highly recommend.');
+INSERT INTO user_comments VALUES ('R000027', 'One of the best museums I’ve visited.');
+INSERT INTO user_comments VALUES ('R000028', 'Clean and well-organized museum.');
+INSERT INTO user_comments VALUES ('R000029', 'Excellent place for kids and adults.');
+INSERT INTO user_comments VALUES ('R000030', 'The museum was a bit crowded but nice.');
+INSERT INTO user_comments VALUES ('R000031', 'Beautiful park, very relaxing.');
+INSERT INTO user_comments VALUES ('R000032', 'Decent park but not very clean.');
+INSERT INTO user_comments VALUES ('R000033', 'Amazing views and plenty of space.');
+INSERT INTO user_comments VALUES ('R000034', 'Quiet and serene park.');
+INSERT INTO user_comments VALUES ('R000035', 'Well-maintained and family-friendly.');
+INSERT INTO user_comments VALUES ('R000036', 'Great park for jogging and picnics.');
+INSERT INTO user_comments VALUES ('R000037', 'Spacious park with lots of greenery.');
+INSERT INTO user_comments VALUES ('R000038', 'Perfect for a weekend outing.');
+INSERT INTO user_comments VALUES ('R000039', 'Peaceful place to relax and unwind.');
+INSERT INTO user_comments VALUES ('R000040', 'The park was clean and well-maintained.');
+INSERT INTO user_comments VALUES ('R000041', 'Horrible Place, awful food'); 
+INSERT INTO user_comments VALUES ('R000042', 'mid'); 
+INSERT INTO user_comments VALUES ('R000043', 'good eats'); 
+
 
 -- picture table
 INSERT INTO picture VALUES ('R000001', HEXTORAW('89504E47'));
@@ -367,6 +405,39 @@ INSERT INTO picture VALUES ('R000007', HEXTORAW('89504E47'));
 INSERT INTO picture VALUES ('R000008', HEXTORAW('FFD8FFE0'));
 INSERT INTO picture VALUES ('R000009', HEXTORAW('89504E47'));
 INSERT INTO picture VALUES ('R000010', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000011', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000012', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000013', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000014', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000015', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000016', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000017', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000018', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000019', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000020', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000021', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000022', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000023', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000024', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000025', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000026', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000027', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000028', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000029', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000030', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000031', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000032', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000033', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000034', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000035', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000036', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000037', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000038', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000039', HEXTORAW('89504E47'));
+INSERT INTO picture VALUES ('R000040', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000041', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000042', HEXTORAW('FFD8FFE0'));
+INSERT INTO picture VALUES ('R000043', HEXTORAW('FFD8FFE0'));
 
 -- time_of_booking table
 INSERT INTO time_of_booking VALUES ('08:00 AM', '10:00 AM', '2 hours');
