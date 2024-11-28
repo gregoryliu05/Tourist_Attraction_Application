@@ -39,12 +39,12 @@ async function getLocationsDetails() {
 
 
 //add a location with its subtype??
-async function addLocation(locationID, locationName, postalCode, address, operationHours, provinceState, cityName) {
+async function addLocation(locationID, locationName, postalCode, address, operationHours, provinceState, cityName, locationType) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `INSERT INTO locations (locationID, locationName, postalCode, address, operationHours, provinceState, cityName)
-             VALUES(:locationID, :locationName, :postalCode, :address, :operationHours, :provinceState, :cityName)`,
-             [locationID, locationName, postalCode, address, operationHours, provinceState, cityName],
+            `INSERT INTO locations (locationID, locationName, postalCode, address, operationHours, provinceState, cityName, locationType)
+             VALUES(:locationID, :locationName, :postalCode, :address, :operationHours, :provinceState, :cityName, :locationType)`,
+             [locationID, locationName, postalCode, address, operationHours, provinceState, cityName, locationType],
              {autoCommit: true}
         );
         return result.rowsAffected && result.rowsAffected > 0;
@@ -90,6 +90,7 @@ async function getLocationFromID(locationID) {
             operationHours: result.rows[0][4],
             provinceState: result.rows[0][5],
             cityName: result.rows[0][6],
+            locationType: result.rows[0][7]
         };
     }).catch((err) => {
         console.error('Error in getLocationFromKey:', err);
@@ -146,10 +147,17 @@ async function getLocationsRating(postalCode, address) {
             `SELECT * from rating where postalCode = :postalCode AND address = :address`,
             [postalCode, address],
         );
-        return result.rows
+        const ratings = result.rows.map((row) => ({
+            ratingID: row[0],
+            score: row[1],
+            userID: row[2],
+            postalCode: row[3],
+            address: row[4]
+        }))
+        return ratings;
     }).catch((err)=> {
         console.error('Error in getLocationsRating:', err);
-        return [];
+        return null;
     });
 }
 

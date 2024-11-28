@@ -63,6 +63,7 @@ CREATE TABLE locations (
     operationHours VARCHAR(50),
     provinceState VARCHAR(2) NOT NULL,
     cityName VARCHAR(50) NOT NULL,
+    locationType VARCHAR(50) NOT NULL,
     PRIMARY KEY (postalCode, address),
     FOREIGN KEY (provinceState, cityName) REFERENCES city_details(provinceState, cityName) ON DELETE CASCADE
 );
@@ -252,50 +253,50 @@ INSERT INTO city_time_zone VALUES ('YT', 'Canada', 'PST');
 INSERT INTO city_time_zone VALUES ('NT', 'Canada', 'MST');
 
 -- Locations for Bookables (10 Hotels and 10 Restaurants)
-INSERT INTO locations VALUES ('LOC001', 'Hotel 1', 'P123456', '123 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC002', 'Restaurant 1', 'P123457', '124 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC003', 'Hotel 2', 'P223456', '125 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC004', 'Restaurant 2', 'P223457', '126 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC005', 'Hotel 3', 'P323456', '127 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC006', 'Restaurant 3', 'P323457', '128 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC007', 'Hotel 4', 'P423456', '129 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC008', 'Restaurant 4', 'P423457', '130 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC009', 'Hotel 5', 'P523456', '131 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC010', 'Restaurant 5', 'P523457', '132 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC011', 'Hotel 6', 'P623456', '133 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC012', 'Restaurant 6', 'P623457', '134 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC013', 'Hotel 7', 'P723456', '135 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC014', 'Restaurant 7', 'P723457', '136 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC015', 'Hotel 8', 'P823456', '137 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC016', 'Restaurant 8', 'P823457', '138 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC017', 'Hotel 9', 'P923456', '139 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC018', 'Restaurant 9', 'P923457', '140 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC019', 'Hotel 10', 'P103456', '141 Main St', '8AM-10PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC020', 'Restaurant 10', 'P103457', '142 Main St', '8AM-10PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC001', 'Hotel 1', 'P123456', '123 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC002', 'Restaurant 1', 'P123457', '124 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC003', 'Hotel 2', 'P223456', '125 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC004', 'Restaurant 2', 'P223457', '126 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC005', 'Hotel 3', 'P323456', '127 Main St', '8AM-10PM', 'BC', 'Vancouver','Hotel');
+INSERT INTO locations VALUES ('LOC006', 'Restaurant 3', 'P323457', '128 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC007', 'Hotel 4', 'P423456', '129 Main St', '8AM-10PM', 'BC', 'Vancouver','Hotel');
+INSERT INTO locations VALUES ('LOC008', 'Restaurant 4', 'P423457', '130 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC009', 'Hotel 5', 'P523456', '131 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC010', 'Restaurant 5', 'P523457', '132 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC011', 'Hotel 6', 'P623456', '133 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC012', 'Restaurant 6', 'P623457', '134 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC013', 'Hotel 7', 'P723456', '135 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC014', 'Restaurant 7', 'P723457', '136 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC015', 'Hotel 8', 'P823456', '137 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC016', 'Restaurant 8', 'P823457', '138 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC017', 'Hotel 9', 'P923456', '139 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC018', 'Restaurant 9', 'P923457', '140 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
+INSERT INTO locations VALUES ('LOC019', 'Hotel 10', 'P103456', '141 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Hotel');
+INSERT INTO locations VALUES ('LOC020', 'Restaurant 10', 'P103457', '142 Main St', '8AM-10PM', 'BC', 'Vancouver', 'Restaurant');
 
 -- Locations for Museums (10)
-INSERT INTO locations VALUES ('LOC021', 'Museum 1', 'M123456', '201 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC022', 'Museum 2', 'M223456', '202 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC023', 'Museum 3', 'M323456', '203 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC024', 'Museum 4', 'M423456', '204 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC025', 'Museum 5', 'M523456', '205 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC026', 'Museum 6', 'M623456', '206 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC027', 'Museum 7', 'M723456', '207 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC028', 'Museum 8', 'M823456', '208 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC029', 'Museum 9', 'M923456', '209 Culture St', '9AM-6PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC030', 'Museum 10', 'M103456', '210 Culture St', '9AM-6PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC021', 'Museum 1', 'M123456', '201 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC022', 'Museum 2', 'M223456', '202 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC023', 'Museum 3', 'M323456', '203 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC024', 'Museum 4', 'M423456', '204 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC025', 'Museum 5', 'M523456', '205 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC026', 'Museum 6', 'M623456', '206 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC027', 'Museum 7', 'M723456', '207 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC028', 'Museum 8', 'M823456', '208 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC029', 'Museum 9', 'M923456', '209 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
+INSERT INTO locations VALUES ('LOC030', 'Museum 10', 'M103456', '210 Culture St', '9AM-6PM', 'BC', 'Vancouver', 'Museum');
 
 -- Locations for Parks (10)
-INSERT INTO locations VALUES ('LOC031', 'Park 1', 'PARK001', '301 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC032', 'Park 2', 'PARK002', '302 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC033', 'Park 3', 'PARK003', '303 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC034', 'Park 4', 'PARK004', '304 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC035', 'Park 5', 'PARK005', '305 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC036', 'Park 6', 'PARK006', '306 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC037', 'Park 7', 'PARK007', '307 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC038', 'Park 8', 'PARK008', '308 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC039', 'Park 9', 'PARK009', '309 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
-INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '6AM-8PM', 'BC', 'Vancouver');
+INSERT INTO locations VALUES ('LOC031', 'Park 1', 'PARK001', '301 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC032', 'Park 2', 'PARK002', '302 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC033', 'Park 3', 'PARK003', '303 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC034', 'Park 4', 'PARK004', '304 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC035', 'Park 5', 'PARK005', '305 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC036', 'Park 6', 'PARK006', '306 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC037', 'Park 7', 'PARK007', '307 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC038', 'Park 8', 'PARK008', '308 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC039', 'Park 9', 'PARK009', '309 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
+INSERT INTO locations VALUES ('LOC040', 'Park 10', 'PARK010', '310 Green Ave', '6AM-8PM', 'BC', 'Vancouver', "Park");
 
 -- rating table
 -- Ratings for Bookables (10 Hotels and 10 Restaurants)

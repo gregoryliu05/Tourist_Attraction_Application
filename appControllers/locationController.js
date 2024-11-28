@@ -24,13 +24,13 @@ router.get('/details', async (req,res) => {
 
 
 router.post('/add-location', async (req, res) => {
-    const {locationID, locationName, postalCode, address, operationHours, provinceState, cityName} = req.body;
+    const {locationID, locationName, postalCode, address, operationHours, provinceState, cityName, locationType} = req.body;
     if (!postalCode || !address || !provinceState || !cityName || !locationName) {
         res.status(500).json({error: "Incomplete Data. Please fill out all required fields"});
 
     }
     const updateResult = await locationService.addLocation(locationID, locationName, postalCode, address, 
-        operationHours, provinceState, cityName);
+        operationHours, provinceState, cityName, locationType);
     if (updateResult) {
         res.json({ success: true });
     } else {
