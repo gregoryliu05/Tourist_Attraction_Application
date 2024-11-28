@@ -73,7 +73,6 @@ async function getUsersRating(userID) {
     });
 }
 
-
 // get average rating and number of ratings for all locations 
 async function getLocationsRatings() {
     return await withOracleDB(async (connection) => {
@@ -93,8 +92,9 @@ async function getLocationsRatings() {
         console.log("error in getLocationsRatings", err)
         return null;
     })
-
 }
+
+//Get all user
 
 module.exports = {
     addRating, 
