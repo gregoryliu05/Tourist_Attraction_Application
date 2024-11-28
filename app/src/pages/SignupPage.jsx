@@ -90,13 +90,7 @@ const SignupPage = () => {
             return;
         }
 
-        try {console.log("Payload being sent:", {
-            userID: uuidv4().replace(/-/g, '').slice(0, 10),
-            fullName: name,
-            username: user,
-            password: pwd,
-            email: email,
-        });
+        try {
             const response = await axios.post(SIGNUP_URL, 
                 JSON.stringify({
                     userID:  uuidv4().replace(/-/g, '').slice(0, 10),

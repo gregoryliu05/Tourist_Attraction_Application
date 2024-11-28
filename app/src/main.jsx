@@ -10,6 +10,8 @@ import SignupPage from './pages/SignupPage.jsx'
 import RequireAuth from './pages/requireAuth.jsx'
 import LocationsPage from './pages/LocationsPage.jsx'
 import LocationPage from './pages/LocationPage.jsx'
+import BookingPage from './pages/BookingPage.jsx'
+import RatingPage from './pages/RatingPage.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
 
 
@@ -43,7 +45,17 @@ const router = createBrowserRouter([
   element: <LocationsPage/>,
   children: [
     { path: '/locations/:locationID',
-      element: <LocationPage/>
+      element: <LocationPage/>,
+      children: [
+        {
+          path: '/locations/:locationID/booking',
+          element: <BookingPage/>
+        },
+        {
+          path: '/locations/:locationID/rating',
+          element: <RatingPage/>
+        }
+      ]
     }
   ]
 

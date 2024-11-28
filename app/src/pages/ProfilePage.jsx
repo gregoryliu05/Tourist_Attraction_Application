@@ -78,6 +78,14 @@ const ProfilePage = () => {
         setChangePassword(true);
     }
 
+    const handleLogout = () => {
+        console.log(auth);
+        setAuth(null);
+        localStorage.removeItem('auth');
+        console.log()
+        
+      }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -210,6 +218,7 @@ const ProfilePage = () => {
 
             <div className ='flex flex-col gap-2 '>
             <NavLink className = "bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow "to = '/'> Return to Homepage</NavLink>
+            <button className= 'text-center bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' onClick = {handleLogout}>Logout</button>
             </div>
         </div>
         )
