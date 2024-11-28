@@ -30,15 +30,12 @@ CREATE TABLE users (
 );
 GRANT SELECT ON users TO PUBLIC;
 
--- TODO: Do we need category Service? Users shouldn't be able to create their own category 
--- maybe only need get queries (no add/delete)
 CREATE TABLE category (
     catName VARCHAR(50) PRIMARY KEY,
     description VARCHAR(255)
 );
 GRANT SELECT ON category TO PUBLIC;
 
--- TODO: User shouldn't be able to change city details. 
 CREATE TABLE city_details (
     provinceState VARCHAR(2) NOT NULL,
     cityName VARCHAR(50) NOT NULL,
@@ -46,7 +43,6 @@ CREATE TABLE city_details (
 );
 GRANT SELECT ON city_details TO PUBLIC;
 
--- TODO: User shouldn't be able to add/change city time zone
 CREATE TABLE city_time_zone (
     provinceState VARCHAR(2) NOT NULL,
     country VARCHAR(50) NOT NULL,
@@ -127,7 +123,6 @@ CREATE TABLE booking_details (
 );
 GRANT SELECT ON booking_details TO PUBLIC;
 
--- TODO-- 
 CREATE TABLE categorizes (
     catName VARCHAR(50),
     postalCode VARCHAR(10),
