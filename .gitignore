@@ -5,7 +5,9 @@ node_modules/
 *.log
 
 # dotenv environment variable files
-#.env
+.env
+
+# pack
 
 # IDEs and editors
 .vscode/
