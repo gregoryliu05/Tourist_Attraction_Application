@@ -98,7 +98,7 @@ router.get('/:userID', async (req, res) => {
 router.get('/:userID/ratings', async (req,res) => {
     const {userID} = req.params;
     
-    const tableContent = await userService.getUsersRating(userID);
+    const tableContent = await userService.getUsersRatings(userID);
     if (tableContent.length > 0) {
         res.json({data: tableContent});
     } else {

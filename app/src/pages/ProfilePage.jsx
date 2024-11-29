@@ -1,233 +1,295 @@
-import { Link, Outlet, NavLink} from "react-router-dom";
-import { useState, useEffect, useRef} from "react";
-import useAuth from '../hooks/useAuth';
+import { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import axios from "../api/axios";
-
-
-
+import useUpdate from "../hooks/useUpdate";
+import ReviewComponent from "./../components/ReviewComponent";
+import BookingComponent from "./../components/BookingComponent";
 
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-
 const ProfilePage = () => {
-    const userRef = useRef();
-    const errRef = useRef();
-    const {auth, setAuth} = useAuth();
-    const [userInfo, setUserInfo] = useState(null)
+  const userRef = useRef();
+  const errRef = useRef();
+  const { auth, setAuth } = useAuth();
+  const { update } = useUpdate();
 
-    const [oldPassword, setOldPassword] = useState('')
-    const [validOldPassword, setValidOldPassword] = useState(false);
-    const [success, setSuccess] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const [passwordData, setPasswordData] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
 
+  const [validations, setValidations] = useState({
+    validOldPassword: false,
+    validNewPassword: false,
+    validMatch: false,
+  });
 
-    const [pwd, setPwd] = useState('');
-    const [validPwd, setValidPwd] = useState(false);
-    const [pwdFocus, setPwdFocus] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+  const [changePassword, setChangePassword] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-    const [matchPwd, setMatchPwd] = useState('');
-    const [validMatch, setValidMatch] = useState(false);
-    const [matchFocus, setMatchFocus] = useState(false);
+  const [ratings, setRatings] = useState(null);
+  const [showRatings, setShowRatings] = useState(false);
 
-    const [errMsg, setErrMsg] = useState('');
+  const [bookings, setBookings] = useState(null);
+  const [showBookings, setShowBookings] = useState(false);
 
-    
+  // Validate passwords
+  useEffect(() => {
+    setValidations((prev) => ({
+      ...prev,
+      validNewPassword: PWD_REGEX.test(passwordData.newPassword),
+      validMatch: passwordData.newPassword === passwordData.confirmPassword,
+    }));
+  }, [passwordData.newPassword, passwordData.confirmPassword]);
 
-    const [changePassword, setChangePassword] = useState(false);
+  // Fetch user info
+  useEffect(() => {
+    axios
+      .get(`http://localhost:50004/users/${auth.userID}`)
+      .then((response) => setUserInfo(response.data.data))
+      .catch((err) => console.error("Error fetching user info:", err));
+  }, [auth.userID, success]);
 
-    useEffect(() => {
-        const result = PWD_REGEX.test(pwd);
-        console.log(result);
-        console.log(pwd);
-        setValidPwd(result);
-        const match = pwd == matchPwd;
-        setValidMatch(match);
-    }, [pwd, matchPwd])
+  // Fetch user's ratings
+  useEffect(() => {
+    axios
+      .get(`http://localhost:50004/users/${auth.userID}/ratings`)
+      .then((response) => setRatings(response.data.data))
+      .catch((err) => console.error("Error fetching ratings:", err));
+  }, [update]);
 
-    useEffect(() => {
-        if (userRef.current) {
-            userRef.current.focus(); 
-        }
-    }, [])
+  // Fetch user's bookings
+  useEffect(() => {
+    axios
+      .get(`http://localhost:50004/users/${auth.userID}/bookings`)
+      .then((response) => setBookings(response.data.data))
+      .catch((err) => console.error("Error fetching bookings:", err));
+  }, [update]);
 
-    useEffect(() => {
-        axios.get(
-            `http://localhost:50004/users/${auth.userID}`
-        ).then(
-            response => {
-                console.log(response.data)
-                console.log("response data data:", response.data.data)
-                const {userID, fullName, username, password, numReviews, email} = response.data.data;
-                setUserInfo({userID, fullName, username, password, numReviews, email});
-            }
-        )
+  const handleLogout = () => {
+    setAuth(null);
+    localStorage.removeItem("auth");
+  };
 
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
 
-    }, [success])
+    try {
+      await axios.post(
+        `http://localhost:50004/users/${userInfo.userID}/update-password`,
+        { newPassword: passwordData.newPassword },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-    useEffect(() => {
-        if (userInfo) {
-            const password = userInfo.password
-        const result = oldPassword === password
-        setValidOldPassword(result)
-        }
-    }, [oldPassword])
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        setChangePassword(true);
+      setPasswordData({ oldPassword: "", newPassword: "", confirmPassword: "" });
+      setSuccess(true);
+    } catch (err) {
+      setErrMsg(err.response?.data?.message || "Failed to update password.");
     }
+  };
 
-    const handleLogout = () => {
-        console.log(auth);
-        setAuth(null);
-        localStorage.removeItem('auth');
-        console.log()
-        
-      }
+  return (
+    <>
+      {userInfo && ratings && bookings? (
+        <div className="border border-gray-200 rounded-lg p-6 flex flex-col items-center">
+          <h2 className="text-xl font-bold mb-4">Your Profile</h2>
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+          {/* User Information */}
+          <div className="space-y-2 text-gray-700">
+            <p>
+              <strong>UserID:</strong> {userInfo.userID}
+            </p>
+            <p>
+              <strong>Full Name:</strong> {userInfo.fullName}
+            </p>
+            <p>
+              <strong>Username:</strong> {userInfo.username}
+            </p>
+            <p>
+              <strong>Number of Reviews:</strong> {userInfo.numReviews}
+            </p>
+            <p>
+              <strong>Email:</strong> {userInfo.email}
+            </p>
+          </div>
 
-        try {
-            await axios.post(`http://localhost:50004/users/${userInfo.userID}/update-password`, 
-                {newPassword: pwd},
-            {headers: {'Content-Type': 'application/json'},
-            withCredentials: true,
-        }
-        );
+          {/* Change Password Button */}
+          <button
+            className="bg-gray-200 px-4 py-2 mt-4 border border-gray-300 rounded hover:shadow-lg transition-shadow"
+            onClick={() => setChangePassword(!changePassword)}
+          >
+            Change Password
+          </button>
 
-        setPwd('')
-        setOldPassword('')
-        setMatchPwd('')
-        setSuccess(true);
-
-
-        } catch (err) {
-            const serverMessage = err.response?.data?.message || 'failed to update password';
-            setErrMsg(serverMessage);
-            errRef.current.focus();
-
-        }
-
-    }
-    
-    return (
-        <>
-        {userInfo ?(
-        <div className="border border-gray-200 rounded-lg p-4 flex flex-col items-center">
-            <p className=" text-xl text-bold text-center"> Your Profile</p>
-            <div className=" flex-row p-4 gap-4 text-center">
-                <p className="flex "> UserID:  {userInfo.userID}</p>
-                <p className=" flex"> Full Name: {userInfo.fullName}</p>
-                <p className=" flex"> Username: {userInfo.username}</p>
-                <p className=" flex"> Number of Reviews: {userInfo.numReviews}</p>
-                <p className=" flex"> Email: {userInfo.email}</p>
-                <button 
-                className="bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow"
-                onClick = {handleClick}
-                >Change Password?</button>
-            </div>
-            <br/>
-            { changePassword ? 
-            (<>
-            {success?
-            (<div>
-                <p className="text-xl text-bold text-center"> Success!</p>
-            </div>
-            )
-            :
-            (<>
-            <p ref={errRef} className={errMsg ? "py-4 border  border-gray-200 rounded-lg p-4 flex text-red-500" : "hidden"} aria-live='assertive'
-            >{errMsg}</p>
-            <form className="flex px-4 py-2 grid grid-cols-1" onSubmit={handleSubmit}>
-                <label htmlFor="oldpassword"> Enter old password:
-                <span className= {!oldPassword ? "hidden": " "}>{validOldPassword? " ✅": " ❌"}</span>
-                     </label>
-                <input
-                className='py-2 border border-gray-200 rounded-lg p-4 flex'  
-                type = "password"
-                id="oldpassword"
-                placeholder="enter old password here"
-                onChange={(e) => {
-                    setOldPassword(e.target.value);
-                }}
-                required
-                />
-                <label className='' htmlFor="pwd"> Enter New Password:
-                    <span className= {!pwd ? "hidden": " "}>{validPwd? " ✅": " ❌"}</span>
-                </label>
-                <input 
-                    className='py-2 border border-gray-200 rounded-lg p-4 flex'  
-                    type = "password"
-                    id="pwd"
-                    onChange={(e) => {
-                        setPwd(e.target.value);
-                    }}
-                    value={pwd}
-                    required
-                    aria-invalid = {validPwd ? 'false' : 'true'}
-                    aria-describedby = 'pwdnote'
-                    placeholder='enter password here'
-                    onFocus = {() => setPwdFocus(true)}
-                    onBlur = {() => setPwdFocus(false)}
-
-                />
-                <p id = 'pwdnote' className= {
-                    pwdFocus && pwd && !validPwd ? "py-4 border border-gray-200  bg-gray-200 rounded-lg p-4 flex text-black-500" : "hidden"} >
-                    8 to 24 characters. <br/>
-                    Must include upper & lowercase letters, a number and a special character <br/>
-                    Allowed special characters: ! @ # $ %
+          {/* Password Change Form */}
+          {changePassword && (
+            <div className="w-full mt-6">
+              {success ? (
+                <p className="text-xl font-bold text-center text-green-500">
+                  Password updated successfully!
                 </p>
+              ) : (
+                <form className="space-y-4" onSubmit={handlePasswordSubmit}>
+                  <div>
+                    <label>
+                      Enter Old Password:{" "}
+                      {passwordData.oldPassword &&
+                        (validations.validOldPassword ? "✅" : "❌")}
+                    </label>
+                    <input
+                      type="password"
+                      className="block w-full py-2 border border-gray-300 rounded-lg px-4"
+                      value={passwordData.oldPassword}
+                      onChange={(e) =>
+                        setPasswordData({
+                          ...passwordData,
+                          oldPassword: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
 
-                <label className='' htmlFor="cpassword"> Confirm New Password:
-                <span className= {!matchPwd ? "hidden": " "}>{validMatch? " ✅": " ❌"}</span>
-                </label>
-                <input 
-                    className='py-2 border border-gray-200 rounded-lg p-4 flex' 
-                    type="password" 
-                    placeholder='retype password here'
-                    id="cpassword"
-                    onChange={(e) => {
-                        setMatchPwd(e.target.value);
-                    }}
-                    value={matchPwd}
-                    required
-                    aria-invalid = {validMatch ? 'false' : 'true'}
-                    aria-describedby = 'matchnote'
-                    onFocus = {() => setMatchFocus(true)}
-                    onBlur = {() => setMatchFocus(false)}
-                />
-                <p id = 'match' className= {
-                    matchFocus && match && !validMatch ? "py-4 border border-gray-200  bg-gray-200 rounded-lg p-4 flex text-black-500" : "hidden"} >
-                    Must match password above.
-                </p>
+                  <div>
+                    <label>
+                      Enter New Password:{" "}
+                      {passwordData.newPassword &&
+                        (validations.validNewPassword ? "✅" : "❌")}
+                    </label>
+                    <input
+                      type="password"
+                      className="block w-full py-2 border border-gray-300 rounded-lg px-4"
+                      value={passwordData.newPassword}
+                      onChange={(e) =>
+                        setPasswordData({
+                          ...passwordData,
+                          newPassword: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
 
-                <button type='submit' className="bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow"
-                disabled = {!validPwd || !validMatch || !validOldPassword ? true: false}> 
-                Confirm Change Password </button>
-            </form>
-             </>
-            )} 
+                  <div>
+                    <label>
+                      Confirm New Password:{" "}
+                      {passwordData.confirmPassword &&
+                        (validations.validMatch ? "✅" : "❌")}
+                    </label>
+                    <input
+                      type="password"
+                      className="block w-full py-2 border border-gray-300 rounded-lg px-4"
+                      value={passwordData.confirmPassword}
+                      onChange={(e) =>
+                        setPasswordData({
+                          ...passwordData,
+                          confirmPassword: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:opacity-50"
+                    disabled={
+                      !validations.validNewPassword || !validations.validMatch
+                    }
+                  >
+                    Confirm Password Change
+                  </button>
+                </form>
+              )}
+            </div>
+          )}
+
+          {/* Reviews and Bookings Section */}
+          <div className="flex justify-between gap-8 mt-6 w-full">
+            {/* Reviews */}
+            <div className="w-1/2">
+              <h1 className="text-xl font-bold mb-4">Your Reviews</h1>
+              {ratings.length > 0 ? (
+                <>
+                  <button
+                    className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
+                    onClick={() => setShowRatings(!showRatings)}
+                  >
+                    {showRatings ? "Hide" : "Show"} Reviews
+                  </button>
+                  {showRatings &&
+                    ratings.map((rating) => (
+                      <ReviewComponent
+                        key={rating.ratingID}
+                        ID={rating.userID}
+                        score={rating.score}
+                        comment={rating.text}
+                        address={rating.address}
+                        postalCode={rating.postalCode}
+                      />
+                    ))}
+                </>
+              ) : (
+                <p>No reviews available.</p>
+              )}
+            </div>
+
+            <div className="flex justify-between gap-8 mt-6 w-full">
+        {/* Bookings */}
+        <div className="w-1/2">
+            <h1 className="text-xl font-bold mb-4">Your Bookings</h1>
+            {bookings.length > 0 ? (
+            <>
+            <button
+                className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
+                onClick={() => setShowBookings(!showBookings)}
+                >
+                {showBookings ? "Hide" : "Show"} Bookings
+                </button>
+                {showBookings &&
+                bookings.map((booking) => (
+                    <BookingComponent
+                    key={booking.bookingID}
+                    bookingID={booking.bookingID}
+                    startTime={booking.startTime}
+                    duration={booking.duration}
+                    numPeople={booking.numPeople}
+                    userID={booking.userID}
+                    address={booking.address}
+                    postalCode={booking.postalCode}
+                 />
+                 ))}
             </>
-            )
-            : 
-            (<br/>)
-            
-            }      
-
-            <div className ='flex flex-col gap-2 '>
-            <NavLink className = "bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow "to = '/'> Return to Homepage</NavLink>
-            <button className= 'text-center bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' onClick = {handleLogout}>Logout</button>
-            </div>
+            ) : (
+             <p>No bookings available.</p>
+            )}
         </div>
-        )
-        :
-        (<div> loading....</div>)
-    }
-        </>
-    )
-}
+        </div>
+        </div>
 
+          {/* Navigation Buttons */}
+          <div className="flex flex-col gap-4 mt-6">
+            <NavLink
+              className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
+              to="/"
+            >
+              Return to Homepage
+            </NavLink>
+            <button
+              className="bg-red-500 text-white px-4 py-2 border rounded-lg hover:bg-red-600 transition-shadow"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </>
+  );
+};
 
 export default ProfilePage;

@@ -47,7 +47,7 @@ const TopNavBar = () => {
       <p className=' px-4 py-2'>Hello, {auth.username} </p>
       <NavLink className = ' text-center bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {`/profile`}
         >View Profile</NavLink>
-        <button className= 'text-center bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' onClick = {handleLogout}>Logout</button>
+        <button className= 'bg-red-500 text-white px-4 py-2 border rounded-lg hover:bg-red-600 transition-shadow' onClick = {handleLogout}>Logout</button>
         </>)
       }
       </>

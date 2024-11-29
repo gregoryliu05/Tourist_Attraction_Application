@@ -63,7 +63,20 @@ async function getLocationFromKey(postalCode, address) {
             SELECT * from locations WHERE postalCode = :postalCode and address = :address`,
             [postalCode, address]
         );
-        return result.rows;
+        if (result.rows.length === 0) {
+            return null; 
+        }
+    
+        return {
+            locationID: result.rows[0][0],
+            locationName: result.rows[0][1],
+            postalCode: result.rows[0][2],
+            address: result.rows[0][3],
+            operationHours: result.rows[0][4],
+            provinceState: result.rows[0][5],
+            cityName: result.rows[0][6],
+            locationType: result.rows[0][7]
+        };
     }).catch((err) => {
         console.error('Error in getLocationFromKey:', err);
         return [];
@@ -146,7 +159,6 @@ async function getLocationsRating(postalCode, address) {
         const result = await connection.execute(
             `SELECT * 
             FROM rating R
-            JOIN picture P ON R.ratingID = P.ratingID
             JOIN user_comments U ON R.ratingID = U.ratingID
             WHERE R.postalCode = :postalCode AND R.address = :address`,
             [postalCode, address],
@@ -157,8 +169,7 @@ async function getLocationsRating(postalCode, address) {
             userID: row[2],
             postalCode: row[3],
             address: row[4], 
-            image: row[6],
-            text: row[8]
+            text: row[6],
         }))
         return ratings;
     }).catch((err)=> {

@@ -13,8 +13,7 @@ import LocationPage from './pages/LocationPage.jsx'
 import BookingPage from './pages/BookingPage.jsx'
 import RatingPage from './pages/RatingPage.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
-
-
+import { UpdateProvider } from './context/UpdateProvider.jsx'
 
 
 
@@ -45,7 +44,9 @@ const router = createBrowserRouter([
   element: <LocationsPage/>,
   children: [
     { path: '/locations/:locationID',
-      element: <LocationPage/>,
+      element: 
+        <LocationPage />
+  ,
       children: [
         {
           path: '/locations/:locationID/booking',
@@ -60,9 +61,6 @@ const router = createBrowserRouter([
   ]
 
  }
- 
-
-
 
 ]);
 
@@ -70,7 +68,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
+      <UpdateProvider>
     <RouterProvider router = {router}/>
+    </UpdateProvider>
     </AuthProvider>
   </StrictMode>,
 )

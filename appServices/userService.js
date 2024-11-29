@@ -120,6 +120,29 @@ async function getUserByID(userID) {
         return null;
     });
 }
+// getting ratings based on userID
+async function getUsersRatings(userID) {
+    return await withOracleDB(async (connection)=> {
+        const result = await connection.execute(
+            `SELECT * 
+            FROM rating R
+            JOIN user_comments U ON R.ratingID = U.ratingID
+             where userID = :userID`,
+            [userID]
+        )
+        const ratings = result.rows.map((row) => ({
+            ratingID: row[0],
+            score: row[1],
+            userID: row[2],
+            postalCode: row[3],
+            address: row[4], 
+            text: row[6],
+     }))
+        return ratings;
+    }).catch((err)=> {
+        console.err("could not get bookings", err);
+    })
+} 
 
 
 // getting bookings based on userID
@@ -129,7 +152,16 @@ async function getUsersBookings(userID) {
             `SELECT * from booking_details where userID = :userID`,
             [userID]
         )
-        return result.rows;
+        const bookings = result.rows.map((row) => ({
+            bookingID: row[0],
+            startTime: row[1],
+            duration: row[2],
+            numPeople: row[3],
+            userID: row[4],
+            postalCode: row[5],
+            address: row[6]
+        }))
+        return bookings;
     }).catch((err)=> {
         console.err("could not get bookings", err);
     })
@@ -186,6 +218,7 @@ module.exports = {
     updateNameUsers,
     countUsers,
     getUserByID,
+    getUsersRatings,
     getUsersBookings, 
     updateUserPassword,
     getUserFromUsernameAndPassword

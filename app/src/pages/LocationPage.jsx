@@ -2,12 +2,13 @@ import {useRef, useState, useEffect, useContext} from 'react';
 import { NavLink, Link, useNavigate, useLocation ,useParams, Outlet } from 'react-router-dom';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
-
+import useUpdate from '../hooks/useUpdate';
 
 
 
 const LocationPage = () => {
     const {auth, setAuth} = useAuth();
+    const {update, setUpdate} = useUpdate();
     const params = useParams();
 
     const [location, setLocation] =useState(null)
@@ -23,13 +24,34 @@ const LocationPage = () => {
     }, [params])
 
 
+    const fetchRatings = () => {
+        if (location) {
+            axios.get(`http://localhost:50004/locations/${location.postalCode}/${location.address}/ratings`)
+                .then((response) => {
+                    setRatings(response.data.data);
+                });
+        }
+    };
+
+    useEffect(() => {
+        if (location) {
+            axios.get(`http://localhost:50004/locations/${location.postalCode}/${location.address}/ratings`
+
+            ).then((response) => {
+                console.log("ratings updated", response.data.data)
+                setRatings(response.data.data)
+            })
+        }   
+        console.log("update", update)
+    }, [update])
+
     useEffect(() => {
         if (location) {
             console.log('addr', location.address)
             axios.get(`http://localhost:50004/locations/${location.postalCode}/${location.address}/ratings`
 
             ).then((response) => {
-                console.log("rating", response.data.data)
+                console.log("ratings", response.data.data)
                 setRatings(response.data.data)
             })
 
@@ -70,6 +92,14 @@ const LocationPage = () => {
 
     }, [location])
 
+    useEffect(() => {
+        return () => {
+            // Reset state when the component is unmounted or navigated away
+            setLocation(null);
+            setLocationDetails(null);
+            setRatings(null);
+        };
+    }, []);
    
 
 
@@ -81,7 +111,8 @@ const LocationPage = () => {
                     <h2 className="text-xl font-bold mb-4">
                         {location.locationName}
                     </h2>
-                    {!auth ? (<NavLink className="px-4 py-2 text-sm rounded border border-gray-200 bg-blue-500 hover:shadow-lg hover:bg-blue-600 transition-shadow text-white"
+                    {location.locationType == "Restaurant" || location.locationType == "Hotel" ?
+                    (!auth ? (<NavLink className="px-4 py-2 text-sm rounded border border-gray-200 bg-blue-500 hover:shadow-lg hover:bg-blue-600 transition-shadow text-white"
                     to = "/login">
                         Log In to Create Booking
                     </NavLink>) :(
@@ -90,6 +121,9 @@ const LocationPage = () => {
                      >
                     Create a Booking
                     </NavLink>)
+                )
+                :
+                (<></>)
                 }
                     </div>
                     <div className="text-gray-700 space-y-2">
@@ -154,15 +188,15 @@ const LocationPage = () => {
     
                     <div className="mt-6">
                     <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold">Ratings:</h3>
+                    <h3 className="text-lg font-semibold">Reviews:</h3>
                     {!auth ? (<NavLink className="px-4 py-2 text-sm rounded border border-gray-200 bg-blue-500 hover:shadow-lg hover:bg-blue-600 transition-shadow text-white"
                     to = "/login">
-                        Log In to Make Rating
+                        Log In to Make a Review
                     </NavLink>) :(
                      <NavLink className="px-4 py-2 text-sm rounded border border-gray-200 bg-blue-500 hover:shadow-lg hover:bg-blue-600 transition-shadow text-white"
                      to ={`/locations/${location.locationID}/rating`}
                      >
-                    Make a Rating
+                    Make a Review
                     </NavLink>)
                 }
                     </div>
@@ -209,7 +243,7 @@ const LocationPage = () => {
                 </div>
             )}
             <div className= 'pt-4'>
-            <Outlet />
+            <Outlet/>
             </div>
         </div>
     );
