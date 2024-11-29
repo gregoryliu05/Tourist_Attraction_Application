@@ -66,7 +66,29 @@ async function getLocationsRatingsGood() {
         console.log("error in getLocationsRatings", err)
         return null;
     })
+}
 
+//returns location with higher avg rating than num
+async function getLocationWithRatingGreater(num) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT postalCode, address, AVG(score) as avg_rating, COUNT(*) as num_ratings  
+            from rating
+            GROUP BY postalCode, address
+            HAVING AVG(score) > :num`,
+            [num]
+        );
+        const ratings = result.rows.map((row)=> ({
+            postalCode: row[0],
+            address: row[1],
+            avg_rating: row[2],
+            num_ratings: row[3]
+        }))
+        return ratings;
+    }).catch((err) => {
+        console.log("error in getLocationsRatings", err)
+        return null;
+    })
 }
 
 
@@ -129,5 +151,6 @@ module.exports = {
     deleteRating,
     getUsersRating,
     getLocationsRatings,
-    getLocationsRatingsGood
+    getLocationsRatingsGood, 
+    getLocationWithRatingGreater
 };

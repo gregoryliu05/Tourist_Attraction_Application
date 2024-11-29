@@ -19,8 +19,11 @@ join - Allow users to see other users’ profile, and what ratings they have don
 the past (you can do this without join, select all user with specified user id), instead, We need joins on ISA to get all comments and/or picture associated with rating
 
 aggregation withgroup_by done
+
 aggregation with having 
+
 nested aggregation with group by done 
+
 division 
 
 

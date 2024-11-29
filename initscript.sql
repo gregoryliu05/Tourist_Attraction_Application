@@ -217,6 +217,9 @@ INSERT INTO category VALUES ('Aquarium', 'Displays of aquatic life.');
 INSERT INTO category VALUES ('Zoo', 'Enclosures for wildlife.');
 INSERT INTO category VALUES ('Art Gallery', 'Display spaces for artwork.');
 INSERT INTO category VALUES ('Beach', 'Outdoor area by the sea or lake.');
+INSERT INTO category VALUES ('Family-Friendly', 'Great for family, child friendly'); 
+INSERT INTO category VALUES ('Good View', 'The location has good views, great for sight seeing.')
+
 
 -- city_details table
 INSERT INTO city_details VALUES ('BC', 'Vancouver');
@@ -493,7 +496,11 @@ INSERT INTO categorizes VALUES ('Museum', 'M223456', '202 Culture St');
 INSERT INTO categorizes VALUES ('Restaurant', 'P223457', '126 Main St');
 INSERT INTO categorizes VALUES ('Hotel', 'P223456', '125 Main St');
 INSERT INTO categorizes VALUES ('Park', 'PARK003', '303 Green Ave');
+
+-- Location with multiple categories
 INSERT INTO categorizes VALUES ('Museum', 'M323456', '203 Culture St');
+INSERT INTO categorizes VALUES ('Family-Friendly', 'M323456', '203 Culture St');
+INSERT INTO categorizes VALUES ('Good View', 'M323456', '203 Culture St');
 
 -- parks table
 INSERT INTO parks VALUES ('PARK001', '301 Green Ave', 500);
