@@ -197,6 +197,15 @@ router.get('/museums', async (req,res) => {
     }
 })
 
+router.get('/:catNames', async (req,res) => {
+    try {
+        const tableContent = await locationService.getLocationWithCategories();
+        res.json({ data: tableContent });
+    } catch (error) {
+        res.status(500).json({ error: 'An error occurred while fetching location' });
+    }
+})
+
 
 
 module.exports = router;
