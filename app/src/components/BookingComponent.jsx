@@ -1,9 +1,31 @@
 import { useState, useEffect } from 'react';
 import axios from '../api/axios';
+import { v4 as uuidv4 } from 'uuid';
+import useUpdate from '../hooks/useUpdate';
+
 
 const BookingComponent = (props) => {
   const { bookingID, startTime, duration, numPeople, userID, postalCode, address } = props;
   const [location, setLocation] = useState('');
+  const {update, setUpdate} = useUpdate();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    try {
+
+      await axios.delete(`http://localhost:50004/bookings/${bookingID}`)
+      
+        console.log("Booking deleted Successfully")
+
+      setUpdate(uuidv4().replace(/-/g, '').slice(0, 10))
+
+    } catch (error) {
+      console.error("Error deleting Booking", error);
+    }
+
+  }
+
 
   useEffect(() => {
     axios.get(`http://localhost:50004/locations/${postalCode}/${address}`)
@@ -34,6 +56,11 @@ const BookingComponent = (props) => {
           <p>
             <span className="font-bold">Number of People:</span> {numPeople}
           </p>
+          <button
+            className='bg-red-500 text-white px-2 py-2 border rounded-lg hover:bg-red-600 transition-shadow'
+            onClick = {handleClick}>
+                Delete Booking
+            </button>
         </div>
       ) : (
         <div>Loading...</div>

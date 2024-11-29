@@ -95,182 +95,160 @@ const ProfilePage = () => {
 
   return (
     <>
-      {userInfo && ratings && bookings? (
-        <div className="border border-gray-200 rounded-lg p-6 flex flex-col items-center">
-          <h2 className="text-xl font-bold mb-4">Your Profile</h2>
-
-          {/* User Information */}
-          <div className="space-y-2 text-gray-700">
-            <p>
-              <strong>UserID:</strong> {userInfo.userID}
-            </p>
-            <p>
-              <strong>Full Name:</strong> {userInfo.fullName}
-            </p>
-            <p>
-              <strong>Username:</strong> {userInfo.username}
-            </p>
-            <p>
-              <strong>Number of Reviews:</strong> {userInfo.numReviews}
-            </p>
-            <p>
-              <strong>Email:</strong> {userInfo.email}
-            </p>
-          </div>
-
-          {/* Change Password Button */}
-          <button
-            className="bg-gray-200 px-4 py-2 mt-4 border border-gray-300 rounded hover:shadow-lg transition-shadow"
-            onClick={() => setChangePassword(!changePassword)}
-          >
-            Change Password
-          </button>
-
-          {/* Password Change Form */}
-          {changePassword && (
-            <div className="w-full mt-6">
-              {success ? (
-                <p className="text-xl font-bold text-center text-green-500">
-                  Password updated successfully!
-                </p>
-              ) : (
-                <form className="space-y-4" onSubmit={handlePasswordSubmit}>
-                  <div>
-                    <label>
-                      Enter Old Password:{" "}
-                      {passwordData.oldPassword &&
-                        (validations.validOldPassword ? "✅" : "❌")}
-                    </label>
-                    <input
-                      type="password"
-                      className="block w-full py-2 border border-gray-300 rounded-lg px-4"
-                      value={passwordData.oldPassword}
-                      onChange={(e) =>
-                        setPasswordData({
-                          ...passwordData,
-                          oldPassword: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <div>
-                    <label>
-                      Enter New Password:{" "}
-                      {passwordData.newPassword &&
-                        (validations.validNewPassword ? "✅" : "❌")}
-                    </label>
-                    <input
-                      type="password"
-                      className="block w-full py-2 border border-gray-300 rounded-lg px-4"
-                      value={passwordData.newPassword}
-                      onChange={(e) =>
-                        setPasswordData({
-                          ...passwordData,
-                          newPassword: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <div>
-                    <label>
-                      Confirm New Password:{" "}
-                      {passwordData.confirmPassword &&
-                        (validations.validMatch ? "✅" : "❌")}
-                    </label>
-                    <input
-                      type="password"
-                      className="block w-full py-2 border border-gray-300 rounded-lg px-4"
-                      value={passwordData.confirmPassword}
-                      onChange={(e) =>
-                        setPasswordData({
-                          ...passwordData,
-                          confirmPassword: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:opacity-50"
-                    disabled={
-                      !validations.validNewPassword || !validations.validMatch
-                    }
-                  >
-                    Confirm Password Change
-                  </button>
-                </form>
-              )}
+      {userInfo && ratings && bookings ? (
+        <div className="max-w-screen-lg mx-auto p-6">
+          {/* Profile Section */}
+          <div className="bg-white border border-gray-300 rounded-lg shadow-lg p-6 mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">Your Profile</h2>
+            <div className="space-y-2 text-gray-700">
+              <p><strong>UserID:</strong> {userInfo.userID}</p>
+              <p><strong>Full Name:</strong> {userInfo.fullName}</p>
+              <p><strong>Username:</strong> {userInfo.username}</p>
+              <p><strong>Number of Reviews:</strong> {userInfo.numReviews}</p>
+              <p><strong>Email:</strong> {userInfo.email}</p>
             </div>
-          )}
-
+            <button
+              className="bg-blue-500 text-white px-4 py-2 mt-4 border border-blue-500 rounded-lg hover:bg-blue-600 transition-shadow w-full"
+              onClick={() => setChangePassword(!changePassword)}
+            >
+              Change Password
+            </button>
+  
+            {/* Password Change Form */}
+            {changePassword && (
+              <div className="mt-6">
+                {success ? (
+                  <p className="text-xl font-bold text-center text-green-500">
+                    Password updated successfully!
+                  </p>
+                ) : (
+                  <form className="space-y-4" onSubmit={handlePasswordSubmit}>
+                    <div>
+                      <label className="block font-bold">Enter Old Password:</label>
+                      <input
+                        type="password"
+                        className="block w-full py-2 border border-gray-300 rounded-lg px-4"
+                        value={passwordData.oldPassword}
+                        onChange={(e) =>
+                          setPasswordData({
+                            ...passwordData,
+                            oldPassword: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-bold">Enter New Password:</label>
+                      <input
+                        type="password"
+                        className="block w-full py-2 border border-gray-300 rounded-lg px-4"
+                        value={passwordData.newPassword}
+                        onChange={(e) =>
+                          setPasswordData({
+                            ...passwordData,
+                            newPassword: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-bold">Confirm New Password:</label>
+                      <input
+                        type="password"
+                        className="block w-full py-2 border border-gray-300 rounded-lg px-4"
+                        value={passwordData.confirmPassword}
+                        onChange={(e) =>
+                          setPasswordData({
+                            ...passwordData,
+                            confirmPassword: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-shadow w-full"
+                      disabled={
+                        !validations.validNewPassword || !validations.validMatch
+                      }
+                    >
+                      Confirm Password Change
+                    </button>
+                  </form>
+                )}
+              </div>
+            )}
+          </div>
+  
           {/* Reviews and Bookings Section */}
-          <div className="flex justify-between gap-8 mt-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Reviews */}
-            <div className="w-1/2">
+            <div className="bg-gray-50 border border-gray-300 rounded-lg shadow-lg p-6">
               <h1 className="text-xl font-bold mb-4">Your Reviews</h1>
               {ratings.length > 0 ? (
                 <>
                   <button
-                    className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition mb-4"
                     onClick={() => setShowRatings(!showRatings)}
                   >
                     {showRatings ? "Hide" : "Show"} Reviews
                   </button>
-                  {showRatings &&
-                    ratings.map((rating) => (
-                      <ReviewComponent
-                        key={rating.ratingID}
-                        ID={rating.userID}
-                        score={rating.score}
-                        comment={rating.text}
-                        address={rating.address}
-                        postalCode={rating.postalCode}
-                      />
-                    ))}
+                  {showRatings && (
+                    <div className="space-y-4 overflow-y-auto max-h-[300px]">
+                      {ratings.map((rating) => (
+                        <ReviewComponent
+                          key={rating.ratingID}
+                          ID={rating.ratingID}
+                          score={rating.score}
+                          comment={rating.text}
+                          address={rating.address}
+                          postalCode={rating.postalCode}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </>
               ) : (
                 <p>No reviews available.</p>
               )}
             </div>
-
-            <div className="flex justify-between gap-8 mt-6 w-full">
-        {/* Bookings */}
-        <div className="w-1/2">
-            <h1 className="text-xl font-bold mb-4">Your Bookings</h1>
-            {bookings.length > 0 ? (
-            <>
-            <button
-                className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
-                onClick={() => setShowBookings(!showBookings)}
-                >
-                {showBookings ? "Hide" : "Show"} Bookings
-                </button>
-                {showBookings &&
-                bookings.map((booking) => (
-                    <BookingComponent
-                    key={booking.bookingID}
-                    bookingID={booking.bookingID}
-                    startTime={booking.startTime}
-                    duration={booking.duration}
-                    numPeople={booking.numPeople}
-                    userID={booking.userID}
-                    address={booking.address}
-                    postalCode={booking.postalCode}
-                 />
-                 ))}
-            </>
-            ) : (
-             <p>No bookings available.</p>
-            )}
-        </div>
-        </div>
-        </div>
-
+  
+            {/* Bookings */}
+            <div className="bg-gray-50 border border-gray-300 rounded-lg shadow-lg p-6">
+              <h1 className="text-xl font-bold mb-4">Your Bookings</h1>
+              {bookings.length > 0 ? (
+                <>
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition mb-4"
+                    onClick={() => setShowBookings(!showBookings)}
+                  >
+                    {showBookings ? "Hide" : "Show"} Bookings
+                  </button>
+                  {showBookings && (
+                    <div className="space-y-4 overflow-y-auto max-h-[300px]">
+                      {bookings.map((booking) => (
+                        <BookingComponent
+                          key={booking.bookingID}
+                          bookingID={booking.bookingID}
+                          startTime={booking.startTime}
+                          duration={booking.duration}
+                          numPeople={booking.numPeople}
+                          userID={booking.userID}
+                          address={booking.address}
+                          postalCode={booking.postalCode}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <p>No bookings available.</p>
+              )}
+            </div>
+          </div>
+  
           {/* Navigation Buttons */}
-          <div className="flex flex-col gap-4 mt-6">
+          <div className="flex flex-col gap-4 mt-8 items-center">
             <NavLink
               className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
               to="/"
@@ -286,10 +264,12 @@ const ProfilePage = () => {
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
+        <div className="flex items-center justify-center h-screen">
+          <p>Loading...</p>
+        </div>
       )}
     </>
   );
-};
+}  
 
 export default ProfilePage;

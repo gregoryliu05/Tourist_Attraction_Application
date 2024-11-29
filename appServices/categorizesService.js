@@ -32,7 +32,9 @@ async function getCategorizesFromDb() {
 async function getCategorizes(catName, postalCode, address) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
-            `SELECT * from categorizes WHERE catName = :catName AND postalCode = :postalCode AND address = :address`,
+            `SELECT * from categorizes WHERE catName = :catName 
+            AND postalCode = :postalCode 
+            AND address = :address`,
             [catName, postalCode, address]
         );
         return result.rows;

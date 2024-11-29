@@ -122,10 +122,14 @@ async function deleteRating(ratingID) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM rating WHERE ratingID = :ratingID`,
-            [ratingID]
+            [ratingID], 
+            {
+                autoCommit: true
+            }
         );
-        return true;
-    }).catch(() => {
+        return result.rowsAffected > 0;
+    }).catch((err) => {
+        console.log("Error in deleteRating", err)
         return false;
     });
 }
