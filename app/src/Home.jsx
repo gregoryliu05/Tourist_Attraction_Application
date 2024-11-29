@@ -8,12 +8,8 @@ import useAuth from './hooks/useAuth';
 // UPDATE NAVLINKS LATER, update categories const to have their link?? 
 const CategoriesGrid = () => {
   const categories = [
-    { name: 'Locations', icon: '📍' , route: '/locations'}, 
-    { name: 'Hotels', icon: '🏨' ,route: '/locations'},    
-    { name: 'Parks', icon: '🌳' ,route: '/locations'},     
-    { name: 'Museums', icon: '🏛️', route: '/locations'},  
-    { name: 'Events', icon: '🎉', route: '/locations' },    
-    { name: 'Restaurants', icon: '🍴', route: '/locations' },
+    { name: 'Locations', icon: '📍' , route: '/locations'},  
+    { name: 'Events', icon: '🎉', route: '/events' },   
   ]
   return (
     <div className="p-6">

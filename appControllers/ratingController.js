@@ -35,9 +35,9 @@ router.get('/locations-ratings-good', async (req, res) => {
     }
 })
 
-router.get('/locations-Ratings_greater', async (req, res) => {
+router.get('/locations-ratings-greater/:num', async (req, res) => {
     try {
-        const {num} = req.body;
+        const {num} = req.params;
         const tableContent = await ratingService.getLocationWithRatingGreater(num);
         res.json({data: tableContent})
 

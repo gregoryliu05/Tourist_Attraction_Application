@@ -27,6 +27,16 @@ router.post('/add-eventDetail', async (req, res) => {
     }
 });
 
+router.get('/:eventName/:host/:postalCode', async (req, res) => {
+    const {eventName, host, postalCode} = req.params;
+    const tableContent = await eventDetailsService.getEventSearchAll(eventName, host, postalCode);
+    if (tableContent.length > 0) {
+        res.json({data: tableContent});
+    } else {
+        res.status(404).json({success: false, message: 'failed to get bookable'});
+    }
+});
+
 router.get('/:eventName/:startTime/:duration', async (req, res) => {
     const {eventName, startTime, duration} = req.params;
     const tableContent = await eventDetailsService.getEventDetails(eventName, startTime, duration);
