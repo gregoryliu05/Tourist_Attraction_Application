@@ -5,7 +5,6 @@ drop table city_time_zone CASCADE CONSTRAINTS;
 drop table locations CASCADE CONSTRAINTS;
 drop table rating CASCADE CONSTRAINTS;
 drop table user_comments CASCADE CONSTRAINTS;
-drop table picture CASCADE CONSTRAINTS;
 drop table bookable CASCADE CONSTRAINTS;
 drop table booking_details CASCADE CONSTRAINTS;
 drop table categorizes CASCADE CONSTRAINTS;
@@ -297,7 +296,6 @@ INSERT INTO rating VALUES ('R000016', 1.0, '1000000001', 'P823457', '138 Main St
 INSERT INTO rating VALUES ('R000017', 4.9, '1000000001', 'P923456', '139 Main St'); 
 INSERT INTO rating VALUES ('R000018', 3.8, '1000000001', 'P923457', '140 Main St'); 
 INSERT INTO rating VALUES ('R000019', 3.6, '1000000001', 'P103456', '141 Main St'); 
-INSERT INTO rating VALUES ('R000020', 4.3, '1000000001', 'P103457', '142 Main St'); 
 INSERT INTO rating VALUES ('R000020', 4.3, '1000000001', 'P103457', '142 Main St'); 
 INSERT INTO rating VALUES ('R000041', 1.5, '1000000001', 'P103457', '142 Main St'); 
 INSERT INTO rating VALUES ('R000042', 2.6, '1000000001', 'P103457', '142 Main St'); 

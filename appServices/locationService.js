@@ -156,8 +156,7 @@ async function getLocationsRating(postalCode, address) {
             userID: row[2],
             postalCode: row[3],
             address: row[4], 
-            image: row[6],
-            text: row[8]
+            text: row[6],
         }))
         return ratings;
     }).catch((err)=> {
