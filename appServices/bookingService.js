@@ -18,16 +18,17 @@ async function getAllBookings() {
 
 
 // add a Booking
-async function addBooking(bookingID, startTime, duration, numPeople, userID, postalCode,address) {
+async function addBooking(bookingID, startTime, duration, numPeople, userID, postalCode, address) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `INSERT INTO booking_details (bookingID, startTime, duration, numPeople, userID, postalCode, address)
             VALUES (:bookingID, :startTime, :duration, :numPeople, :userID, :postalCode, :address )`,
-            [bookingID, startTime, duration, numPeople, userID, postalCode,address],
+            [bookingID, startTime, duration, numPeople, userID, postalCode, address],
             { autoCommit: true}
         );
         return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
+    }).catch((err) => {
+        console.error('Error in addBooking:', err);
         return false;
     });
 }

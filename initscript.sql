@@ -91,14 +91,6 @@ CREATE TABLE picture (
 );
 GRANT SELECT ON picture TO PUBLIC;
 
--- TODO : I think theres no need for this, we added it for FD
-CREATE TABLE time_of_booking (
-    startTime VARCHAR(50),
-    endTime VARCHAR(50),
-    duration VARCHAR(50),
-    PRIMARY KEY (startTime, duration)
-);
-GRANT SELECT ON time_of_booking TO PUBLIC;
 
 CREATE TABLE bookable (
     postalCode VARCHAR(10),
@@ -117,7 +109,6 @@ CREATE TABLE booking_details (
     userID CHAR(10),
     postalCode VARCHAR(10) NOT NULL,
     address VARCHAR(50) NOT NULL,
-    FOREIGN KEY (startTime, duration) REFERENCES time_of_booking(startTime, duration) ON DELETE CASCADE,
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE,
     FOREIGN KEY (postalCode, address) REFERENCES bookable(postalCode, address) ON DELETE CASCADE
 );
@@ -434,17 +425,6 @@ INSERT INTO picture VALUES ('R000041', HEXTORAW('FFD8FFE0'));
 INSERT INTO picture VALUES ('R000042', HEXTORAW('FFD8FFE0'));
 INSERT INTO picture VALUES ('R000043', HEXTORAW('FFD8FFE0'));
 
--- time_of_booking table
-INSERT INTO time_of_booking VALUES ('08:00 AM', '10:00 AM', '2 hours');
-INSERT INTO time_of_booking VALUES ('10:00 AM', '11:30 AM', '1.5 hours');
-INSERT INTO time_of_booking VALUES ('12:00 PM', '01:30 PM', '1.5 hours');
-INSERT INTO time_of_booking VALUES ('02:00 PM', '03:30 PM', '1.5 hours');
-INSERT INTO time_of_booking VALUES ('03:30 PM', '04:30 PM', '1 hour');
-INSERT INTO time_of_booking VALUES ('05:00 PM', '06:30 PM', '1.5 hours');
-INSERT INTO time_of_booking VALUES ('07:00 PM', '08:00 PM', '1 hour');
-INSERT INTO time_of_booking VALUES ('08:30 PM', '09:30 PM', '1 hour');
-INSERT INTO time_of_booking VALUES ('09:30 PM', '11:00 PM', '1.5 hours');
-INSERT INTO time_of_booking VALUES ('11:00 PM', '12:00 AM', '1 hour');
 
 -- bookable table
 -- Hotels

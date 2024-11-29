@@ -18,12 +18,15 @@ router.get('/', async (req, res) => {
 // add a booking 
 router.post('/add-booking', async (req,res) => {
     const {bookingID, startTime, duration, numPeople, userID, postalCode,address} = req.body;
-
-    if (!bookingID || !startTime || !userID || !postalCode || !address) {
-        return res.status(400).json({ success: false, message: 'Missing required fields' });
+    console.log(req.body)
+    console.log(parseInt(numPeople))
+    if (
+        !bookingID || !startTime || !userID || !postalCode || !address || isNaN(parseInt(numPeople)) || parseInt(numPeople) <= 0
+    ) {
+        return res.status(400).json({ success: false, message: 'Missing or invalid required fields' });
     }
 
-    const updateResult = await bookingService.addBooking(bookingID, startTime, duration, numPeople, userID, postalCode,address)
+    const updateResult = await bookingService.addBooking(bookingID, startTime, duration, parseInt(numPeople), userID, postalCode,address)
     if (updateResult) {
         res.json({success: true});
     } else {
