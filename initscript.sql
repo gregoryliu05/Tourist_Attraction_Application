@@ -6,7 +6,6 @@ drop table locations CASCADE CONSTRAINTS;
 drop table rating CASCADE CONSTRAINTS;
 drop table user_comments CASCADE CONSTRAINTS;
 drop table picture CASCADE CONSTRAINTS;
-drop table time_of_booking CASCADE CONSTRAINTS;
 drop table bookable CASCADE CONSTRAINTS;
 drop table booking_details CASCADE CONSTRAINTS;
 drop table categorizes CASCADE CONSTRAINTS;
