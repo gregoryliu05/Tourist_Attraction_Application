@@ -146,7 +146,6 @@ async function getLocationsRating(postalCode, address) {
         const result = await connection.execute(
             `SELECT * 
             FROM rating R
-            JOIN picture P ON R.ratingID = P.ratingID
             JOIN user_comments U ON R.ratingID = U.ratingID
             WHERE R.postalCode = :postalCode AND R.address = :address`,
             [postalCode, address],

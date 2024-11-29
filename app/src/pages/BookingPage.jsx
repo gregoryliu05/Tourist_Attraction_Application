@@ -13,7 +13,7 @@ const BookingPage = () => {
     const {auth, setAuth} = useAuth();
     const params = useParams();
 
-    const ratingRef = useRef();
+    const bookingRef = useRef();
     const errRef = useRef();
 
 
@@ -36,7 +36,7 @@ const BookingPage = () => {
     const [numPeopleFocus, setNumPeopleFocus] = useState(false)
     
     useEffect(() => {
-        ratingRef.current.focus()
+        bookingRef.current.focus()
     }, [])
 
     useEffect(() => {
@@ -146,7 +146,7 @@ const BookingPage = () => {
             onFocus={() => setTimeFocus(true)}
             onBlur={() => setTimeFocus(false)}
             placeholder='ex 5PM, 12:15AM'
-            ref = {ratingRef}
+            ref = {bookingRef}
             maxLength= '8'
             />
             <p id = "timenote" 
@@ -192,17 +192,23 @@ const BookingPage = () => {
             <input
             className='py-2 border border-gray-200 rounded-lg p-4 flex'
             id = 'numpeople'
-            placeholder='enter an integer between 0 and 100'
+            placeholder='int between 0 and 100'
             onChange = {(e) => {
                 setNumPeople(e.target.value)}}
             value ={numPeople}
             required 
             aria-invalid = {validNumPeople ? 'false' : 'true'}
-            aria-describedby= 'durationnote'
+            aria-describedby= 'numpeoplenote'
             onFocus={() => setNumPeopleFocus(true)}
             onBlur={() => setNumPeopleFocus(false)}
             maxLength= '3'
             />
+
+            <p id = "numpeoplenote" 
+            className= {numPeopleFocus && numPeople && !validNumPeople ? "py-4 border bg-gray-200 border-gray-200 rounded-lg p-4 flex text-black-500" : "hidden"}
+            >
+               integer between 0 and 100
+            </p>
             </div>
         
             <button className='px-4 py-2 text-sm rounded border border-gray-200 bg-blue-500 hover:shadow-lg hover:bg-blue-600 transition-shadow text-white'
