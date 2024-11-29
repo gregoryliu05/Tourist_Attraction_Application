@@ -1,3 +1,4 @@
+const { autoCommit } = require('oracledb');
 const {withOracleDB } = require('../db');
 
 async function addUserComment(ratingID, text) {
@@ -47,10 +48,14 @@ async function deleteUserComment(ratingID) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM user_comments WHERE ratingID = :ratingID`,
-            [ratingID]
+            [ratingID], 
+            {
+                autoCommit: true
+            }
         );
-        return true;
-    }).catch(() => {
+        return result.rowsAffected > 0;
+    }).catch((err) => {
+        console.error("Error in deleteUserComment:", err);
         return false;
     });
 }

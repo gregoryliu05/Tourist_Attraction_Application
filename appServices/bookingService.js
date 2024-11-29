@@ -1,3 +1,4 @@
+const { autoCommit } = require('oracledb');
 const {withOracleDB} = require('../db');
 
 
@@ -39,10 +40,12 @@ async function deleteBooking(bookingID) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
             `DELETE FROM booking_details WHERE bookingID = :bookingID`,
-            [bookingID]
+            [bookingID],
+            {autoCommit: true}
         );
-        return result.rowsAffected && result.rowsAffected >0;
+        return result.rowsAffected >0;
     }).catch(() => {
+        console.log("error in deleting Booking", err)
         return false;
     });
 }

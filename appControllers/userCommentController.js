@@ -48,7 +48,8 @@ router.delete('/:ratingID', async (req, res) => {
     if (updateResult) {
         res.json({ success: true});
     } else {
-        res.status(500).json({ success: false});
+        console.error("Failed to delete userComment:", ratingID); 
+        res.status(500).json({ success: false, message: "Failed to delete user comment" });
     }
 
 })
