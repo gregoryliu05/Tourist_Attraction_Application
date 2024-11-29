@@ -3,6 +3,7 @@ import { NavLink, Link, useNavigate, useLocation, Outlet } from 'react-router-do
 import axios from '../api/axios';
 import TopNavBar from '../components/TopNavBar';
 import useAuth from '../hooks/useAuth';
+import useUpdate from '../hooks/useUpdate';
 
 const LocationElement = (props) => {
   const {location, rating} = props;
@@ -43,6 +44,7 @@ const LocationPage = () => {
   const [locationsRating, setLocationsRating] = useState(null);
   const [filterRatings, setFilterRatings] = useState(false);
   const [goodLocationsRating, setGoodLocationsRating] = useState(null);
+  const {update, setUpdate} = useUpdate();
 
   const filterLocations = (locations) => {
     return locations.filter((location) =>
@@ -62,7 +64,7 @@ const LocationPage = () => {
         console.log("locations data", response.data.data);
         setLocations(response.data.data);
       });
-  }, []);
+  }, [update]);
 
   useEffect(() => {
     axios
@@ -74,7 +76,7 @@ const LocationPage = () => {
       .catch((error) => {
         console.error("Error fetching ratings data:", error);
       });
-  }, []);
+  }, [update]);
 
   useEffect(() => {
     axios
@@ -86,7 +88,7 @@ const LocationPage = () => {
       .catch((error) => {
         console.error("Error fetching ratings data:", error);
       });
-  }, []);
+  }, [update]);
 
   const ogLocations = locations;
   const filteredLocations = filterRatings ? filterLocations(locations) : ogLocations;
@@ -135,7 +137,7 @@ const LocationPage = () => {
         ))}
       </div>
 
-      <div className="w-2/3 p-4 pt-20">
+      <div className="w-2/3 p-4 pt-16">
         <Outlet />
       </div>
 

@@ -136,7 +136,7 @@ const RatingPage = () => {
             <section className='w-[400px] md:w-[500px] lg:w-[600px] h-auto border border-gray-200 bg-white shadow-lg rounded-lg p-4 flex flex-col items-center text-center'>
             <h1 className='py-4'> Review Added!</h1> 
             <br/>
-            <NavLink className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {'/profile'}> Click here to View Your Review</NavLink>
+            <NavLink className = 'bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow' to = {'/profile'}> Click here to View Your Reviews</NavLink>
         </section>
         ) 
         : 
@@ -148,12 +148,12 @@ const RatingPage = () => {
             <h1 className='font-bold text-xl'>Make a Review</h1>
             <form className='' onSubmit = {handleSubmit}>
             
-            <label className=' block' htmlFor='score'>
+            <label className=' block text-left' htmlFor='score'>
                 Score:
                 <span className={ !score ? "hidden": " "}>{validScore ? " ✅": " ❌"}</span>
             </label>
             <input
-            className='py-2 border border-gray-200 rounded-lg p-4 flex'
+            className='py-2 border border-gray-200  w-full rounded-lg p-4 flex'
             type = 'text'
             id = 'score'
             onChange={(e) => {setScore(e.target.value)}}
@@ -173,8 +173,8 @@ const RatingPage = () => {
                2 digit decimal num from 0 to 5 inclusive, e.g. 0.0, 2.5, 4.99
             </p>
             
-            <label className=' block' htmlFor='text'>
-                enter text:
+            <label className='text-left block' htmlFor='text'>
+                Comment:
                 <span className={ !text ? "hidden": " "}>{validText ? " ✅": " ❌"}</span>
             </label>
             <textarea

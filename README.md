@@ -9,9 +9,10 @@ TODO division
 
 
 frontend
-displaying user info like all the ratings they've done & option to delete a rating TODO
+ option to delete a rating and booking TODO
+ events Do events page
 For location Page display events at location as well TODO 
-events Do events page
+
 
 removed picture and time of booking, both kind of irrelevant 
 

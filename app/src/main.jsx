@@ -17,7 +17,6 @@ import { UpdateProvider } from './context/UpdateProvider.jsx'
 
 
 
-
 const router = createBrowserRouter([
  {
   path: '/',
@@ -62,9 +61,6 @@ const router = createBrowserRouter([
   ]
 
  }
- 
-
-
 
 ]);
 
