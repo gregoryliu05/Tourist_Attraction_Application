@@ -97,7 +97,7 @@ const ProfilePage = () => {
     <>
       {userInfo && ratings && bookings ? (
         <div className="max-w-screen-lg mx-auto p-6">
-          {/* Profile Section */}
+         
           <div className="bg-white border border-gray-300 rounded-lg shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold mb-4 text-center">Your Profile</h2>
             <div className="space-y-2 text-gray-700">
@@ -114,7 +114,7 @@ const ProfilePage = () => {
               Change Password
             </button>
   
-            {/* Password Change Form */}
+          
             {changePassword && (
               <div className="mt-6">
                 {success ? (
@@ -180,9 +180,9 @@ const ProfilePage = () => {
             )}
           </div>
   
-          {/* Reviews and Bookings Section */}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Reviews */}
+            
             <div className="bg-gray-50 border border-gray-300 rounded-lg shadow-lg p-6">
               <h1 className="text-xl font-bold mb-4">Your Reviews</h1>
               {ratings.length > 0 ? (
@@ -213,7 +213,7 @@ const ProfilePage = () => {
               )}
             </div>
   
-            {/* Bookings */}
+           
             <div className="bg-gray-50 border border-gray-300 rounded-lg shadow-lg p-6">
               <h1 className="text-xl font-bold mb-4">Your Bookings</h1>
               {bookings.length > 0 ? (
@@ -247,7 +247,7 @@ const ProfilePage = () => {
             </div>
           </div>
   
-          {/* Navigation Buttons */}
+         
           <div className="flex flex-col gap-4 mt-8 items-center">
             <NavLink
               className="bg-gray-200 px-4 py-2 border border-gray-300 rounded-lg hover:shadow-lg transition-shadow"
