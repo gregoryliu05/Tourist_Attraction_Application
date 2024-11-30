@@ -28,12 +28,19 @@ router.post('/add-eventDetail', async (req, res) => {
 });
 
 router.get('/:eventName/:host/:postalCode', async (req, res) => {
-    const {eventName, host, postalCode} = req.params;
-    const tableContent = await eventDetailsService.getEventSearchAll(eventName, host, postalCode);
-    if (tableContent.length > 0) {
-        res.json({data: tableContent});
-    } else {
-        res.status(404).json({success: false, message: 'failed to get bookable'});
+    const eventName = decodeURIComponent(req.params.eventName);
+    const host = decodeURIComponent(req.params.host);
+    const postalCode = req.params.postalCode;
+
+    try {
+        const tableContent = await eventDetailsService.getEventSearchAll(eventName, host, postalCode);
+        if (tableContent.length > 0) {
+            res.json({ data: tableContent });
+        } else {
+            res.status(404).json({ success: false, message: 'No matching events found' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });
 
@@ -57,5 +64,50 @@ router.delete('/:eventName/:startTime/:duration', async (req, res) => {
     }
 
 })
+
+router.get('/:eventName/:postalCode', async (req,res) => {
+    const eventName = decodeURIComponent(req.params.eventName);
+    const postalCode = req.params.postalCode;
+    try {
+        const tableContent = await eventDetailsService.getEventSearchNamePostalCode(eventName, postalCode);
+        if (tableContent.length > 0) {
+            res.json({ data: tableContent });
+        } else {
+            res.status(404).json({ success: false, message: 'No matching events found' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+router.get('/:eventName/:host', async (req,res) => {
+    const eventName = decodeURIComponent(req.params.eventName);
+    const host = decodeURIComponent(req.params.host);
+    try {
+        const tableContent = await eventDetailsService.getEventSearchNameHost(eventName, host);
+        if (tableContent.length > 0) {
+            res.json({ data: tableContent });
+        } else {
+            res.status(404).json({ success: false, message: 'No matching events found' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
+
+router.get('/:eventName', async (req,res) => {
+    const eventName = decodeURIComponent(req.params.eventName);
+    try {
+        const tableContent = await eventDetailsService.getEventSearchName(eventName);
+        if (tableContent.length > 0) {
+            res.json({ data: tableContent });
+        } else {
+            res.status(404).json({ success: false, message: 'No matching events found' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
 
 module.exports = router;

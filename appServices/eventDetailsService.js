@@ -43,24 +43,32 @@ async function getEventDetailsFromDb() {
 
 async function getEventSearchAll(eventName, host, postalCode) {
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `SELECT * from event_details WHERE eventName = :eventName AND host = :host AND postalCode = :postalCode`,
-            [eventName, host, postalCode]
-        );
-        const details = result.rows.map((row) => ({
-            eventName: row[0],
-            startTime: row[1],
-            duration : row[2],
-            host: row[3],
-            postalCode: row[4],
-            address: row[5]
+        try {
+            const result = await connection.execute(
+                `SELECT * from event_details WHERE eventName = :eventName AND host = :host AND postalCode = :postalCode`,
+                [eventName, host, postalCode]
+            );
+            const details = result.rows.map((row) => ({
+                eventName: row[0],
+                startTime: row[1],
+                duration: row[2],
+                host: row[3],
+                postalCode: row[4],
+                address: row[5]
+            }));
 
-        }))
-        return details;
-    }).catch(() => {
+            return details;
+
+        } catch (error) {
+            console.error("Error executing query:", error); 
+            throw error;
+        }
+    }).catch((error) => {
+        console.error("Database error:", error); 
         return [];
     });
 }
+
 
 async function getEventDetails(eventName, startTime, duration) {
     return await withOracleDB(async (connection) => {
@@ -95,6 +103,91 @@ async function deleteEventDetails(eventName, startTime, duration) {
     });
 }
 
+async function getEventSearchNameHost(eventName, host) {
+    return await withOracleDB(async (connection) => {
+        try {
+            const result = await connection.execute(
+                `SELECT * from event_details WHERE eventName = :eventName AND host = :host`,
+                [eventName, host]
+            );
+            const details = result.rows.map((row) => ({
+                eventName: row[0],
+                startTime: row[1],
+                duration: row[2],
+                host: row[3],
+                postalCode: row[4],
+                address: row[5]
+            }));
+
+            return details;
+
+        } catch (error) {
+            console.error("Error executing query:", error); 
+            throw error;
+        }
+    }).catch((error) => {
+        console.error("Database error:", error); 
+        return [];
+    });
+}
+
+async function getEventSearchNamePostalCode(eventName, postalCode) {
+    return await withOracleDB(async (connection) => {
+        try {
+            const result = await connection.execute(
+                `SELECT * from event_details WHERE eventName = :eventName AND postalCode = :postalCode`,
+                [eventName, postalCode]
+            );
+            const details = result.rows.map((row) => ({
+                eventName: row[0],
+                startTime: row[1],
+                duration: row[2],
+                host: row[3],
+                postalCode: row[4],
+                address: row[5]
+            }));
+
+            return details;
+
+        } catch (error) {
+            console.error("Error executing query:", error); 
+            throw error;
+        }
+    }).catch((error) => {
+        console.error("Database error:", error); 
+        return [];
+    });
+}
+
+
+
+async function getEventSearchName(eventName) {
+    return await withOracleDB(async (connection) => {
+        try {
+            const result = await connection.execute(
+                `SELECT * from event_details WHERE eventName = :eventName`,
+                [eventName]
+            );
+            const details = result.rows.map((row) => ({
+                eventName: row[0],
+                startTime: row[1],
+                duration: row[2],
+                host: row[3],
+                postalCode: row[4],
+                address: row[5]
+            }));
+
+            return details;
+
+        } catch (error) {
+            console.error("Error executing query:", error); 
+            throw error;
+        }
+    }).catch((error) => {
+        console.error("Database error:", error); 
+        return [];
+    });
+}
 
 module.exports = {
     addEventDetails, 
@@ -102,4 +195,7 @@ module.exports = {
     getEventSearchAll,
     getEventDetails,
     deleteEventDetails,
+    getEventSearchName,
+    getEventSearchNameHost,
+    getEventSearchNamePostalCode
 };

@@ -26,12 +26,18 @@ const EventElement = (props) => {
 
 const EventsPage = () => {
     const [events, setEvents] = useState(null)
+    const errRef = useRef();
+    const [errMsg, setErrMsg] = useState('')
+
     const [searchName, setSearchName] = useState('')
 
     const [searchHost, setSearchHost] = useState('')
 
     const [searchPostalCode, setSearchPostalCode] = useState('')
 
+    useEffect(() => {
+        setErrMsg('')
+    }, [searchName])   
 
     useEffect(() => {
         axios.get('http://localhost:50004/eventDetails').then((response => {
@@ -42,42 +48,89 @@ const EventsPage = () => {
 
     const handleSubmit = ((e) => {
         e.preventDefault();
+        console.log(searchHost, searchPostalCode, searchName)
         if (!searchHost && ! searchPostalCode) {
             // get search by Name
-            axios.get()
-        }
-
-        else if (!searchHost) {
-            // get search by name and host
+            axios.get(`http://localhost:50004/eventDetails/${encodeURIComponent(searchName)}`)
+            .then((response) => {
+                console.log("events filtered", response.data.data)
+                setEvents(response.data.data)
+                setSearchName('')
+            })
+            .catch((error) => {
+                console.error("error getting filter", error)
+                setErrMsg("Name didn't match an Event Name");
+            })
         }
 
         else if (!searchPostalCode) {
-            // get search by name and time
+            // get search by name and host
+            axios.get(`http://localhost:50004/eventDetails/${encodeURIComponent(searchName)}/${encodeURIComponent(searchHost)}`)
+            .then((response) => {
+                console.log("events filtered", response.data.data)
+                setEvents(response.data.data)
+                setSearchName('')
+                setSearchHost('')
+            })
+            .catch((error) => {
+                setErrMsg("Name/Host didn't match an Event Name/Host");
+                console.error("", error)
+            })
+        }
+
+        else if (!searchHost) {
+            // get search by name and postalCode
+            axios.get(`http://localhost:50004/eventDetails/${encodeURIComponent(searchName)}/${searchPostalCode}`)
+            .then((response) => {
+                console.log("events filtered", response.data.data)
+                setEvents(response.data.data)
+                setSearchName('')
+                setSearchPostalCode('')
+            })
+            .catch((error) => {
+                console.error("error getting filter", error)
+                setErrMsg("Name/Postal Code didn't match an Event Name/Postal Code");
+            })
         }
 
         else if (searchHost && searchPostalCode) {
             // get search by all 3
-            axios.get(`http://localhost:50004/${searchName}/${searchHost}/${searchPostalCode}`)
+            axios.get(`http://localhost:50004/eventDetails/${encodeURIComponent(searchName)}/${encodeURIComponent(searchHost)}/${searchPostalCode}`)
             .then((response) => {
                 console.log("events filtered", response.data.data)
                 setEvents(response.data.data)
+                setSearchName('')
+                setSearchPostalCode('')
+                setSearchHost('')
             })
             .catch((error) => {
                 console.error("error getting filter", error)
+                setErrMsg("Name/Postal Code/Host didn't match an Event Name/Postal Code/Host");
             })
         }
     }) 
 
+    const handleReset = ((e) =>{
+        e.preventDefault();
+        axios.get('http://localhost:50004/eventDetails').then((response => {
+            console.log('events data', response.data.data)
+            setEvents(response.data.data)
+        }))
+    })
 
 
     return (
         <>
-        
+         <TopNavBar/>        
         {events ? (<>
 
-        <TopNavBar/>
+        <div className="flex h-screen">
+        <div className="w-[350px] md:w-[400px] lg:w-[450px] overflow-y-auto border-r border-gray-200 p-4">
+        <h1 className="font-bold text-xl py-2">All Events</h1>
 
-        <form className="flex space-x-2 items-center" onSubmit={handleSubmit}>
+        <p ref={errRef} className={errMsg ? "py-4 border w-[300px] border-gray-200 rounded-lg p-4 flex text-red-500" : "hidden"} aria-live='assertive'
+        >{errMsg}</p>
+        <form className="flex flex-col space-y-4 mb-4" onSubmit={handleSubmit}>
                 <input
                   type="text"
                   placeholder="Search by name"
@@ -113,6 +166,12 @@ const EventsPage = () => {
                 >
                   Filter by Rating
                 </button>
+                <button
+                  onClick={handleReset}
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                >
+                  Reset to normal
+                </button>
               </form>
             {events.map((event) => (
                 <div key = {uuidv4().replace(/-/g, '').slice(0, 10)}>
@@ -123,10 +182,13 @@ const EventsPage = () => {
                     />
                     </NavLink>
                 </div>
+
             ))}
 
-        <div className="w-2/3 p-4 pt-16">
+          </div>
+          <div className="w-2/3 p-4 pt-16">
             <Outlet />
+          </div>
           </div>
 
         <NavLink className="bg-gray-200 px-4 py-2 border border-black-300 rounded hover:shadow-lg transition-shadow absolute bottom-4 right-4" to="/">
