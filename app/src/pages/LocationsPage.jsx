@@ -157,7 +157,7 @@ const LocationPage = () => {
       <TopNavBar />
       {locationsRating && locations ? (
         <div className="flex h-screen">
-          <div className="w-[350px] md:w-[400px] lg:w-[450px] overflow-y-auto border-r border-gray-200 p-4">
+          <div className="w-[400px] md:w-[450px] lg:w-[500px] overflow-y-auto border-r border-gray-200 p-4">
             <div className="flex flex-col space-y-4 mb-4">
               <h1 className="font-bold text-xl">All Locations</h1>
               <button
@@ -173,22 +173,36 @@ const LocationPage = () => {
               </button>
 
               <div className="flex space-x-2 items-center">
-                <input
-                  type="number"
-                  min="0"
-                  max="5"
-                  step="0.01"
-                  placeholder="Enter min rating"
-                  value={num}
-                  onChange={(e) => setNum(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded"
+              <input
+              type="number"
+              min="0"
+              max="5"
+              step="0.1"
+              placeholder="Enter min rating"
+              value={num}
+              onChange={(e) => {
+               const value = e.target.value;
+               if (
+                /^\d{1,1}(\.\d{0,2})?$/.test(value) &&
+                (value === "" || (parseFloat(value) >= 0 && parseFloat(value) <= 5))
+                ) {
+               setNum(value);
+                }
+                }}
+                className="px-4 py-2 border border-gray-300 rounded"
+                 maxLength="4"
                 />
                 <button
                   onClick={handleNumFilter}
                   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
                 >
                   Filter by Rating
-                </button>
+                </button  >
+                <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                onClick={() => {
+                  setNum('');
+                }}
+                > Reset</button>
               </div>
 
               <div className="flex space-x-2 items-center">

@@ -301,14 +301,14 @@ async function getMuseumFromKey(postalCode, address) {
 }
 
 //catNames is a list, return location with all specified categories
-async function getLocationWithCategories(catNames) {
+async function getLocationWithCategories(catName) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(`SELECT L.postalCode, L.address
             FROM locations L
              WHERE NOT EXISTS (
                 SELECT T.catName
                 FROM category T
-                WHERE T.catName IN (:catNames)
+                WHERE T.catName IN (:catName)
                     MINUS
                     SELECT C.catName
                 FROM categorizes C
@@ -316,7 +316,7 @@ async function getLocationWithCategories(catNames) {
                 AND C.address = L.address
                 )
         `,
-        [catNames]);
+        [catName]);
         console.log("result:", result)
         return result.rows.map((row) => ({
             postalCode: row[1],
