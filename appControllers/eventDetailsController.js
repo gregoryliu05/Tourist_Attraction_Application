@@ -96,18 +96,45 @@ router.get('/:eventName/:host', async (req,res) => {
 });
 
 
-router.get('/:eventName', async (req,res) => {
-    const eventName = decodeURIComponent(req.params.eventName);
+// router.get('/:eventName', async (req,res) => {
+//     const eventName = decodeURIComponent(req.params.eventName);
+//     try {
+//         const tableContent = await eventDetailsService.getEventSearchName(eventName);
+//         if (tableContent.length > 0) {
+//             res.json({ data: tableContent });
+//         } else {
+//             res.status(404).json({ success: false, message: 'No matching events found' });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: 'Internal server error' });
+//     }
+// });
+
+router.get('/:eventName', async (req, res) => {
+    const eventName = decodeURIComponent(req.params.eventName).trim();
+    const fields = req.query.fields ? req.query.fields.split(',') : ['*'];
+
+    console.log('Received eventName:', eventName);
+    console.log('Requested fields:', fields);
+
     try {
-        const tableContent = await eventDetailsService.getEventSearchName(eventName);
-        if (tableContent.length > 0) {
-            res.json({ data: tableContent });
+        const eventDetails = await eventDetailsService.getEventDetailsWithProjection(eventName, fields);
+
+        if (eventDetails.length > 0) {
+            console.log('Matching Event Details:', eventDetails);
+            res.json({ data: eventDetails });
         } else {
+            console.log('No matching events found for:', eventName);
             res.status(404).json({ success: false, message: 'No matching events found' });
         }
     } catch (error) {
+        console.error('Error in controller:', error);
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });
+
+
+
+
 
 module.exports = router;

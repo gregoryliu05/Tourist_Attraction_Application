@@ -189,6 +189,52 @@ async function getEventSearchName(eventName) {
     });
 }
 
+async function getEventDetailsWithProjection(eventName, fields) {
+    return await withOracleDB(async (connection) => {
+        try {
+            const validFields = ['eventName', 'startTime', 'duration', 'host', 'postalCode', 'address'];
+            
+            // Filter requested fields against valid fields
+            const selectedFields = fields.filter(field => validFields.includes(field)).join(', ') || '*';
+
+            console.log('Requested fields:', fields);
+            console.log('Validated fields for query:', selectedFields);
+
+            if (selectedFields === '*') {
+                console.warn('No valid fields selected. Querying all fields.');
+            }
+
+            // Construct the SQL query
+            const query = `SELECT ${selectedFields} FROM event_details WHERE LOWER(TRIM(eventName)) = LOWER(:eventName)`;
+            console.log('Constructed SQL Query:', query);
+
+            // Execute the query
+            const result = await connection.execute(query, [eventName.trim()]);
+            console.log('Raw Query Result:', result.rows);
+
+            // Map the results to an object
+            const details = result.rows.map((row) => {
+                const mappedData = {};
+                result.metaData.forEach((meta, index) => {
+                    mappedData[meta.name.toLowerCase()] = row[index];
+                });
+                return mappedData;
+            });
+
+            console.log('Processed Event Details:', details);
+            return details;
+
+        } catch (error) {
+            console.error('Error executing query:', error);
+            throw error;
+        }
+    });
+}
+
+
+
+
+
 module.exports = {
     addEventDetails, 
     getEventDetailsFromDb,
@@ -197,5 +243,6 @@ module.exports = {
     deleteEventDetails,
     getEventSearchName,
     getEventSearchNameHost,
-    getEventSearchNamePostalCode
+    getEventSearchNamePostalCode,
+    getEventDetailsWithProjection
 };
