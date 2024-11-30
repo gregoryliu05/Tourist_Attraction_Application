@@ -15,9 +15,11 @@ const EventElement = (props) => {
        <div className="flex justify-center items-center bg-white-100 w-96 h-32 p-4">
       <div className="max-w-lg w-full border border-gray-300 rounded-lg shadow-sm p-6 bg-white">
         <h2 className="text-xl font-bold text-gray-800">{event.eventName}</h2>
+        <h2 className="text-m font-bold text-gray-800">Host: {event.host}</h2>
         <p className="text-sm text-gray-500">
           Address: {event.address}, {event.postalCode}
         </p>
+        
     
       </div>
     </div>
@@ -164,13 +166,13 @@ const EventsPage = () => {
                   type = 'submit'
                   className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
                 >
-                  Filter by Rating
+                  Search
                 </button>
                 <button
                   onClick={handleReset}
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                  className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400 transition"
                 >
-                  Reset to normal
+                  Reset
                 </button>
               </form>
             {events.map((event) => (

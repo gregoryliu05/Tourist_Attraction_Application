@@ -302,38 +302,30 @@ async function getMuseumFromKey(postalCode, address) {
 
 //catNames is a list, return location with all specified categories
 async function getLocationWithCategories(catNames) {
-    if (!Array.isArray(catNames) || catNames.length === 0) {
-        throw new Error("Invalid category names: must be a non-empty array.");
-    }
-
-    const placeholders = catNames.map((_, index) => `:catName${index}`).join(", ");
-    const binds = catNames.reduce((acc, name, index) => {
-        acc[`catName${index}`] = name;
-        return acc;
-    }, {});
-
-    const query = `
-        SELECT postalCode, address
-        FROM locations L
-        WHERE NOT EXISTS (
-            (SELECT catName
-             FROM category T
-             WHERE T.catName IN (${placeholders}))
-            MINUS
-            (SELECT C.catName
-             FROM categorizes C
-             WHERE C.postalCode = L.postalCode
-               AND C.address = L.address)
-        );
-    `;
-
     return await withOracleDB(async (connection) => {
-        const result = await connection.execute(query, binds);
-        return result.rows || [];
-    }).catch(() => {
-        console.error('getLocationWithCategories', err);
-        return [];
-    })
+        const result = await connection.execute(`SELECT L.postalCode, L.address
+            FROM locations L
+             WHERE NOT EXISTS (
+                SELECT T.catName
+                FROM category T
+                WHERE T.catName IN (:catNames)
+                    MINUS
+                    SELECT C.catName
+                FROM categorizes C
+                WHERE C.postalCode = L.postalCode
+                AND C.address = L.address
+                )
+        `,
+        [catNames]);
+        console.log("result:", result)
+        return result.rows.map((row) => ({
+            postalCode: row[1],
+            address: row[0],
+        }));
+    }).catch((err) => {
+        console.error("getLocationWithCategories", err);
+        return null;
+    });
 }
 
 

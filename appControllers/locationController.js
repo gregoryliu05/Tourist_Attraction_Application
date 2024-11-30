@@ -13,6 +13,18 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/categories/:catNames', async (req, res) => {
+    const catNamesString = decodeURIComponent(req.params.catNames);
+
+    try {
+        const tableContent = await locationService.getLocationWithCategories(catNamesString);
+        res.json({ data: tableContent });
+    } catch (error) {
+        console.error("Error in fetching categories:", error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/details', async (req,res) => {
     try {
         const tableContent = await locationService.getLocationsDetails();
@@ -72,6 +84,8 @@ router.delete('/:postalCode/:address', async (req,res) => {
         res.status(500).json({success: false});
     }
 })
+
+
 
 router.get('/:locationID', async (req,res) => {
     const {locationID} = req.params;
@@ -197,14 +211,7 @@ router.get('/museums', async (req,res) => {
     }
 })
 
-router.get('/:catNames', async (req,res) => {
-    try {
-        const tableContent = await locationService.getLocationWithCategories();
-        res.json({ data: tableContent });
-    } catch (error) {
-        res.status(500).json({ error: 'An error occurred while fetching location' });
-    }
-})
+
 
 
 

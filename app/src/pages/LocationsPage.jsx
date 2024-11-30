@@ -49,6 +49,10 @@ const LocationPage = () => {
   const [num, setNum] = useState("");
   const [filteredLocationsByNum, setFilteredLocationsByNum] = useState(null);
 
+  const [categories, setCategories] = useState("");
+  const [filterCategories, setFilterCategories] = useState(false);
+  const [filteredLocationsByCat, setFilteredLocationsByCat] = useState(null);
+
   useEffect(() => {
     axios.get("http://localhost:50004/locations/details").then((response) => {
       console.log("locations data", response.data.data);
@@ -81,23 +85,43 @@ const LocationPage = () => {
   }, []);
 
   const handleNumFilter = () => {
-    if (!num || isNaN(num) || num < 0 || num > 5) {
-      alert("Please enter a valid number between 0 and 5.");
-      return;
-    }
-
     axios
       .get(`http://localhost:50004/ratings/locations-ratings-greater/${num}`)
       .then((response) => {
         console.log("greater ratings data", response.data.data);
         setFilteredLocationsByNum(response.data.data);
-        setFilterRatings(false); 
+        setFilterRatings(false);
       })
       .catch((error) => {
         console.error("Error fetching greater ratings data:", error);
       });
   };
 
+  const handleCategories = () => {
+    axios
+      .get(`http://localhost:50004/locations/categories/${encodeURIComponent(categories)}`)
+      .then((response) => {
+        console.log("categories data", response.data.data);
+        setFilteredLocationsByCat(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error getting categories filter", error);
+      });
+  };
+
+  useEffect(() => {
+    console.log("Filtered Locations by Category:", filteredLocationsByCat);
+    console.log(filteredLocationsByCat)
+    setFilterCategories(true)
+  }, [filteredLocationsByCat]);
+
+  const handleCategoryReset = () => {
+    setCategories("");
+    setFilterCategories(false);
+    setFilteredLocationsByCat(null);
+  };
+
+  // Combine all filters
   const filteredLocations = filterRatings
     ? locations.filter((location) =>
         goodLocationsRating?.find(
@@ -116,20 +140,30 @@ const LocationPage = () => {
       )
     : locations;
 
+
+    const categorizedLocations =
+    filterCategories && filteredLocationsByCat
+      ? filteredLocations.filter((location) =>
+          filteredLocationsByCat.find(
+            (cat) =>
+              cat.postalCode === location.postalCode &&
+              cat.address === location.address
+          )
+        )
+      : filteredLocations;
+
   return (
     <>
       <TopNavBar />
-      {locationsRating ? (
+      {locationsRating && locations ? (
         <div className="flex h-screen">
           <div className="w-[350px] md:w-[400px] lg:w-[450px] overflow-y-auto border-r border-gray-200 p-4">
             <div className="flex flex-col space-y-4 mb-4">
               <h1 className="font-bold text-xl">All Locations</h1>
-
-              
               <button
                 onClick={() => {
                   setFilterRatings(!filterRatings);
-                  setFilteredLocationsByNum(null); 
+                  setFilteredLocationsByNum(null);
                 }}
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
               >
@@ -138,7 +172,6 @@ const LocationPage = () => {
                   : "Filter Top Rated Locations Only"}
               </button>
 
-              
               <div className="flex space-x-2 items-center">
                 <input
                   type="number"
@@ -157,9 +190,31 @@ const LocationPage = () => {
                   Filter by Rating
                 </button>
               </div>
+
+              <div className="flex space-x-2 items-center">
+                <input
+                  type="text"
+                  placeholder="Enter a Category"
+                  value={categories}
+                  onChange={(e) => setCategories(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded"
+                />
+                <button
+                  onClick={handleCategories}
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                >
+                  Filter by Categories
+                </button>
+                <button
+                  onClick={handleCategoryReset}
+                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                >
+                  Reset Categories
+                </button>
+              </div>
             </div>
 
-            {filteredLocations?.map((location) => (
+            {categorizedLocations.map((location) => (
               <div key={location.locationID} className="py-2 transition">
                 <NavLink
                   key={location.locationID}
