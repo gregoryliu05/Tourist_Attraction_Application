@@ -12,6 +12,8 @@ import LocationsPage from './pages/LocationsPage.jsx'
 import LocationPage from './pages/LocationPage.jsx'
 import BookingPage from './pages/BookingPage.jsx'
 import RatingPage from './pages/RatingPage.jsx'
+import EventsPage from './pages/EventsPage.jsx'
+import EventPage from './pages/EventPage.jsx'
 import { AuthProvider } from './context/AuthProvider.jsx'
 import { UpdateProvider } from './context/UpdateProvider.jsx'
 
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
  {
   path: '/signup',
   element: <SignupPage/>
+ },
+ {path: '/events',
+  element: <EventsPage/>,
+  children: [
+    {path :'/events/:eventName/:startTime/:duration',
+      element: <EventPage/>
+    }
+  ]
  },
  {path: '/locations',
   element: <LocationsPage/>,

@@ -26,7 +26,37 @@ async function getEventDetailsFromDb() {
         const result = await connection.execute(
             'SELECT * from event_details'
         );
-        return result.rows;
+        const details = result.rows.map((row) => ({
+            eventName: row[0],
+            startTime: row[1],
+            duration : row[2],
+            host: row[3],
+            postalCode: row[4],
+            address: row[5]
+
+        }))
+        return details
+    }).catch(() => {
+        return [];
+    });
+}
+
+async function getEventSearchAll(eventName, host, postalCode) {
+    return await withOracleDB(async (connection) => {
+        const result = await connection.execute(
+            `SELECT * from event_details WHERE eventName = :eventName AND host = :host AND postalCode = :postalCode`,
+            [eventName, host, postalCode]
+        );
+        const details = result.rows.map((row) => ({
+            eventName: row[0],
+            startTime: row[1],
+            duration : row[2],
+            host: row[3],
+            postalCode: row[4],
+            address: row[5]
+
+        }))
+        return details;
     }).catch(() => {
         return [];
     });
@@ -38,13 +68,21 @@ async function getEventDetails(eventName, startTime, duration) {
             `SELECT * from event_details WHERE eventName = :eventName AND startTime = :startTime AND duration = :duration`,
             [eventName, startTime, duration]
         );
-        return result.rows;
+        const details = result.rows.map((row) => ({
+            eventName: row[0],
+            startTime: row[1],
+            duration : row[2],
+            host: row[3],
+            postalCode: row[4],
+            address: row[5]
+
+        }))
+        return details;
     }).catch(() => {
         return [];
     });
 }
 
-//delete a rating by user for a location
 async function deleteEventDetails(eventName, startTime, duration) {
     return await withOracleDB(async (connection) => {
         const result = await connection.execute(
@@ -57,9 +95,11 @@ async function deleteEventDetails(eventName, startTime, duration) {
     });
 }
 
+
 module.exports = {
     addEventDetails, 
     getEventDetailsFromDb,
+    getEventSearchAll,
     getEventDetails,
     deleteEventDetails,
 };
