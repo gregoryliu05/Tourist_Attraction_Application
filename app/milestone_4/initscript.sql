@@ -491,105 +491,24 @@ INSERT INTO event_time VALUES ('06:30 PM', '08:30 PM', '2 hours');
 
 -- event_details table
 
---same name, different event
-INSERT INTO event_details VALUES ('Music Concert', '10:00 AM', '3 hours', 'Festival Organizers', 'P123458', '124 Music Ave');
-INSERT INTO event_details VALUES ('Music Concert', '11:30 AM', '1.5 hours', 'Live Nation', 'P123459', '125 Music Ave');
-INSERT INTO event_details VALUES ('Music Concert', '01:00 PM', '2 hours', 'Rock Band', 'P123460', '126 Music Ave');
-
-INSERT INTO event_details VALUES ('Art Exhibition', '01:00 PM', '3 hours', 'Art World', 'P123461', '125 Art St');
-INSERT INTO event_details VALUES ('Art Exhibition', '03:30 PM', '2 hours', 'Gallery Hub', 'P123462', '126 Art St');
-INSERT INTO event_details VALUES ('Art Exhibition', '05:00 PM', '4 hours', 'Local Artists', 'P123463', '127 Art St');
-
-INSERT INTO event_details VALUES ('Food Festival', '03:00 PM', '5 hours', 'Food Lovers International', 'P223458', '126 Food Blvd');
-INSERT INTO event_details VALUES ('Food Festival', '06:00 PM', '3 hours', 'Local Chefs', 'P223459', '127 Food Blvd');
-INSERT INTO event_details VALUES ('Food Festival', '07:30 PM', '2 hours', 'Culinary Society', 'P223460', '128 Food Blvd');
-
-INSERT INTO event_details VALUES ('Book Reading', '04:00 PM', '1.5 hours', 'Authors Guild', 'P223461', '127 Book St');
-INSERT INTO event_details VALUES ('Book Reading', '05:30 PM', '2 hours', 'Local Writers', 'P223462', '128 Book St');
-INSERT INTO event_details VALUES ('Book Reading', '07:00 PM', '1 hour', 'Reading Club', 'P223463', '129 Book St');
-
-INSERT INTO event_details VALUES ('Outdoor Movie', '07:00 PM', '2 hours', 'Cinema Nights', 'P323458', '128 Movie Park');
-INSERT INTO event_details VALUES ('Outdoor Movie', '08:30 PM', '3 hours', 'Open Sky Films', 'P323459', '129 Movie Park');
-INSERT INTO event_details VALUES ('Outdoor Movie', '10:00 PM', '1.5 hours', 'Community Cinema', 'P323460', '130 Movie Park');
-
-INSERT INTO event_details VALUES ('Yoga Class', '08:00 AM', '1 hour', 'Health Haven', 'P323458', '129 Yoga Blvd');
-INSERT INTO event_details VALUES ('Yoga Class', '06:30 PM', '2.5 hours', 'Zen Masters', 'P323459', '130 Yoga Blvd');
-INSERT INTO event_details VALUES ('Yoga Class', '09:00 PM', '1.5 hours', 'Local Instructors', 'P323460', '131 Yoga Blvd');
-
-INSERT INTO event_details VALUES ('Cooking Workshop', '11:00 AM', '2 hours', 'Culinary Academy', 'P423458', '130 Chef Rd');
-INSERT INTO event_details VALUES ('Cooking Workshop', '01:30 PM', '3 hours', 'Master Chefs', 'P423459', '131 Chef Rd');
-INSERT INTO event_details VALUES ('Cooking Workshop', '03:00 PM', '1.5 hours', 'Cooking Enthusiasts', 'P423460', '132 Chef Rd');
-
-INSERT INTO event_details VALUES ('Tech Meetup', '02:00 PM', '2 hours', 'Startup Hub', 'P423458', '131 Tech Blvd');
-INSERT INTO event_details VALUES ('Tech Meetup', '04:00 PM', '1.5 hours', 'Innovation Center', 'P423459', '132 Tech Blvd');
-INSERT INTO event_details VALUES ('Tech Meetup', '06:00 PM', '3 hours', 'Tech Visionaries', 'P423460', '133 Tech Blvd');
-
-INSERT INTO event_details VALUES ('Charity Run', '07:00 AM', '4 hours', 'Health Advocates', 'P523458', '132 Sports Ave');
-INSERT INTO event_details VALUES ('Charity Run', '09:30 AM', '3.5 hours', 'Community Runners', 'P523459', '133 Sports Ave');
-INSERT INTO event_details VALUES ('Charity Run', '12:00 PM', '2.5 hours', 'Local Heroes', 'P523460', '134 Sports Ave');
-
-
---same host different event
-INSERT INTO event_details VALUES ('Jazz Night', '08:00 PM', '2.5 hours', 'City Events', 'P123461', '200 Music Hall');
-INSERT INTO event_details VALUES ('Rock Concert', '09:30 PM', '3 hours', 'City Events', 'P123462', '201 Concert Blvd');
-INSERT INTO event_details VALUES ('Classical Recital', '07:00 PM', '1.5 hours', 'City Events', 'P123463', '202 Symphony St');
-
-INSERT INTO event_details VALUES ('Sculpture Exhibition', '10:00 AM', '4 hours', 'Art Center', 'P123464', '300 Art Plaza');
-INSERT INTO event_details VALUES ('Photography Showcase', '02:00 PM', '3 hours', 'Art Center', 'P123465', '301 Exhibit Ave');
-INSERT INTO event_details VALUES ('Modern Art Fair', '06:00 PM', '5 hours', 'Art Center', 'P123466', '302 Gallery Lane');
-
-INSERT INTO event_details VALUES ('Farmers Market', '07:00 AM', '6 hours', 'Food Lovers', 'P223461', '400 Fresh Lane');
-INSERT INTO event_details VALUES ('BBQ Festival', '01:00 PM', '4 hours', 'Food Lovers', 'P223462', '401 Grill Blvd');
-INSERT INTO event_details VALUES ('Dessert Fair', '05:30 PM', '3.5 hours', 'Food Lovers', 'P223463', '402 Sweet St');
-
-INSERT INTO event_details VALUES ('Storytelling Session', '11:00 AM', '1 hour', 'Local Library', 'P223464', '500 Book Ave');
-INSERT INTO event_details VALUES ('Poetry Reading', '02:00 PM', '1.5 hours', 'Local Library', 'P223465', '501 Literature St');
-INSERT INTO event_details VALUES ('Fiction Writers Meetup', '04:00 PM', '2 hours', 'Local Library', 'P223466', '502 Creativity Blvd');
-
-INSERT INTO event_details VALUES ('Fireworks Display', '09:00 PM', '1 hour', 'City Council', 'P323461', '600 Celebration Park');
-INSERT INTO event_details VALUES ('Parade Event', '10:00 AM', '3 hours', 'City Council', 'P323462', '601 Downtown Blvd');
-INSERT INTO event_details VALUES ('Community Festival', '12:00 PM', '5 hours', 'City Council', 'P323463', '602 Unity St');
-
-INSERT INTO event_details VALUES ('Meditation Workshop', '06:00 AM', '1.5 hours', 'Wellness Club', 'P323464', '700 Peace Blvd');
-INSERT INTO event_details VALUES ('Pilates Class', '08:00 AM', '2 hours', 'Wellness Club', 'P323465', '701 Fitness Ave');
-INSERT INTO event_details VALUES ('Stretching Session', '07:00 PM', '1 hour', 'Wellness Club', 'P323466', '702 Health St');
-
-INSERT INTO event_details VALUES ('Pasta Making Class', '11:00 AM', '2.5 hours', 'Chef School', 'P423461', '800 Gourmet Blvd');
-INSERT INTO event_details VALUES ('Bread Baking Workshop', '02:00 PM', '3 hours', 'Chef School', 'P423462', '801 Artisan St');
-INSERT INTO event_details VALUES ('Dessert Decoration', '05:30 PM', '2 hours', 'Chef School', 'P423463', '802 Sweet Lane');
-
-INSERT INTO event_details VALUES ('AI Tech Talk', '10:00 AM', '2 hours', 'Tech Community', 'P423464', '900 Innovation Ave');
-INSERT INTO event_details VALUES ('Blockchain Meetup', '01:30 PM', '2.5 hours', 'Tech Community', 'P423465', '901 Crypto Blvd');
-INSERT INTO event_details VALUES ('Cybersecurity Seminar', '04:00 PM', '3 hours', 'Tech Community', 'P423466', '902 Security St');
-
-INSERT INTO event_details VALUES ('Soccer Tournament', '08:00 AM', '4 hours', 'Local Sports', 'P523461', '1000 Sports Park');
-INSERT INTO event_details VALUES ('Basketball Game', '12:00 PM', '3.5 hours', 'Local Sports', 'P523462', '1001 Hoops Blvd');
-INSERT INTO event_details VALUES ('Running Workshop', '03:00 PM', '2 hours', 'Local Sports', 'P523463', '1002 Marathon Lane');
-
---Same postal code, different event
-INSERT INTO event_details VALUES ('Jazz Night', '08:00 PM', '2.5 hours', 'City Events', 'P123456', '123 Main St');
-INSERT INTO event_details VALUES ('Rock Concert', '09:30 PM', '3 hours', 'Festival Organizers', 'P123456', '123 Music Hall');
-INSERT INTO event_details VALUES ('Classical Recital', '07:00 PM', '1.5 hours', 'Symphony Group', 'P123456', '123 Symphony St');
-
-INSERT INTO event_details VALUES ('Food Tasting', '01:00 PM', '2 hours', 'Culinary Masters', 'P223457', '125 Culinary Lane');
-INSERT INTO event_details VALUES ('Wine and Cheese Night', '07:30 PM', '3 hours', 'Food Lovers', 'P223457', '125 Gourmet Ave');
-INSERT INTO event_details VALUES ('Farmers Market', '08:00 AM', '5 hours', 'Local Farmers', 'P223457', '125 Fresh Blvd');
-
-INSERT INTO event_details VALUES ('Outdoor Yoga', '06:30 AM', '1 hour', 'Wellness Club', 'P323456', '127 Park Lane');
-INSERT INTO event_details VALUES ('Movie Screening', '09:00 PM', '2 hours', 'Open Air Cinema', 'P323456', '127 Film Blvd');
-INSERT INTO event_details VALUES ('Meditation Workshop', '08:00 AM', '1.5 hours', 'Health Haven', 'P323456', '127 Serenity Ave');
-
-INSERT INTO event_details VALUES ('Tech Expo', '10:00 AM', '3 hours', 'Tech Innovators', 'P423457', '130 Tech Plaza');
-INSERT INTO event_details VALUES ('Startup Showcase', '01:30 PM', '2.5 hours', 'Entrepreneur Hub', 'P423457', '130 Business Blvd');
-INSERT INTO event_details VALUES ('Coding Bootcamp', '03:00 PM', '4 hours', 'Developer Society', 'P423457', '130 Code Ave');
-
-INSERT INTO event_details VALUES ('Soccer Match', '08:00 AM', '2 hours', 'Local League', 'P523456', '131 Sports Field');
-INSERT INTO event_details VALUES ('Basketball Game', '10:30 AM', '1.5 hours', 'City Sports Club', 'P523456', '131 Arena Blvd');
-INSERT INTO event_details VALUES ('Charity Marathon', '02:00 PM', '3 hours', 'Community Runners', 'P523456', '131 Track St');
-
-
-
-
+INSERT INTO event_details VALUES ('Music Concert', '10:00 AM', '3 hours', 'Festival Organizers', 'M123456', '201 Culture St');
+INSERT INTO event_details VALUES ('Music Concert', '11:30 AM', '1.5 hours', 'Live Nation', 'M223456', '202 Culture St');
+INSERT INTO event_details VALUES ('Music Concert', '01:00 PM', '2 hours', 'Rock Band', 'M323456', '203 Culture St');
+INSERT INTO event_details VALUES ('Art Exhibition', '01:00 PM', '3 hours', 'Art World', 'M423456', '204 Culture St');
+INSERT INTO event_details VALUES ('Art Exhibition', '03:30 PM', '2 hours', 'Gallery Hub', 'M523456', '205 Culture St');
+INSERT INTO event_details VALUES ('Art Exhibition', '05:00 PM', '4 hours', 'Local Artists', 'M623456', '206 Culture St');
+INSERT INTO event_details VALUES ('Food Festival', '03:00 PM', '5 hours', 'Food Lovers International', 'PARK001', '301 Green Ave');
+INSERT INTO event_details VALUES ('Food Festival', '06:00 PM', '3 hours', 'Local Chefs', 'PARK002', '302 Green Ave');
+INSERT INTO event_details VALUES ('Food Festival', '07:30 PM', '2 hours', 'Culinary Society', 'PARK003', '303 Green Ave');
+INSERT INTO event_details VALUES ('Outdoor Movie', '07:00 PM', '2 hours', 'Cinema Nights', 'PARK004', '304 Green Ave');
+INSERT INTO event_details VALUES ('Outdoor Movie', '08:30 PM', '3 hours', 'Open Sky Films', 'PARK005', '305 Green Ave');
+INSERT INTO event_details VALUES ('Outdoor Movie', '10:00 PM', '1.5 hours', 'Community Cinema', 'PARK006', '306 Green Ave');
+INSERT INTO event_details VALUES ('Yoga Class', '08:00 AM', '1 hour', 'Health Haven', 'PARK007', '307 Green Ave');
+INSERT INTO event_details VALUES ('Yoga Class', '06:30 PM', '2.5 hours', 'Zen Masters', 'PARK008', '308 Green Ave');
+INSERT INTO event_details VALUES ('Yoga Class', '09:00 PM', '1.5 hours', 'Local Instructors', 'PARK009', '309 Green Ave');
+INSERT INTO event_details VALUES ('Charity Run', '07:00 AM', '4 hours', 'Health Advocates', 'PARK010', '310 Green Ave');
+INSERT INTO event_details VALUES ('Charity Run', '09:30 AM', '3.5 hours', 'Community Runners', 'PARK009', '309 Green Ave');
+INSERT INTO event_details VALUES ('Charity Run', '12:00 PM', '2.5 hours', 'Local Heroes', 'PARK008', '308 Green Ave');
 
 
 
